@@ -1,0 +1,116 @@
+package cs5004.model;
+
+import java.awt.*;
+
+public class AEllipse extends AnimatedShapeImpl {
+
+  // Constants
+  private static final int DEFAULT_A_AXIS = 1;
+  private static final int DEFAULT_B_AXIS = 1;
+  private static final Color DEFAULT_COLOR = Color.black;
+
+  // Attributes
+  private int aAxis;
+  private int bAxis;
+
+  /**
+   * Minimal Constructor for an ellipse. Requires a location to be created & instantiates with
+   * default values.
+   *
+   * @param name Name of the shape represented by a string.
+   * @param aReference Point2D Object referring to the location of the shape.
+   */
+  public AEllipse(String name, Point2D aReference, int aAppearTime, int aDisappearTime) {
+    super(aReference, name, aAppearTime, aDisappearTime);
+    this.aAxis = DEFAULT_A_AXIS;
+    this.bAxis = DEFAULT_B_AXIS;
+    this.shapeColor = DEFAULT_COLOR;
+  }
+
+
+  /**
+   * Constructor for an ellipse. Requires a location to be created & instantiates passed arguments.
+   *
+   * @param name The name of the shape.
+   * @param ref Point2D Object referring to the location of the sha
+   * @param r Red (0 -> 255) for rgb.
+   * @param g Green (0 -> 255) for rgb.
+   * @param b Blue (0 -> 255) for rgb.
+   * @param aAxis A axis of the ellipse.
+   * @param bAxis B axis of the ellipse.
+   */
+  public AEllipse(
+      String name,
+      Point2D ref,
+      int r,
+      int g,
+      int b,
+      int aAxis,
+      int bAxis,
+      int aAppearTime,
+      int aDisappearTime) {
+    super(name, ref, r, g, b, aAppearTime, aDisappearTime);
+
+    if (aAxis <= 0 | bAxis <= 0) {
+      throw new IllegalArgumentException("Ellipse axes must be positive non zero entries");
+    }
+
+    this.aAxis = aAxis;
+    this.bAxis = bAxis;
+  }
+
+  /**
+   * Setter for Elipse axis.
+   * @param aAxis The a-axis of the elipse.
+   * @param bAxis The b-axis of the elipse.
+   */
+  public void setAxis(int aAxis, int bAxis) {
+    if (aAxis > 0 && bAxis > 0) {
+      this.aAxis = aAxis;
+      this.bAxis = bAxis;
+    } else {
+      throw new IllegalArgumentException("Axes must be positive non zero entries.");
+    }
+  }
+
+
+  /**
+   * Getter Method for a-Axis.
+   * @return The int value of the a-Axis.
+   */
+  public int getaAxis(){
+    return this.aAxis;
+  }
+
+  /**
+   * Getter Method for b-Axis.
+   * @return The int value of the b-Axis.
+   */
+  public int getbAxis(){
+    return this.bAxis;
+  }
+
+
+  @Override
+  public String generateInfoScript() {
+    String info;
+    String rgb = this.getColor().toString().substring(14);
+
+    info = String.format("Name: %s\n", this.getName());
+    info += String.format("Type: %s\n", this.getClass().getSimpleName());
+    info +=
+        String.format(
+            "Center: (%.2f,%.2f), X Radius: %.2f, Y Radius: %.2f, Color: %s\n",
+            getLocation().getX(),
+            getLocation().getY(),
+            (double) this.aAxis,
+            (double) this.bAxis,
+            rgb);
+    info += String.format("Appears at t=%d\n", this.appearTime);
+    info += String.format("Disappears at t=%d\n", this.disappearTime);
+
+    return info;
+  }
+
+
+}
