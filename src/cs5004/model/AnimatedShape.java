@@ -1,7 +1,6 @@
 package cs5004.model;
 
 import java.awt.Color;
-import java.util.List;
 
 /**
  * Interface represents shape which is a component in a animation scene.
@@ -24,13 +23,14 @@ public interface AnimatedShape {
   /////////////////// SHAPE VISIBILITY /////////////////////
   //////////////////////////////////////////////////////////
 
-
-  /**
-   * Getter Method for determining a shape visibility at tick r.
-   * @return isVisible A boolean value for the shape's visibility. Visible if true, false if not.
-
-  boolean isVisible();
-   */
+  // todo: Stubbed out for later.
+  //  /**
+  //   * Getter Method for determining a shape visibility at tick r.
+  //   * @return isVisible A boolean value for the shape's visibility. Visible if true,
+  //   false if not.
+  //
+  //  boolean isVisible();
+  //
 
   //////////////////////////////////////////////////////////
   ///////////////// SHAPE LOCATION METHODS /////////////////
@@ -60,8 +60,8 @@ public interface AnimatedShape {
 
 
 
-//  // todo: do we need this?
-//  double distanceFromOrigin(int t);
+  //  // todo: do we need this?
+  //  double distanceFromOrigin(int t);
 
   //////////////////////////////////////////////////////////
   ///////////////// SHAPE VELOCITY METHODS /////////////////
@@ -110,9 +110,21 @@ public interface AnimatedShape {
   //////////////////////////////////////////////////////////
   /////////////////// SCRIPT GENERATION ////////////////////
   //////////////////////////////////////////////////////////
-
+  /**
+   * todo: FUNCTION YET TO BE FULLY REVIEWED
+   * This method sorts by chronological order the animations (on the basis of start time)
+   * and then iterates through all animations ( does a loop for each type) while checking for
+   * any conflict and making sure the starting state of animations are updated given the
+   * animation that comes before it.
+   * @return Boolean True for validatedAnimations and False if a conflict has been detected.
+   */
   public boolean validateAnimations();
 
+  /**
+   * It is a toSTring type of method that generates information about the shape and it's
+   * properties ( location, color, width, height, type, etc.).
+   * @return A string of the aforementioned.
+   */
   String generateInfoScript();
 
 }

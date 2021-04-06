@@ -1,7 +1,10 @@
 package cs5004.model;
 
-import java.awt.*;
+import java.awt.Color;
 
+/**
+ * Subclass for the Ellipse Shape.
+ */
 public class AEllipse extends AnimatedShapeImpl {
 
   // Constants
@@ -78,7 +81,7 @@ public class AEllipse extends AnimatedShapeImpl {
    * Getter Method for a-Axis.
    * @return The double value of the a-Axis.
    */
-  public double getaAxis(){
+  public double getaAxis() {
     return this.aAxis;
   }
 
@@ -86,7 +89,7 @@ public class AEllipse extends AnimatedShapeImpl {
    * Getter Method for b-Axis.
    * @return The double value of the b-Axis.
    */
-  public double getbAxis(){
+  public double getbAxis() {
     return this.bAxis;
   }
 
