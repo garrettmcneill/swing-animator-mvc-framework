@@ -172,13 +172,16 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   //////////////////////////////////////////////////////////
 
   /**
-   * Getter method to return the list of animations
-   * @return
+   * Getter method to return the list of animations.
+   * @return A list of animations.
    */
   public List<Animation> getAnimationList() {
     return this.animationList;
   }
 
+  /**
+   * Method that adds an animation to the list of animations.
+   */
   public void addAnimation(Animation aAnimation) {
 
     if (aAnimation.getStartTime() < this.appearTime
@@ -190,6 +193,7 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
 
     this.animationList.add(aAnimation);
   }
+
 
   @Override
   public boolean validateAnimations() {
