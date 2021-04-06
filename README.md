@@ -2,9 +2,9 @@
 
 ### Week 1 Deliverable for MVC Project
 
-#### By Guy Bou Ladou & Garrett McNeill
+#### By Guy Bou Lahdou & Garrett McNeill
 
-##### Version 4.5.21
+##### Version 0.5 | Date 4.5.21
 
 - - - - - - - - - - -
 
@@ -30,7 +30,7 @@ principles when working under pressure.
 **AnimatedShape.Java**
 = = = = = = = = =
 
-Represents a shape which is a component in an animation scene. Each shape contains an animationList
+Represents a shape which is a component in a scene. Each shape contains an animationList
 which is used to store transformations (movement, color change, and rescaling).
 
 AnimatedShape the super-type of all shapes in our model.
