@@ -1,9 +1,8 @@
-
 package cs5004.model;
+
 /**
- * This class represents a 2D point. This point is denoted in Cartesian
- * coordinates (x,y) within the first quadrant of the coordinate plane where
- * both x and y have non negative values.
+ * This class represents a 2D point. This point is denoted in Cartesian coordinates (x,y) within the
+ * first quadrant of the coordinate plane where both x and y have non negative values.
  */
 public class Point2D {
   private double x;
@@ -15,9 +14,9 @@ public class Point2D {
    * @param x the x-coordinate of this point
    * @param y the y-coordinate of this point
    */
-  public Point2D(double x, double y) throws  IllegalArgumentException{
+  public Point2D(double x, double y) throws IllegalArgumentException {
 
-    if (x<0 | y<0 ) {
+    if (x < 0 | y < 0) {
       throw new IllegalArgumentException("X and Y Coordinates cannot be negative");
     }
 
@@ -30,7 +29,6 @@ public class Point2D {
    *
    * @return the euclidean distance
    */
-
   public double distToOrigin() {
     return Math.sqrt(x * x + y * y);
   }
@@ -55,6 +53,7 @@ public class Point2D {
 
   /**
    * Set a new x coordinate for the point.
+   *
    * @param x new x-axis coordinate.
    */
   public void setX(double x) {
@@ -63,10 +62,10 @@ public class Point2D {
 
   /**
    * Set a new y coordinate for the point.
+   *
    * @param y new y-axis coordinate.
    */
   public void setY(double y) {
     this.y = y;
   }
-
 }

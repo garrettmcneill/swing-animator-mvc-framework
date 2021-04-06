@@ -48,6 +48,7 @@ public class Velocity2D {
 
   /**
    * Set the vertical component.
+   *
    * @param aDeltaY of this object.
    */
   public void setDeltaY(double aDeltaY) {

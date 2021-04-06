@@ -9,6 +9,8 @@ public interface AnimatorModel {
   /////////////////// REGISTER OBJECTS /////////////////////
   //////////////////////////////////////////////////////////
   /**
+   * Method for registering objects to the animation scene.
+   *
    * @param name The name of the shape.
    * @param Shape The type of shape (selected from ShapeType Enum)
    * @param Loc The location of the shape as a Point2D reference object. Contains x & y values.
@@ -52,9 +54,8 @@ public interface AnimatorModel {
   /**
    * Add an animation to the list of animations for a shape. One object can have many animations.
    *
-   * @param name The name of the shape.
-   * @param t1 Starting time.
-   * @param t2 Ending time.
+   * @param shapeName A string name of the shape to add an animation to.
+   * @param aAnimation An Animation object to add to the shape's animationList.
    */
   void addShapeAnimation(String shapeName, Animation aAnimation);
   /*
@@ -116,7 +117,8 @@ public interface AnimatorModel {
   /**
    * Returns a "script", as a String representation of all shapes and their animations.
    *
-   * @return
+   * @return a string representation of an animation's script: containing a list of all shapes and a
+   *     list of all animations sorted by starting time.
    */
   String generateScript();
 }

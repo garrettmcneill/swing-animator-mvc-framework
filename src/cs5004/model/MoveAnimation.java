@@ -1,14 +1,23 @@
 package cs5004.model;
 
+/** Scale Animation class represents a concrete implementation of a SCALE animation type. */
 public class MoveAnimation extends AbstractAnimationImpl {
 
   // Attributes
-
   private double deltaX;
   private double deltaY;
   private Point2D startingLocation;
   private Point2D endLocation;
 
+  /**
+   * Default constructor for a move-type animation.
+   *
+   * @param aShape An AnimatedShape object to be moved in this animation.
+   * @param t1 The starting time of the move animation.
+   * @param t2 The ending time of the move animation.
+   * @param endLoc The ending location as a Point2D reference object (containing new x & y
+   *     coordinates)
+   */
   public MoveAnimation(AnimatedShape aShape, int t1, int t2, Point2D endLoc) {
     super(aShape, t1, t2, AnimationType.MOVE);
     this.startingLocation = this.shape.getLocation(); // which location are we getting here
@@ -16,6 +25,12 @@ public class MoveAnimation extends AbstractAnimationImpl {
     recalculateVelocity();
   }
 
+  /**
+   * Method for updating a shape after an animation has been added. Will be used for running
+   * animations to update the shape's properties.
+   *
+   * @param currentTime The current tick to update the shape's properties to.
+   */
   @Override
   public void updateShape(int currentTime) {
 
@@ -31,20 +46,27 @@ public class MoveAnimation extends AbstractAnimationImpl {
     }
   }
 
-  @Override  // might want to move back to abstract class
+  /**
+   * Check Consistent is a helper method to ensure that animations of the same type are not added on
+   * top of each other. The previous animation of the same type must end before a new animation of
+   * the same type can begin.
+   *
+   * @param previousAnimation or null.
+   * @return True if the animations are consistent and do not overlap, false if they do not.
+   */
+  @Override // todo: might want to move back to abstract class
   public boolean checkConsistent(Animation previousAnimation) {
 
     boolean rVal = true;
 
-    if (previousAnimation == null){
+    if (previousAnimation == null) {
       return rVal;
     }
 
     if (previousAnimation instanceof MoveAnimation) {
-      if ( previousAnimation.getEndTime() < this.endTime ) {
+      if (previousAnimation.getEndTime() < this.endTime) {
         rVal = true;
-      }
-      else {
+      } else {
         rVal = false;
       }
     }
@@ -52,54 +74,83 @@ public class MoveAnimation extends AbstractAnimationImpl {
     return rVal;
   }
 
-  @Override // might want to move back to abstract class
-  public void patchBeginningState(Animation previousAnimation){
+  /**
+   * Helper method for patching the beginning state of an animation list. It will update the
+   * starting height as the ending height after an animation is run.
+   *
+   * @param previousAnimation or null.
+   */
+  @Override // todo: might want to move back to abstract class
+  public void patchBeginningState(Animation previousAnimation) {
 
-    if (previousAnimation == null){
+    if (previousAnimation == null) {
       return;
     }
     if (previousAnimation instanceof MoveAnimation) {
       MoveAnimation tmpMove = (MoveAnimation) previousAnimation;
       this.setStartingLocation(tmpMove.getEndingLocation());
     }
-
   }
 
-
-
-  public Point2D getStartingLocation(){
+  /**
+   * Getter method for returning the starting location of the shape during the move animation.
+   * @return A Point2D reference object that contains the starting location's x&y coordinates.
+   */
+  public Point2D getStartingLocation() {
     return this.startingLocation;
   }
 
-  public void setStartingLocation(Point2D aLoc){
+  /**
+   * Setter method for updating the starting location.
+   * @param aLoc A Point2D reference object that represents the starting location.
+   */
+  public void setStartingLocation(Point2D aLoc) {
     this.startingLocation = aLoc;
     recalculateVelocity();
   }
 
-  public Point2D getEndingLocation(){
+  /**
+   * Getter method for returning the ending location of the shape in the move animation.
+   * @return A Point2D reference object that contains the ending location's x&y coordinates.
+   */
+  public Point2D getEndingLocation() {
     return this.endLocation;
   }
 
-  public void setEndingLocation(Point2D aLoc){
+  /**
+   * Setter method for changing the ending location.
+   * @param aLoc A Point2D reference object that represents the ending location's x&y coordinates.
+   */
+  public void setEndingLocation(Point2D aLoc) {
     this.endLocation = aLoc;
     recalculateVelocity();
   }
 
-  private void recalculateVelocity(){
+  /**
+   * Method for recalculating the velocity of the move animation.
+   */
+  private void recalculateVelocity() {
     double deltaT = this.endTime - this.startTime;
     this.deltaX = (this.endLocation.getX() - this.startingLocation.getX()) / deltaT;
     this.deltaY = (this.endLocation.getY() - this.startingLocation.getY()) / deltaT;
   }
 
+  /**
+   * Method generates an animation script for a move animation.
+   * @return A formatted string that contains the printout of a move animation.
+   */
   @Override
   public String generateAnimationScript() {
     String tmpName = this.getShape().getName();
 
-    return String.format("%s moves from(%.2f,%.2f) to (%.2f,%.2f) from t=%d to t=%d\n"
-            ,tmpName ,this.startingLocation.getX(),this.startingLocation.getY(), this.endLocation.getX()
-            ,this.endLocation.getY(), this.startTime, this.endTime);
+    return String.format(
+        "%s moves from(%.2f,%.2f) to (%.2f,%.2f) from t=%d to t=%d\n",
+        tmpName,
+        this.startingLocation.getX(),
+        this.startingLocation.getY(),
+        this.endLocation.getX(),
+        this.endLocation.getY(),
+        this.startTime,
+        this.endTime);
   }
-
-
-
 }
