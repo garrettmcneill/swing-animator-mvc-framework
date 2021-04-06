@@ -65,7 +65,7 @@ public class ARectangle extends AnimatedShapeImpl {
    *
    * @return A double value representing the width of the rectangle.
    */
-  private double getWidth() {
+  public double getWidth() {
     return this.width;
   }
 
@@ -74,7 +74,7 @@ public class ARectangle extends AnimatedShapeImpl {
    *
    * @param aWidth A double value representing the width of the rectangle.
    */
-  private void setWidth(int aWidth) {
+  public void setWidth(double aWidth) {
     if (aWidth > 0) {
       this.width = aWidth;
     } else {
@@ -87,7 +87,7 @@ public class ARectangle extends AnimatedShapeImpl {
    *
    * @return A double value representing the length of a rectangle.
    */
-  private double getLength() {
+  public double getLength() {
     return this.length;
   }
 
@@ -96,7 +96,7 @@ public class ARectangle extends AnimatedShapeImpl {
    *
    * @param aLength A double value representing the length of a rectangle.
    */
-  private void setLength(int aLength) {
+  public void setLength(double aLength) {
     if (aLength > 0) {
       this.length = aLength;
     } else {
@@ -118,7 +118,7 @@ public class ARectangle extends AnimatedShapeImpl {
     info += String.format("Type: %s\n", this.getClass().getSimpleName());
     info +=
         String.format(
-            "Center: (%.2f,%.2f), Length: %.2f, Width: %.2f, Color: %s\n",
+            "Corner: (%.2f,%.2f), Length: %.2f, Width: %.2f, Color: %s\n",
             getLocation().getX(), getLocation().getY(), this.length, this.width, rgb);
 
     return info;

@@ -1,35 +1,16 @@
 package cs5004.model;
 
-public class MoveAnimation implements Animation {
+public class MoveAnimation extends AbstractAnimationImpl {
 
   // Attributes
-  //todo: move me to base class
-  final AnimationType type;
-  final AnimatedShape shape;
-  final int startTime;
-  final int endTime;
 
-  double deltaX;
-  double deltaY;
-  Point2D startingLocation;
-  Point2D endLocation;
+  private double deltaX;
+  private double deltaY;
+  private Point2D startingLocation;
+  private Point2D endLocation;
 
-  public MoveAnimation(AnimatedShape aShape, Point2D endLoc, int t1, int t2) {
-
-    if (t2 < t1) {
-      throw new IllegalArgumentException("Start of animation time has to be" +
-              "smaller than the end of the animation time.");
-    }
-    this.type = AnimationType.MOVE;
-    this.startTime = t1;
-    this.endTime = t2;
-
-    if ( !(aShape instanceof AnimatedShape)) {
-      throw new IllegalArgumentException("Shape must be of type AnimatedShape");
-    }
-
-    this.shape = aShape;
-
+  public MoveAnimation(AnimatedShape aShape, int t1, int t2, Point2D endLoc) {
+    super(aShape, t1, t2, AnimationType.MOVE);
     this.startingLocation = this.shape.getLocation(); // which location are we getting here
     this.endLocation = endLoc;
     recalculateVelocity();
@@ -50,7 +31,7 @@ public class MoveAnimation implements Animation {
     }
   }
 
-  @Override
+  @Override  // might want to move back to abstract class
   public boolean checkConsistent(Animation previousAnimation) {
 
     boolean rVal = true;
@@ -71,7 +52,7 @@ public class MoveAnimation implements Animation {
     return rVal;
   }
 
-  @Override
+  @Override // might want to move back to abstract class
   public void patchBeginningState(Animation previousAnimation){
 
     if (previousAnimation == null){
@@ -84,21 +65,6 @@ public class MoveAnimation implements Animation {
 
   }
 
-
-  @Override
-  public AnimatedShape getShape(){
-    return this.shape;
-  }
-
-  @Override
-  public int getStartTime(){
-    return this.startTime;
-  }
-
-  @Override
-  public int getEndTime(){
-    return this.endTime;
-  }
 
 
   public Point2D getStartingLocation(){
@@ -134,9 +100,6 @@ public class MoveAnimation implements Animation {
             ,this.endLocation.getY(), this.startTime, this.endTime);
   }
 
-  @Override
-  public AnimationType getType(){
-    return this.type;
-  }
+
 
 }
