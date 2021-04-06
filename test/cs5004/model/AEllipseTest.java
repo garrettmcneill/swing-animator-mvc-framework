@@ -1,11 +1,9 @@
 package cs5004.model;
 
-import static org.junit.Assert.*;
-
-import java.awt.Color;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class AEllipseTest {
 
@@ -20,7 +18,6 @@ public class AEllipseTest {
 
     testEllOverCon = new AEllipse("Second Test", new Point2D(10, 15)
             , 1, 2, 3, 50, 60, 20, 80);
-
   }
 
 

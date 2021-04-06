@@ -171,6 +171,10 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   /////////////////// LIST UTILITIES ///////////////////////
   //////////////////////////////////////////////////////////
 
+  /**
+   * Getter method to return the list of animations
+   * @return
+   */
   public List<Animation> getAnimationList() {
     return this.animationList;
   }
