@@ -10,8 +10,8 @@ public class AEllipse extends AnimatedShapeImpl {
   private static final Color DEFAULT_COLOR = Color.black;
 
   // Attributes
-  private int aAxis;
-  private int bAxis;
+  private double aAxis;
+  private double bAxis;
 
   /**
    * Minimal Constructor for an ellipse. Requires a location to be created & instantiates with
@@ -45,8 +45,8 @@ public class AEllipse extends AnimatedShapeImpl {
       int r,
       int g,
       int b,
-      int aAxis,
-      int bAxis,
+      double aAxis,
+      double bAxis,
       int aAppearTime,
       int aDisappearTime) {
     super(name, ref, r, g, b, aAppearTime, aDisappearTime);
@@ -64,7 +64,7 @@ public class AEllipse extends AnimatedShapeImpl {
    * @param aAxis The a-axis of the elipse.
    * @param bAxis The b-axis of the elipse.
    */
-  public void setAxis(int aAxis, int bAxis) {
+  public void setAxis(double aAxis, double bAxis) {
     if (aAxis > 0 && bAxis > 0) {
       this.aAxis = aAxis;
       this.bAxis = bAxis;
@@ -76,17 +76,17 @@ public class AEllipse extends AnimatedShapeImpl {
 
   /**
    * Getter Method for a-Axis.
-   * @return The int value of the a-Axis.
+   * @return The double value of the a-Axis.
    */
-  public int getaAxis(){
+  public double getaAxis(){
     return this.aAxis;
   }
 
   /**
    * Getter Method for b-Axis.
-   * @return The int value of the b-Axis.
+   * @return The double value of the b-Axis.
    */
-  public int getbAxis(){
+  public double getbAxis(){
     return this.bAxis;
   }
 
@@ -103,8 +103,8 @@ public class AEllipse extends AnimatedShapeImpl {
             "Center: (%.2f,%.2f), X Radius: %.2f, Y Radius: %.2f, Color: %s\n",
             getLocation().getX(),
             getLocation().getY(),
-            (double) this.aAxis,
-            (double) this.bAxis,
+            this.aAxis,
+            this.bAxis,
             rgb);
     info += String.format("Appears at t=%d\n", this.appearTime);
     info += String.format("Disappears at t=%d\n", this.disappearTime);

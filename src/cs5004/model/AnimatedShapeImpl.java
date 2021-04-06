@@ -13,7 +13,6 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   protected final int appearTime;
   protected final int disappearTime;
   protected Point2D reference;
-  protected Point2D startingLocation;
   protected Color shapeColor;
   protected List<Animation> animationList; // we should probably declare as array list
   protected Velocity2D velocity;
@@ -172,6 +171,10 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   /////////////////// LIST UTILITIES ///////////////////////
   //////////////////////////////////////////////////////////
 
+  /**
+   * Getter method to return the list of animations
+   * @return
+   */
   public List<Animation> getAnimationList() {
     return this.animationList;
   }
@@ -221,4 +224,6 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
 
   @Override
   public abstract String generateInfoScript();
+
+
 }

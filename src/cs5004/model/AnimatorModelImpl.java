@@ -88,7 +88,9 @@ public class AnimatorModelImpl implements AnimatorModel {
   //////////////////////////////////////////////////////////
 
   @Override
-  public void moveTo(String shapeName, Point2D newLoc, int t1, int t2) {
+  public void moveTo(String shapeName, Point2D newLoc, int t1, int t2) throws IllegalStateException{
+
+    // todo: CODE TO BE REFACTORED IN THE NEXT ITERATION
 
     // find the shape
     AnimatedShapeImpl tmpShape = this.shapeMap.get(shapeName);
@@ -104,16 +106,80 @@ public class AnimatorModelImpl implements AnimatorModel {
     // todo: this is implemented in AnimatedShapeImpl but DOUBLE CHECK
 
 
-    Animation newAnim=new MoveAnimation(tmpShape, newLoc, t1, t2);
+    Animation newAnim=new MoveAnimation(tmpShape, t1, t2, newLoc);
     tmpAnimationList.add(newAnim);
+
+    if (!tmpShape.validateAnimations()) {
+      throw new IllegalStateException("Animation conflicts with other animations");
+      // no method to remove animations todo: implement in next iteration
+    }
+  }
+
+  @Override
+  public void changeColor(String shapeName, int t1, int t2, int r, int g, int b) {
+
+    // todo: CODE TO BE REFACTORED IN THE NEXT ITERATION
+
+    // find the shape
+    AnimatedShapeImpl tmpShape = this.shapeMap.get(shapeName);
+    if (tmpShape == null) {
+      throw new IllegalArgumentException("ShapeName not found, animation cannot be added.");
+    }
+
+
+    // get list of animations
+    List<Animation> tmpAnimationList = tmpShape.getAnimationList();
+
+    // check whether there is a time conflict with another animation of the same type
+    // todo: this is implemented in AnimatedShapeImpl but DOUBLE CHECK
+
+    Animation newAnim=new ColorAnimation(tmpShape, t1, t2, r,g,b);
+    tmpAnimationList.add(newAnim);
+
+    if (!tmpShape.validateAnimations()) {
+      throw new IllegalStateException("Animation conflicts with other animations");
+      // no method to remove animations todo: implement in next iteration
+    }
 
   }
 
   @Override
-  public void changeColor(String name, int t1, int t2, int r, int g, int b) {}
+  public void rescaleShape(String shapeName, int newH, int newW, int t1, int t2) {
 
-  @Override
-  public void rescaleShape(String name, int newH, int newW, int t1, int t2) {}
+    // todo: CODE TO BE REFACTORED IN THE NEXT ITERATION
+
+
+    AnimatedShapeImpl tmpShape = this.shapeMap.get(shapeName);
+
+    if (tmpShape == null) {
+      throw new IllegalArgumentException("ShapeName not found, animation cannot be added.");
+    }
+
+    // get list of animations
+    List<Animation> tmpAnimationList = tmpShape.getAnimationList();
+
+    // check whether there is a time conflict with another animation of the same type
+    // todo: this is implemented in AnimatedShapeImpl but DOUBLE CHECK
+
+    if ( tmpShape instanceof ARectangle) {
+      Animation newAnim = new ScaleAnimation((ARectangle) tmpShape, t1, t2, newH, newW);
+      tmpAnimationList.add(newAnim);
+    }
+    else if ( tmpShape instanceof AEllipse) {
+      Animation newAnim = new ScaleAnimation((AEllipse) tmpShape, t1, t2, newH, newW);
+      tmpAnimationList.add(newAnim);
+    }
+    else {
+      throw new IllegalArgumentException("Shape has to be an instance of ARectangle or AEllipse");
+    }
+
+
+    if (!tmpShape.validateAnimations()) {
+      throw new IllegalStateException("Animation conflicts with other animations");
+      // no method to remove animations todo: implement in next iteration
+    }
+
+  }
 
   //////////////////////////////////////////////////////////
   //////////////////// CURRENT STATE ///////////////////////
@@ -175,7 +241,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     if (tmpShape == null) {
       return null;
     }
-
     return tmpShape;
   }
 
