@@ -12,8 +12,8 @@ public interface AnimatorModel {
    * Method for registering objects to the animation scene.
    *
    * @param name The name of the shape.
-   * @param Shape The type of shape (selected from ShapeType Enum)
-   * @param Loc The location of the shape as a Point2D reference object. Contains x & y values.
+   * @param shape The type of shape (selected from ShapeType Enum)
+   * @param aLoc The location of the shape as a Point2D reference object. Contains x & y values.
    * @param length The Length of the shape.
    * @param width The width of the shape.
    * @param r Red (0 -> 255) for rgb.
@@ -24,8 +24,8 @@ public interface AnimatorModel {
    */
   void registerObject(
       String name,
-      ShapeType Shape,
-      Point2D Loc,
+      ShapeType shape,
+      Point2D aLoc,
       int length,
       int width,
       int r,
@@ -121,4 +121,7 @@ public interface AnimatorModel {
    *     list of all animations sorted by starting time.
    */
   String generateScript();
+
+  // TODO: ADD THIS TO README CHANGED IN WK 2
+  List<AnimatedShapeImpl> getShapes();
 }

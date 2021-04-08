@@ -1,6 +1,8 @@
 package cs5004.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -30,8 +32,8 @@ public class AnimatorModelImpl implements AnimatorModel {
    * Method for registering objects to the animation scene.
    *
    * @param name The name of the shape.
-   * @param Shape The type of shape (selected from ShapeType Enum)
-   * @param Loc The location of the shape as a Point2D reference object. Contains x & y values.
+   * @param shape The type of shape (selected from ShapeType Enum)
+   * @param aLoc The location of the shape as a Point2D reference object. Contains x & y values.
    * @param length The Length of the shape.
    * @param width The width of the shape.
    * @param r Red (0 -> 255) for rgb.
@@ -43,8 +45,8 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public void registerObject(
       String name,
-      ShapeType Shape,
-      Point2D Loc,
+      ShapeType shape,
+      Point2D aLoc,
       int length,
       int width,
       int r,
@@ -60,7 +62,7 @@ public class AnimatorModelImpl implements AnimatorModel {
 
     // call ShapeFactory to create object
     AnimatedShapeImpl tmpShape =
-        factory.createShape(name, Shape, Loc, r, g, b, length, width, appearTime, disappearTime);
+        factory.createShape(name, shape, aLoc, r, g, b, length, width, appearTime, disappearTime);
 
     // add to shape map
     this.shapeMap.put(name, tmpShape);
@@ -74,7 +76,7 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public void deregisterObject(String shapeName) {
     if (shapeName == null) {
-      throw new NullPointerException("Invalid shape name. String cannot be null");
+      throw new IllegalArgumentException("Invalid shape name. String cannot be null");
     }
 
     if (shapeMap.get(shapeName) == null) {
@@ -281,6 +283,12 @@ public class AnimatorModelImpl implements AnimatorModel {
     return script.toString();
   }
 
+  /**
+   * Find shape method for getting a shape object by name.
+   *
+   * @param name A string name of the shape.
+   * @return An AnimatedShape object that matches the name passed in.
+   */
   public AnimatedShape findShape(String name) {
     // find the shape, if not found -- return null
     AnimatedShapeImpl tmpShape = this.shapeMap.get(name);
@@ -293,5 +301,14 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public List<AnimatedShapeImpl> getShapesAtTick(int tick) {
     return null;
+  }
+
+  // TODO: ADD THIS TO README CHANGED IN WK 2
+  @Override
+  public List<AnimatedShapeImpl> getShapes() {
+
+    List<AnimatedShapeImpl> rVal = new ArrayList<AnimatedShapeImpl>(shapeMap.values());
+
+    return rVal;
   }
 }

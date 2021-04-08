@@ -46,7 +46,7 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
       String name, Point2D ref, int r, int g, int b, int aAppearTime, int aDisappearTime) {
 
     if (name == null) {
-      throw new NullPointerException("String cannot be null and has to be a valid string");
+      throw new IllegalArgumentException("String cannot be null and has to be a valid string");
     }
 
     if (r > 255 | r < 0 | g > 255 | g < 0 | b > 255 | b < 0) {

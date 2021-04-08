@@ -9,10 +9,10 @@ public class Point2D {
   private double y;
 
   /**
-   * Construct a 2d point with the given coordinates
+   * Construct a 2d point with the given coordinates.
    *
-   * @param x the x-coordinate of this point
-   * @param y the y-coordinate of this point
+   * @param x the x-coordinate of this point.
+   * @param y the y-coordinate of this point.
    */
   public Point2D(double x, double y) throws IllegalArgumentException {
 
@@ -25,27 +25,27 @@ public class Point2D {
   }
 
   /**
-   * Compute and return the Euclidean distance of this point to the origin
+   * Compute and return the Euclidean distance of this point to the origin.
    *
-   * @return the euclidean distance
+   * @return the euclidean distance.
    */
   public double distToOrigin() {
     return Math.sqrt(x * x + y * y);
   }
 
   /**
-   * Return the x-coordinate of this point
+   * Return the x-coordinate of this point.
    *
-   * @return x-coordinate of this point
+   * @return x-coordinate of this point.
    */
   public double getX() {
     return x;
   }
 
   /**
-   * Return the y-coordinate of this point
+   * Return the y-coordinate of this point.
    *
-   * @return y-coordinate of this point
+   * @return y-coordinate of this point.
    */
   public double getY() {
     return y;

@@ -11,7 +11,7 @@ public class AEllipseTest {
   private AnimatedShapeImpl testEllDefCon; // default constructor
   private AnimatedShapeImpl testEllOverCon; // overloaded constructor
 
-  /** @Before setup for test methods. */
+  /** Setup block for test methods. */
   @Before
   public void setUp() {
 
