@@ -55,6 +55,8 @@ public class EasyAnimator {
 
     // create view
     ViewFactory.createView(theModel, modelViewType, outFile, fps);
+
+    // run animation ?
   }
 
 

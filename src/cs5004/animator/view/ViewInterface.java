@@ -4,6 +4,8 @@ import java.io.IOException;
 
 public interface ViewInterface {
 
-  public void generateScript() throws IOException;
+  public void activateView(String outFile, int animationFrameRate) throws IOException;
+
+  public void playAnimation();
 
 }

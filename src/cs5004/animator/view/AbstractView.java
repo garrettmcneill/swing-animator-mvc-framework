@@ -21,7 +21,7 @@ public abstract class AbstractView implements ViewInterface {
 
 
   @Override
-  public abstract void generateScript() throws IOException;
+  public abstract void activateView(String aOutputFilename, int animationFrameRate) throws IOException;
 
 
 }

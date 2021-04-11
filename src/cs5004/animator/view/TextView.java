@@ -23,7 +23,7 @@ public class TextView extends AbstractView {
   }
 
   @Override
-  public void generateScript() throws IOException {
+  public void activateView(String aOutputFilename, int animationFrameRate) throws IOException {
 
     FileWriter tmpFileWriter;
     BufferedWriter tmpWriter;
@@ -68,5 +68,10 @@ public class TextView extends AbstractView {
     } catch (IOException e) {
       throw e; // throw IO exception if write error
     }
+  }
+
+  @Override
+  public void playAnimation() {
+
   }
 }

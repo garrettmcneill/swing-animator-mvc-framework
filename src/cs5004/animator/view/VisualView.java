@@ -13,7 +13,12 @@ public class VisualView extends AbstractView{
 
 
   @Override
-  public void generateScript() throws IOException {
+  public void activateView(String aOutputFilename, int animationFrameRate) throws IOException {
+  }
+
+  @Override
+  public void playAnimation() {
+
   }
 
 
