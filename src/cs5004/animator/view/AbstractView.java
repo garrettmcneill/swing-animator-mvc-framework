@@ -10,18 +10,14 @@ public abstract class AbstractView implements ViewInterface {
   protected final String outputFileName;
   protected final Long tickMSecs;
 
-
-  protected AbstractView(AnimatorModel aModel, String aOutputFilename, Long aTickMSecs){
+  protected AbstractView(AnimatorModel aModel, String aOutputFilename, Long aTickMSecs) {
 
     this.model = aModel;
     this.outputFileName = aOutputFilename;
     this.tickMSecs = aTickMSecs;
-
   }
 
-
   @Override
-  public abstract void activateView(String aOutputFilename, int animationFrameRate) throws IOException;
-
-
+  public abstract void activateView(String aOutputFilename, int animationFrameRate)
+      throws IOException;
 }

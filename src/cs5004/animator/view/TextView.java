@@ -13,9 +13,6 @@ import java.util.List;
 
 public class TextView extends AbstractView {
 
-  // Attributes
-  private AnimatorModel model;
-  private String outputFileName;
 
   public TextView(AnimatorModel aModel, String aOutFileName) {
 
