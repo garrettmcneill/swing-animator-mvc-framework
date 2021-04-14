@@ -105,7 +105,7 @@ public class ScaleAnimation extends AbstractAnimationImpl {
     }
 
     if (previousAnimation instanceof ScaleAnimation) {
-      if (previousAnimation.getEndTime() < this.endTime) {
+      if (previousAnimation.getEndTime() < this.startTime) {
         rVal = true;
       } else {
         rVal = false;

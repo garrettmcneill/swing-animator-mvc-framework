@@ -41,8 +41,8 @@ public class MoveAnimation extends AbstractAnimationImpl {
       double newX = startingLocation.getX() + (dT * deltaX);
       double newY = startingLocation.getX() + (dT * deltaY);
 
-      this.shape.getLocation().setX(newX);
-      this.shape.getLocation().setY(newY);
+      this.shape.setX(newX);
+      this.shape.setY(newY);
     }
   }
 
@@ -64,7 +64,7 @@ public class MoveAnimation extends AbstractAnimationImpl {
     }
 
     if (previousAnimation instanceof MoveAnimation) {
-      if (previousAnimation.getEndTime() < this.endTime) {
+      if (previousAnimation.getEndTime() < this.startTime) {
         rVal = true;
       } else {
         rVal = false;

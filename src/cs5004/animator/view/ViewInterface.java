@@ -8,4 +8,17 @@ public interface ViewInterface {
 
   public void playAnimation();
 
+  /**
+   * Signal the view to draw itself
+   */
+  void refresh();
+
+  /**
+   * Make the view visible. This is usually called
+   * after the view is constructed
+   */
+  void makeVisible();
+
+
+
 }

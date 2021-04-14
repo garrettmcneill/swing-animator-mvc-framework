@@ -211,8 +211,8 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
           if (aAnimation.checkConsistent(lastAnimation)) {
             aAnimation.patchBeginningState(lastAnimation);
           } else {
-            // todo: might want to log inconsistency
             rVal = false;
+
           }
           lastAnimation = aAnimation;
         }
@@ -221,6 +221,35 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
 
     return rVal;
   }
+
+  //todo: do a quick review and test
+  @Override
+  public void updateState(int tickT) {
+
+    // sort animation list
+    Comparator animationCompare = new AnimationComparatorStartTime();
+    this.animationList.sort(animationCompare);
+
+    // iterate over AnimationType
+    for (AnimationType aType : AnimationType.values()) {
+      for (Animation aAnimation : this.animationList) {
+        if (aAnimation.getType() == aType) {
+          if (tickT >= aAnimation.getStartTime() && tickT <= aAnimation.getEndTime()) {
+            aAnimation.updateShape(tickT);
+            break;
+          }
+          else if (aAnimation.getEndTime() < tickT) {
+            //todo: might be useful to add an ID for each anim to avoid reusing 1-line code below:
+            aAnimation.updateShape(aAnimation.getEndTime());
+          }
+        }
+      }
+    }
+  }
+
+
+
+
 
   //////////////////////////////////////////////////////////
   ////////////////////// TO STRING /////////////////////////

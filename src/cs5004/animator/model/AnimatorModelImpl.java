@@ -3,6 +3,7 @@ package cs5004.animator.model;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,10 +17,15 @@ public class AnimatorModelImpl implements AnimatorModel {
 
   private Map<String, AnimatedShapeImpl> shapeMap;
   private ShapeFactory factory;
+  private int modStartTime;
+  private int modEndTime;
 
   public AnimatorModelImpl() {
     this.shapeMap = new HashMap<String, AnimatedShapeImpl>();
     this.factory = new ShapeFactory();
+    this.modStartTime = 0;
+    this.modEndTime = 0;
+
   }
 
   //////////////////////////////////////////////////////////
@@ -56,6 +62,11 @@ public class AnimatorModelImpl implements AnimatorModel {
     // validate values
     if (name == null || shapeMap.get(name) != null) {
       throw new IllegalArgumentException("Invalid shape name, must be unique and not null.");
+    }
+
+    // could add more functionality so that model end time shrinks as we remove objects
+    if (disappearTime > this.modEndTime) {
+      this.modEndTime = disappearTime;
     }
 
     // call ShapeFactory to create object
@@ -172,7 +183,7 @@ public class AnimatorModelImpl implements AnimatorModel {
     // todo: this is implemented in AnimatedShapeImpl but DOUBLE CHECK
 
     Animation newAnim = new ColorAnimation(tmpShape, t1, t2, r, g, b);
-    tmpAnimationList.add(newAnim);
+    tmpAnimationList.add(newAnim); // FIXME: I suppose that works since the list is protected
 
     if (!tmpShape.validateAnimations()) {
       throw new IllegalStateException("Animation conflicts with other animations");
@@ -227,6 +238,8 @@ public class AnimatorModelImpl implements AnimatorModel {
   //////////////////////////////////////////////////////////
 
   /** Stubbed method for running an animation. Todo in the next pass. */
+  //todo: Guy BL comment this should belong to the controller that we'll located this time
+  // in main.
   public void runAnimation() {
 
     // todo: init clock
@@ -298,8 +311,47 @@ public class AnimatorModelImpl implements AnimatorModel {
 
   @Override
   public List<AnimatedShapeImpl> getShapesAtTick(int tick) {
-    return null;
+
+    // 1) iterate through shapes
+    // todo: easy as we simply iterate through the hashmap
+
+    // 2)  For each : Check whether that tick is within it's appear and disappear time;
+    // getAppearTime  AND getDisappearTime Methods
+    //todo: easy to check with the getters whether the shape exists @ that tick.
+
+    // 3) If this is the case:
+    // todo: Would need to add that shape to the list. The Location, Color, Scale of that
+    //  shape would need to be at the tick
+
+    // 4) Would need that shape to have it's color, location, shape, scale updated @ tick
+    // this was taken care of by the new updateState(tick) method of AnimatedShape
+
+
+    // Create empty List of Shapes
+    List<AnimatedShapeImpl> shapeList = new ArrayList<>();
+
+
+    //Traverse the Hashmap
+    for (Map.Entry<String, AnimatedShapeImpl> entry : this.shapeMap.entrySet()) {
+
+      if (tick < entry.getValue().getAppearTime() && tick > entry.getValue().getDisappearTime()) {
+        continue;
+      }
+
+      entry.getValue().validateAnimations();
+      entry.getValue().updateState(tick);
+
+      shapeList.add(entry.getValue()); // todo: might need a copy of the shape, perhaps set a
+      //todo: copy constructor
+    }
+
+
+    return shapeList;
   }
+
+
+
+
 
   // TODO: ADD THIS TO README CHANGED IN WK 2
   @Override

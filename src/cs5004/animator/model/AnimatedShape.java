@@ -121,6 +121,15 @@ public interface AnimatedShape {
   public boolean validateAnimations();
 
   /**
+   * Method that sorts by chronological order the animations( on the basis of start time) and
+   * then iterates through all the animations of the same type while checking whether that tickT
+   * falls during any of those animations. Once an animation is found, the state of the Shape at
+   * time t is updated.
+   * @param tickT tick at which we want to update the state of the shape/
+   */
+  void updateState(int tickT);
+
+  /**
    * It is a toSTring type of method that generates information about the shape and it's
    * properties ( location, color, width, height, type, etc.).
    * @return A string of the aforementioned.

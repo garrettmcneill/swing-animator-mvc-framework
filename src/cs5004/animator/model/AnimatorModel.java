@@ -107,7 +107,7 @@ public interface AnimatorModel {
   //////////////////////////////////////////////////////////
 
   /**
-   * Getter method for returning the state of the animation at a given frame (tick.)
+   * Getter method for returning the state of the shape at a given time frame (tick.)
    *
    * @param tick A frame on the timeline of the animation.
    * @return A deep copy of the animation's objects with values for the requested frame.

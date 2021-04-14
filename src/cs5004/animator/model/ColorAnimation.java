@@ -73,7 +73,7 @@ public class ColorAnimation extends AbstractAnimationImpl {
     }
 
     if (previousAnimation instanceof ColorAnimation) {
-      if (previousAnimation.getEndTime() < this.endTime) {
+      if (previousAnimation.getEndTime() < this.startTime) {
         rVal = true;
       } else {
         rVal = false;
