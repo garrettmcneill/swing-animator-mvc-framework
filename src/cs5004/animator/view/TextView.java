@@ -71,4 +71,14 @@ public class TextView extends AbstractView {
   public void playAnimation() {
 
   }
+
+  @Override
+  public void refresh() {
+
+  }
+
+  @Override
+  public void makeVisible() {
+
+  }
 }

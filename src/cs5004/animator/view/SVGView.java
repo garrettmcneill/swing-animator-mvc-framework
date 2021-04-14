@@ -22,4 +22,14 @@ public class SVGView extends AbstractView{
 
   }
 
+  @Override
+  public void refresh() {
+
+  }
+
+  @Override
+  public void makeVisible() {
+
+  }
+
 }
