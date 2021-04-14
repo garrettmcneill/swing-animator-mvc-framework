@@ -41,4 +41,5 @@ class AnimationPanel extends JPanel {
 
      */
 
+  }
 }
