@@ -56,7 +56,28 @@ public class EasyAnimator {
     // create view
     ViewFactory.createView(theModel, modelViewType, outFile, fps);
 
-    // run animation ?
+    // run animation
+
+    /** Stubbed method for running an animation. Todo in the next pass. */
+    //todo: Guy BL comment this should belong to the controller that we'll located this time
+    // in main.
+    // public void runAnimation() {
+
+    // todo: init clock
+
+    // todo: setNextClockTic()
+    // --> take the current clock and add a number of seconds to it to create the next
+    // tic
+
+    // todo: for each object, handleClockTic(0)
+
+    // todo: loop until finished
+    // --> wait until next tic
+    // --> for each object, handleClockTic(n)
+
+    // }
+
+
   }
 
 
@@ -97,4 +118,8 @@ public class EasyAnimator {
 
     return true;
   }
+
+
+
+
 }

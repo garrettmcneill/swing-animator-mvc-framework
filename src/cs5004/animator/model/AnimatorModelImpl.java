@@ -25,7 +25,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     this.factory = new ShapeFactory();
     this.modStartTime = 0;
     this.modEndTime = 0;
-
   }
 
   //////////////////////////////////////////////////////////
@@ -237,25 +236,6 @@ public class AnimatorModelImpl implements AnimatorModel {
   //////////////////// CURRENT STATE ///////////////////////
   //////////////////////////////////////////////////////////
 
-  /** Stubbed method for running an animation. Todo in the next pass. */
-  //todo: Guy BL comment this should belong to the controller that we'll located this time
-  // in main.
-  public void runAnimation() {
-
-    // todo: init clock
-
-    // todo: setNextClockTic()
-    // --> take the current clock and add a number of seconds to it to create the next
-    // tic
-
-    // todo: for each object, handleClockTic(0)
-
-    // todo: loop until finished
-    // --> wait until next tic
-    // --> for each object, handleClockTic(n)
-
-  }
-
   /**
    * Returns a "script", as a String representation of all shapes and their animations.
    *
@@ -317,7 +297,7 @@ public class AnimatorModelImpl implements AnimatorModel {
 
     // 2)  For each : Check whether that tick is within it's appear and disappear time;
     // getAppearTime  AND getDisappearTime Methods
-    //todo: easy to check with the getters whether the shape exists @ that tick.
+    // todo: easy to check with the getters whether the shape exists @ that tick.
 
     // 3) If this is the case:
     // todo: Would need to add that shape to the list. The Location, Color, Scale of that
@@ -326,12 +306,10 @@ public class AnimatorModelImpl implements AnimatorModel {
     // 4) Would need that shape to have it's color, location, shape, scale updated @ tick
     // this was taken care of by the new updateState(tick) method of AnimatedShape
 
-
     // Create empty List of Shapes
     List<AnimatedShapeImpl> shapeList = new ArrayList<>();
 
-
-    //Traverse the Hashmap
+    // Traverse the Hashmap
     for (Map.Entry<String, AnimatedShapeImpl> entry : this.shapeMap.entrySet()) {
 
       if (tick < entry.getValue().getAppearTime() && tick > entry.getValue().getDisappearTime()) {
@@ -342,16 +320,11 @@ public class AnimatorModelImpl implements AnimatorModel {
       entry.getValue().updateState(tick);
 
       shapeList.add(entry.getValue()); // todo: might need a copy of the shape, perhaps set a
-      //todo: copy constructor
+      // todo: copy constructor
     }
-
 
     return shapeList;
   }
-
-
-
-
 
   // TODO: ADD THIS TO README CHANGED IN WK 2
   @Override
