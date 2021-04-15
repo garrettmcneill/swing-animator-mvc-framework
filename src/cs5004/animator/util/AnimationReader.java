@@ -1,8 +1,11 @@
 package cs5004.animator.util;
 
+import cs5004.animator.model.AnimatorModel;
+
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
 
 /**
  * A helper to read animation data and construct an animation from it.
@@ -28,10 +31,9 @@ public class AnimationReader {
    *
    * @param readable The source of data for the animation
    * @param builder  A builder for helping to construct a new animation
-   * @param <Doc>    The main model interface type describing animations
-   * @return
+   * @return AnimatorModel The main model interface type describing animations
    */
-  public static <Doc> Doc parseFile(Readable readable, AnimationBuilder<Doc> builder) {
+  public static AnimatorModel parseFile(Readable readable, AnimationBuilder<AnimatorModel> builder) {
     Objects.requireNonNull(readable, "Must have non-null readable source");
     Objects.requireNonNull(builder, "Must provide a non-null AnimationBuilder");
     Scanner s = new Scanner(readable);

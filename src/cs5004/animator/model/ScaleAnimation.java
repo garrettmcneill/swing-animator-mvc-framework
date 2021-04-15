@@ -37,6 +37,28 @@ public class ScaleAnimation extends AbstractAnimationImpl {
     recalculateVelocity();
   }
 
+  public ScaleAnimation(
+      AnimatedShapeImpl aShape,
+      int t1,
+      int t2,
+      double startingHeight,
+      double endingHeight,
+      double startingWidth,
+      double endingWidth) {
+    super(aShape, t1, t2, AnimationType.SCALE);
+
+    if (endingHeight <= 0 || endingWidth <= 0) {
+      throw new IllegalArgumentException("Proposed new height or width cannot be zero or negative");
+    }
+
+    this.startingHeight = startingHeight;
+    this.startingWidth = startingWidth;
+    this.endingHeight = endingHeight;
+    this.endingWidth = endingWidth;
+    this.shape = aShape;
+
+  }
+
   /**
    * Constructor for AEllipse objects that want to add a scale animation.
    *
@@ -46,6 +68,7 @@ public class ScaleAnimation extends AbstractAnimationImpl {
    * @param endingHeight The new ending height of the shape after the scale animation.
    * @param endingWidth The new ending width of the shape after the scale animation.
    */
+  @Deprecated
   public ScaleAnimation(AEllipse aShape, int t1, int t2, double endingHeight, double endingWidth) {
     super(aShape, t1, t2, AnimationType.SCALE);
 
@@ -176,6 +199,7 @@ public class ScaleAnimation extends AbstractAnimationImpl {
 
   /**
    * Getter method for returning the ending with of the shape after the scale animation.
+   *
    * @return
    */
   public double getEndingWidth() {
@@ -184,6 +208,7 @@ public class ScaleAnimation extends AbstractAnimationImpl {
 
   /**
    * Setter method for changing the ending height of the shape after the scale animation.
+   *
    * @param newHeight A double value for the new height of the shape.
    * @param newWidth A double value for the new width of the shape.
    */
@@ -193,9 +218,7 @@ public class ScaleAnimation extends AbstractAnimationImpl {
     recalculateVelocity();
   }
 
-  /**
-   * Method for recalculating the velocity of the scale animation.
-   */
+  /** Method for recalculating the velocity of the scale animation. */
   private void recalculateVelocity() {
     double deltaT = this.endTime - this.startTime;
     this.deltaH = (this.endingHeight - this.startingHeight) / deltaT;
@@ -204,6 +227,7 @@ public class ScaleAnimation extends AbstractAnimationImpl {
 
   /**
    * Method generates an animation script for a scale animation.
+   *
    * @return A formatted string that contains the printout of a scale animation.
    */
   @Override

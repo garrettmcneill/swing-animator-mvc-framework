@@ -32,6 +32,7 @@ public interface AnimatedShape {
   //  boolean isVisible();
   //
 
+
   //////////////////////////////////////////////////////////
   ///////////////// SHAPE LOCATION METHODS /////////////////
   //////////////////////////////////////////////////////////
@@ -75,6 +76,18 @@ public interface AnimatedShape {
 
 
   //////////////////////////////////////////////////////////
+  ///////////////////// SHAPE SIZE /////////////////////////
+  //////////////////////////////////////////////////////////
+
+
+  public void setShapeSize(double aWidth, double aHeight);
+
+  public double getShapeWidth();
+
+  public double getShapeHeight();
+
+
+  //////////////////////////////////////////////////////////
   ///////////////////// SHAPE COLOR ////////////////////////
   //////////////////////////////////////////////////////////
 
@@ -83,29 +96,35 @@ public interface AnimatedShape {
    * Getter method for returning the shape's original color.
    * @return A Java.awt value for the color.
    */
-  Color getColor();
+  public Color getColor();
 
   /**
    * Set the color of the original shape at it's default location.
    */
-  void setColor(int r, int g, int b);
+  public void setColor(int r, int g, int b);
 
   /**
    * Set the color of the original shape at it's default location.
    */
-  void changeColor(Color color);
+  public void changeColor(Color color);
 
   /**
    * Get the appearance time of the shape.
    * @return The tick at which the object appears.
    */
-  int getAppearTime();
+  public int getAppearTime();
+
+  //todo: add to readme and add javadoc
+  public void setAppearTime(int aAppearTime);
 
   /**
    * Get the disappearance time of the shape.
    * @return The tick at which the object disappears.
    */
-  int getDisappearTime();
+  public int getDisappearTime();
+
+  // todo: add to readme and add javadoc
+  public void setDisappearTime(int aDisappearTime);
 
   //////////////////////////////////////////////////////////
   /////////////////// SCRIPT GENERATION ////////////////////

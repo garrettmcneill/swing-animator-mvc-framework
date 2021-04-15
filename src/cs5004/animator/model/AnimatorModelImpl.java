@@ -15,16 +15,32 @@ import java.util.Map;
  */
 public class AnimatorModelImpl implements AnimatorModel {
 
+  private static final int DEFAULT_MODEL_WIDTH = 2000;
+  private static final int DEFAULT_MODEL_HEIGHT = 1000;
+
+  //todo: add note to readme that we added model heights & widths + def values.
+  private final int modelWidth;
+  private final int modelHeight;
+
   private Map<String, AnimatedShapeImpl> shapeMap;
   private ShapeFactory factory;
   private int modStartTime;
   private int modEndTime;
+  private int boundingBoxWidth;
+  private int boundingBoxHeight;
+  private Point2D boundingBoxLoc;
+
 
   public AnimatorModelImpl() {
+    this.modelWidth = DEFAULT_MODEL_WIDTH;
+    this.modelHeight = DEFAULT_MODEL_HEIGHT;
     this.shapeMap = new HashMap<String, AnimatedShapeImpl>();
     this.factory = new ShapeFactory();
     this.modStartTime = 0;
     this.modEndTime = 0;
+    this.boundingBoxWidth = modelWidth;
+    this.boundingBoxHeight = modelHeight;
+    this.boundingBoxLoc = new Point2D(0.0,0.0);
   }
 
   //////////////////////////////////////////////////////////
@@ -92,6 +108,21 @@ public class AnimatorModelImpl implements AnimatorModel {
     } else {
       shapeMap.remove(shapeName);
     }
+  }
+
+  /**
+   * Find shape method for getting a shape object by name.
+   *
+   * @param name A string name of the shape.
+   * @return An AnimatedShape object that matches the name passed in.
+   */
+  public AnimatedShapeImpl findShape(String name) {
+    // find the shape, if not found -- return null
+    AnimatedShapeImpl tmpShape = this.shapeMap.get(name);
+    if (tmpShape == null) {
+      return null;
+    }
+    return tmpShape;
   }
 
   /**
@@ -274,20 +305,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     return script.toString();
   }
 
-  /**
-   * Find shape method for getting a shape object by name.
-   *
-   * @param name A string name of the shape.
-   * @return An AnimatedShape object that matches the name passed in.
-   */
-  public AnimatedShape findShape(String name) {
-    // find the shape, if not found -- return null
-    AnimatedShapeImpl tmpShape = this.shapeMap.get(name);
-    if (tmpShape == null) {
-      return null;
-    }
-    return tmpShape;
-  }
 
   @Override
   public List<AnimatedShapeImpl> getShapesAtTick(int tick) {
@@ -333,5 +350,38 @@ public class AnimatorModelImpl implements AnimatorModel {
     List<AnimatedShapeImpl> rVal = new ArrayList<AnimatedShapeImpl>(shapeMap.values());
 
     return rVal;
+  }
+
+  public int getModelWidth() {
+    return modelWidth;
+  }
+
+  public int getModelHeight() {
+    return modelHeight;
+  }
+
+  public int getBoundingBoxWidth() {
+    return boundingBoxWidth;
+  }
+
+  public void setBoundingBoxWidth(int boundingBoxWidth) {
+    this.boundingBoxWidth = boundingBoxWidth;
+  }
+
+  public int getBoundingBoxHeight() {
+    return boundingBoxHeight;
+  }
+
+  public void setBoundingBoxHeight(int boundingBoxHeight) {
+    this.boundingBoxHeight = boundingBoxHeight;
+  }
+
+  public Point2D getBoundingBoxLoc() {
+    return boundingBoxLoc;
+  }
+
+  public void setBoundingBoxLoc(double aX, double aY) {
+    this.boundingBoxLoc.setX(aX);
+    this.boundingBoxLoc.setY(aY);
   }
 }

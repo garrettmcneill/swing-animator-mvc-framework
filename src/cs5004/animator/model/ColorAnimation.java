@@ -34,6 +34,20 @@ public class ColorAnimation extends AbstractAnimationImpl {
     recalculateVelocity();
   }
 
+  public ColorAnimation(
+      AnimatedShape aShape, int t1, int r1, int g1, int b1, int t2, int r2, int g2, int b2) {
+    super(aShape, t1, t2, AnimationType.COLOR);
+    if (r1 > 255 | r1 < 0 | g1 > 255 | g1 < 0 | b1 > 255 | b1 < 0) {
+      throw new IllegalArgumentException("RGB Color Codes must be integers between 0 and 255 ");
+    }
+    if (r2 > 255 | r2 < 0 | g2 > 255 | g2 < 0 | b2 > 255 | b2 < 0) {
+      throw new IllegalArgumentException("RGB Color Codes must be integers between 0 and 255 ");
+    }
+
+    this.startingColor = new Color(r1, g1, b1);
+    this.endColor = new Color(r2, g2, b2);
+  }
+
   /**
    * Method for updating a shape after an animation has been added. Will be used for running
    * animations to update the shape's properties.
@@ -103,6 +117,7 @@ public class ColorAnimation extends AbstractAnimationImpl {
 
   /**
    * Getter method for returning the starting color.
+   *
    * @return A Java.awt.Color object of the color.
    */
   public Color getStartingColor() {
@@ -111,6 +126,7 @@ public class ColorAnimation extends AbstractAnimationImpl {
 
   /**
    * Setter method for changing the starting color in an animation.
+   *
    * @param color A Java.awt.Color object of the color.
    */
   public void setStartingColor(Color color) {
@@ -120,6 +136,7 @@ public class ColorAnimation extends AbstractAnimationImpl {
 
   /**
    * Getter method for returning the ending color of a shape in an animation.
+   *
    * @return A Java.awt.Color object of the color.
    */
   public Color getEndingColor() {
@@ -128,6 +145,7 @@ public class ColorAnimation extends AbstractAnimationImpl {
 
   /**
    * Setter method for changing the ending color in an animation.
+   *
    * @param color A Java.awt.Color object of the color.
    */
   public void setEndingColor(Color color) {
@@ -135,9 +153,7 @@ public class ColorAnimation extends AbstractAnimationImpl {
     recalculateVelocity();
   }
 
-  /**
-   * Method for recalculating the velocity of a color animation.
-   */
+  /** Method for recalculating the velocity of a color animation. */
   private void recalculateVelocity() {
     double deltaT = this.endTime - this.startTime;
     this.deltaR = (this.endColor.getRed() - this.startingColor.getRed()) / deltaT;
@@ -147,6 +163,7 @@ public class ColorAnimation extends AbstractAnimationImpl {
 
   /**
    * Method generates an animation script for a color animation.
+   *
    * @return A formatted string that contains the printout of a color animation.
    */
   @Override
