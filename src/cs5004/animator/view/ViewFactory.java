@@ -4,10 +4,10 @@ import cs5004.animator.model.AnimatorModel;
 
 public class ViewFactory {
 
-  public static ViewInterface createView(
+  public static StaticViewInterface createView(
       AnimatorModel aModel, ViewType aType, String aOutFileName, long aTickMsecs) {
 
-    ViewInterface rVal = null;
+    StaticViewInterface rVal = null;
 
     switch (aType) {
       case TEXT:
@@ -18,7 +18,7 @@ public class ViewFactory {
         rVal = new SVGView(aModel, aOutFileName);
 
       case VISUAL:
-        rVal = new VisualView(aModel, aTickMsecs);
+        rVal = new DynamicView(aModel, aTickMsecs);
     }
     return rVal;
   }

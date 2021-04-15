@@ -7,14 +7,14 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class VisualView extends JFrame implements ViewInterface {
+public class DynamicView extends JFrame {
 
   private AnimationPanel animationPanel;
 
 
   // might need bounds for the JFrame : int x, int y, int width, int height
 
-  public VisualView(AnimatorModel aModel, Long aTickMSecs){
+  public DynamicView(AnimatorModel aModel, Long aTickMSecs){
     super();
 
     this.setTitle("Animator Visual View - Bou Lahdou and Mcneill");
