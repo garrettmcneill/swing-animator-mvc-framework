@@ -56,6 +56,7 @@ public class ARectangle extends AnimatedShapeImpl {
       int aAppearTime,
       int aDisappearTime) {
     super(name, ref, r, g, b, aAppearTime, aDisappearTime);
+
     this.width = width;
     this.length = length;
 
