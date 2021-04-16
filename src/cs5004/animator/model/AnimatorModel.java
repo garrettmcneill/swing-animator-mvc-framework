@@ -3,7 +3,7 @@ package cs5004.animator.model;
 import java.util.List;
 
 /** Animator interface represents a list of AnimatedShapes that compose an animation scene. */
-public interface AnimatorModel {
+public interface AnimatorModel extends ReadOnlyAnimatorModel {
 
   //////////////////////////////////////////////////////////
   /////////////////// REGISTER OBJECTS /////////////////////
@@ -124,4 +124,6 @@ public interface AnimatorModel {
 
   // TODO: ADD THIS TO README CHANGED IN WK 2
   List<AnimatedShapeImpl> getShapes();
+
+
 }
