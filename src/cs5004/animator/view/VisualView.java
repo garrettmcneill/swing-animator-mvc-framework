@@ -23,7 +23,7 @@ public class VisualView extends AbstractView {
     public Visuals(AnimatorModel aModel, Long aTickMSecs) {
       super();
 
-      this.setTitle("Animator Visual View - Bou Lahdou and Mcneill");
+      this.setTitle("Animator Visual View - Bou Lahdou and McNeill");
       this.setSize(500, 500); // todo: need to replace that with the getters from our model
       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -32,13 +32,11 @@ public class VisualView extends AbstractView {
       this.pack();
     }
 
-    @Override
     public void refresh() {
       this.repaint();
     }
 
 
-    @Override
     public void makeVisible() {
       this.setVisible(true);
     }
@@ -54,6 +52,16 @@ public class VisualView extends AbstractView {
 
   @Override
   public void playAnimation() {
+
+  }
+
+  @Override
+  public void refresh() {
+
+  }
+
+  @Override
+  public void makeVisible() {
 
   }
 
