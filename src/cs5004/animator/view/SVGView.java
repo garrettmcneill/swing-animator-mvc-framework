@@ -15,6 +15,7 @@ public class SVGView extends AbstractView{
   @Override
   public void activateView(String aOutputFilename, int animationFrameRate) throws IOException {
 
+
   }
 
   @Override

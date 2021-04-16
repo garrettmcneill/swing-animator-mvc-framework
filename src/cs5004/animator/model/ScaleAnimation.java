@@ -76,8 +76,8 @@ public class ScaleAnimation extends AbstractAnimationImpl {
       throw new IllegalArgumentException("Proposed new height or width cannot be zero or negative");
     }
 
-    this.startingHeight = aShape.getaAxis();
-    this.startingWidth = aShape.getbAxis();
+    this.startingHeight = aShape.getaWidthAxis();
+    this.startingWidth = aShape.getbHeightAxis();
     this.endingHeight = endingHeight;
     this.endingWidth = endingWidth;
     this.shape = (AEllipse) aShape;

@@ -11,8 +11,8 @@ import java.awt.Color;
 public class ARectangle extends AnimatedShapeImpl {
 
   // Constants - Default Values
+  private static final int DEFAULT_HEIGHT = 1;
   private static final int DEFAULT_WIDTH = 1;
-  private static final int DEFAULT_LENGTH = 1;
   private static final Color DEFAULT_COLOR = Color.black;
   // private static final Velocity2D DEFAULT_VELOCITY = new Velocity2D(0.0, 0.0);
 
@@ -28,11 +28,11 @@ public class ARectangle extends AnimatedShapeImpl {
    * @param aReference Point2D Object referring to the location of the shape.
    */
   public ARectangle(String name, Point2D aReference, int aAppearTime, int aDisappearTime) {
-    super(aReference, name, aAppearTime, aDisappearTime);
+    super(aReference, name, DEFAULT_HEIGHT, DEFAULT_WIDTH, aAppearTime, aDisappearTime);
+    this.shapeHeight = DEFAULT_HEIGHT;
     this.shapeWidth = DEFAULT_WIDTH;
-    this.shapeHeight = DEFAULT_LENGTH;
+    this.length = DEFAULT_HEIGHT;
     this.width = DEFAULT_WIDTH;
-    this.length = DEFAULT_LENGTH;
     this.shapeColor = DEFAULT_COLOR;
   }
 
@@ -57,12 +57,12 @@ public class ARectangle extends AnimatedShapeImpl {
       int width,
       int aAppearTime,
       int aDisappearTime) {
-    super(name, ref, r, g, b, aAppearTime, aDisappearTime);
+    super(name, ref, r, g, b, length, width, aAppearTime, aDisappearTime);
 
-    this.shapeWidth = width;
     this.shapeHeight = length;
-    this.width = width;
+    this.shapeWidth = width;
     this.length = length;
+    this.width = width;
   }
 
   // Copy Constructor
@@ -89,6 +89,8 @@ public class ARectangle extends AnimatedShapeImpl {
   public void setWidth(double aWidth) {
     if (aWidth > 0) {
       this.width = aWidth;
+      this.shapeWidth = aWidth;
+
     } else {
       throw new IllegalArgumentException("Width must have a value greater than zero");
     }
@@ -111,6 +113,8 @@ public class ARectangle extends AnimatedShapeImpl {
   public void setLength(double aLength) {
     if (aLength > 0) {
       this.length = aLength;
+      this.shapeHeight = aLength;
+
     } else {
       throw new IllegalArgumentException("Width must have a value greater than zero");
     }
@@ -122,12 +126,14 @@ public class ARectangle extends AnimatedShapeImpl {
   }
 
   @Override
-  public void setShapeSize(double aWidth, double aHeight) {
+  public void setShapeSize(double aWidth, double aLength) {
+    this.width = aWidth;
+    this.length = aLength;
+    this.shapeHeight = aLength;
     this.shapeWidth = aWidth;
-    this.shapeHeight = aHeight;
-    this.width = shapeWidth;
-    this.length = shapeHeight;
   }
+
+
 
   /**
    * To string method for returning the state of the rectangle.
@@ -145,7 +151,8 @@ public class ARectangle extends AnimatedShapeImpl {
         String.format(
             "Corner: (%.2f,%.2f), Length: %.2f, Width: %.2f, Color: %s\n",
             getLocation().getX(), getLocation().getY(), this.length, this.width, rgb);
-
+    info += String.format("Appears at t=%d\n", this.appearTime);
+    info += String.format("Disappears at t=%d\n", this.disappearTime);
     return info;
   }
 }

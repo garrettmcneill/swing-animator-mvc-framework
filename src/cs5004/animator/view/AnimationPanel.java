@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.*;
 
 import cs5004.animator.model.AnimatedShapeImpl;
-import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.model.ShapeType;
 
 class AnimationPanel extends JPanel {
@@ -41,7 +40,7 @@ class AnimationPanel extends JPanel {
       x= (int)S.getLocation().getX();
       y= (int)S.getLocation().getY();
       H = (int) S.getShapeHeight();
-      W = (int) S.getShapeWidth();
+      W = (int) S.getShapeHeight();
       col = S.getColor();
 
       g2d.setColor(col);

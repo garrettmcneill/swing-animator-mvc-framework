@@ -60,7 +60,8 @@ public class TextView extends AbstractView {
       }
 
       // close output file
-      tmpFileWriter.close();
+      tmpWriter.flush();
+      tmpWriter.close();
 
     } catch (IOException e) {
       throw e; // throw IO exception if write error

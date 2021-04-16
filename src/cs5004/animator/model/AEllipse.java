@@ -1,22 +1,20 @@
 package cs5004.animator.model;
 
-import java.awt.Color;
-
 /**
  * Subclass for the Ellipse Shape.
  */
 public class AEllipse extends AnimatedShapeImpl {
 
   // Constants
-  private static final int DEFAULT_A_AXIS = 1;
-  private static final int DEFAULT_B_AXIS = 1;
-  private static final Color DEFAULT_COLOR = Color.black;
+  private static final int DEFAULT_HEIGHT_AXIS = 1;
+  private static final int DEFAULT_WIDTH_AXIS = 1;
 
   // Attributes
-  private double aAxis;
-  private double bAxis;
+  private double aWidthAxis;
+  private double bHeightAxis;
 
   /**
+   *
    * Minimal Constructor for an ellipse. Requires a location to be created & instantiates with
    * default values.
    *
@@ -24,16 +22,14 @@ public class AEllipse extends AnimatedShapeImpl {
    * @param aReference Point2D Object referring to the location of the shape.
    */
   public AEllipse(String name, Point2D aReference, int aAppearTime, int aDisappearTime) {
-    super(aReference, name, aAppearTime, aDisappearTime);
-    this.aAxis = DEFAULT_A_AXIS;
-    this.bAxis = DEFAULT_B_AXIS;
-    this.shapeColor = DEFAULT_COLOR;
+    super(aReference, name, DEFAULT_HEIGHT_AXIS, DEFAULT_WIDTH_AXIS, aAppearTime, aDisappearTime);
+    this.aWidthAxis = DEFAULT_WIDTH_AXIS;
+    this.bHeightAxis = DEFAULT_HEIGHT_AXIS;
   }
 
 
   /**
    * Constructor for an ellipse. Requires a location to be created & instantiates passed arguments.
-   *
    * @param name The name of the shape.
    * @param ref Point2D Object referring to the location of the sha
    * @param r Red (0 -> 255) for rgb.
@@ -48,25 +44,25 @@ public class AEllipse extends AnimatedShapeImpl {
       int r,
       int g,
       int b,
-      double aAxis,
-      double bAxis,
+      int aAxis,
+      int bAxis,
       int aAppearTime,
       int aDisappearTime) {
-    super(name, ref, r, g, b, aAppearTime, aDisappearTime);
+    super(name, ref, r, g, b, aAxis, bAxis, aAppearTime, aDisappearTime);
 
-    if (aAxis <= 0 | bAxis <= 0) {
+    if (aAxis <= 0 | bAxis <= 0 && aAxis != -1 && bAxis != -1) {
       throw new IllegalArgumentException("Ellipse axes must be positive non zero entries");
     }
 
-    this.aAxis = aAxis;
-    this.bAxis = bAxis;
+    this.aWidthAxis = aAxis;
+    this.bHeightAxis = bAxis;
   }
 
   //Copy Constructor
   public AEllipse (AEllipse toCopy) {
     super(toCopy);
-    this.aAxis = toCopy.aAxis;
-    this.bAxis = toCopy.bAxis;
+    this.aWidthAxis = toCopy.aWidthAxis;
+    this.bHeightAxis = toCopy.bHeightAxis;
   }
 
   /**
@@ -76,8 +72,8 @@ public class AEllipse extends AnimatedShapeImpl {
    */
   public void setAxis(double aAxis, double bAxis) {
     if (aAxis > 0 && bAxis > 0) {
-      this.aAxis = aAxis;
-      this.bAxis = bAxis;
+      this.aWidthAxis = aAxis;
+      this.bHeightAxis = bAxis;
     } else {
       throw new IllegalArgumentException("Axes must be positive non zero entries.");
     }
@@ -88,16 +84,16 @@ public class AEllipse extends AnimatedShapeImpl {
    * Getter Method for a-Axis.
    * @return The double value of the a-Axis.
    */
-  public double getaAxis() {
-    return this.aAxis;
+  public double getaWidthAxis() {
+    return this.aWidthAxis;
   }
 
   /**
    * Getter Method for b-Axis.
    * @return The double value of the b-Axis.
    */
-  public double getbAxis() {
-    return this.bAxis;
+  public double getbHeightAxis() {
+    return this.bHeightAxis;
   }
 
 
@@ -110,8 +106,8 @@ public class AEllipse extends AnimatedShapeImpl {
   public void setShapeSize(double aWidth, double aHeight){
     this.shapeWidth = aWidth;
     this.shapeHeight = aHeight;
-    this.aAxis = shapeWidth;
-    this.bAxis = shapeHeight;
+    this.aWidthAxis = aWidth;
+    this.bHeightAxis = aHeight;
   }
 
 
@@ -127,8 +123,8 @@ public class AEllipse extends AnimatedShapeImpl {
             "Center: (%.2f,%.2f), X Radius: %.2f, Y Radius: %.2f, Color: %s\n",
             getLocation().getX(),
             getLocation().getY(),
-            this.aAxis,
-            this.bAxis,
+            this.aWidthAxis,
+            this.bHeightAxis,
             rgb);
     info += String.format("Appears at t=%d\n", this.appearTime);
     info += String.format("Disappears at t=%d\n", this.disappearTime);

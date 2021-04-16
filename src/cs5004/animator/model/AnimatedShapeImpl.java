@@ -10,14 +10,18 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
 
   //todo: add to readme: appear&disappear times are no longer final
 
+  // Constants
+  private static final Color DEFAULT_COLOR = Color.black;
+
+
   // Class Attributes
   protected final String name;
   protected int appearTime;
   protected int disappearTime;
   protected Point2D reference;
   protected Color shapeColor;
-  protected double shapeWidth;
   protected double shapeHeight;
+  protected double shapeWidth;
   protected List<Animation> animationList; // we should probably declare as array list
   protected Velocity2D velocity;
 
@@ -28,13 +32,16 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
    *     values.
    * @param name The name of the shape.
    */
-  public AnimatedShapeImpl(Point2D reference, String name, int aAppearTime, int aDisappearTime) {
+  public AnimatedShapeImpl(Point2D reference, String name, int height, int width, int aAppearTime, int aDisappearTime) {
     this.reference = reference;
     this.name = name;
     this.animationList = new ArrayList<>();
     this.appearTime = aAppearTime;
     this.disappearTime = aDisappearTime;
     this.velocity = new Velocity2D(0.0, 0.0);
+    this.shapeHeight = height;
+    this.shapeWidth = width;
+    this.shapeColor = DEFAULT_COLOR;
   }
 
   /**
@@ -47,7 +54,7 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
    * @param b Blue (0 -> 255) for rgb.
    */
   public AnimatedShapeImpl(
-      String name, Point2D ref, int r, int g, int b, int aAppearTime, int aDisappearTime) {
+      String name, Point2D ref, int r, int g, int b, int height, int width, int aAppearTime, int aDisappearTime) {
 
     if (name == null) {
       throw new IllegalArgumentException("String cannot be null and has to be a valid string");
@@ -70,9 +77,12 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     this.name = name;
     this.shapeColor = new Color(r, g, b);
     this.animationList = new ArrayList<>();
+    this.shapeHeight = height;
+    this.shapeWidth = width;
     this.appearTime = aAppearTime;
     this.disappearTime = aDisappearTime;
     this.velocity = new Velocity2D(0.0, 0.0);
+
   }
 
   public AnimatedShapeImpl(AnimatedShapeImpl toCopy) {
@@ -83,9 +93,12 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     this.animationList = toCopy.animationList; // todo: did a quick fix here but need to make sure
     // we do a deep copy of animationList as the copy constructor is invoked when passing
     // Shapes to view.
+    this.shapeHeight = toCopy.shapeHeight;
+    this.shapeWidth = toCopy.shapeWidth;
     this.appearTime = toCopy.appearTime;
     this.disappearTime = toCopy.disappearTime;
     this.velocity = toCopy.velocity;
+
 
   }
 
@@ -165,13 +178,13 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   public abstract void setShapeSize(double aWidth, double aHeight);
 
   @Override
-  public double getShapeWidth(){
-    return this.shapeWidth;
+  public double getShapeHeight(){
+    return this.shapeHeight;
   }
 
   @Override
-  public double getShapeHeight(){
-    return this.shapeHeight;
+  public double getShapeWidth(){
+    return this.shapeWidth;
   }
 
 
@@ -217,6 +230,10 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   //////////////////////////////////////////////////////////
   /////////////////// LIST UTILITIES ///////////////////////
   //////////////////////////////////////////////////////////
+
+  public boolean emptyAnimationList(){
+    return this.animationList.isEmpty();
+  }
 
   /**
    * Getter method to return the list of animations.

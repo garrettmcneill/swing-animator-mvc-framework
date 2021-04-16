@@ -12,8 +12,8 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
   private static final int SHAPE_DEFAULT_RED = 0;
   private static final int SHAPE_DEFAULT_GREEN = 0;
   private static final int SHAPE_DEFAULT_BLUE = 0;
-  private static final int SHAPE_DEFAULT_APPEAR = 1000;
-  private static final int SHAPE_DEFAULT_DISAPPEAR = 0;
+  private static final int SHAPE_DEFAULT_APPEAR = 0;
+  private static final int SHAPE_DEFAULT_DISAPPEAR = 1;
 
   // Attributes
   AnimatorModelImpl theModel;
@@ -46,11 +46,11 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
         name,
         tmpType,
         SHAPE_DEFAULT_LOC,
-        SHAPE_DEFAULT_LENGTH,
-        SHAPE_DEFAULT_WIDTH,
         SHAPE_DEFAULT_RED,
         SHAPE_DEFAULT_GREEN,
         SHAPE_DEFAULT_BLUE,
+        SHAPE_DEFAULT_LENGTH,
+        SHAPE_DEFAULT_WIDTH,
         SHAPE_DEFAULT_APPEAR,
         SHAPE_DEFAULT_DISAPPEAR);
 
@@ -85,12 +85,12 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
 
     // set initial time
     int tmpAppear = tmpShape.getAppearTime();
-    if (t1 < tmpAppear) {
+    if ( tmpShape.emptyAnimationList() || t1 < tmpAppear) {
       tmpShape.setAppearTime(t1);
     }
 
     int tmpDisappear = tmpShape.getDisappearTime();
-    if (t2 > tmpDisappear) {
+    if ( tmpShape.emptyAnimationList() || t2 > tmpDisappear) {
       tmpShape.setDisappearTime(t2);
     }
 

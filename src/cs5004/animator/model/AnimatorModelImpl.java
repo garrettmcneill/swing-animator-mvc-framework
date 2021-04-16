@@ -66,11 +66,11 @@ public class AnimatorModelImpl implements AnimatorModel {
       String name,
       ShapeType shape,
       Point2D aLoc,
-      int length,
-      int width,
       int r,
       int g,
       int b,
+      int length,
+      int width,
       int appearTime,
       int disappearTime) {
 
@@ -306,6 +306,7 @@ public class AnimatorModelImpl implements AnimatorModel {
 
     return script.toString();
   }
+
 
 
   @Override
