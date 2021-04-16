@@ -1,26 +1,73 @@
 package cs5004.animator.view;
 
 import java.awt.*;
+import java.util.List;
 
 import javax.swing.*;
 
+import cs5004.animator.model.AnimatedShapeImpl;
 import cs5004.animator.model.AnimatorModel;
+import cs5004.animator.model.ShapeType;
 
 class AnimationPanel extends JPanel {
 
-  private final AnimatorModel model; // todo: refactor interface to create a readonly one
-  private long tempo;
+  private List<AnimatedShapeImpl> shapeList;
 
-  AnimationPanel(AnimatorModel m, Long aTickMSecs) {
-    this.model = m;
-    this.tempo = aTickMSecs;
+  AnimationPanel(List<AnimatedShapeImpl> shapes) {
+
+    super();
+    this.shapeList = shapes;
+
+    this.setBackground(Color.WHITE);
+
+
   }
 
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    Graphics2D g2 = (Graphics2D) g;
-  //  g2d.setColor(Color.BLACK);
+    Graphics2D g2d = (Graphics2D) g;
+
+    g2d.setColor(Color.BLACK);
+
+    int x;
+    int y;
+    int H;
+    int W;
+    Color col;
+
+
+    for (AnimatedShapeImpl S: shapeList) {
+      x= (int)S.getLocation().getX();
+      y= (int)S.getLocation().getY();
+      H = (int) S.getShapeHeight();
+      W = (int) S.getShapeWidth();
+      col = S.getColor();
+
+      g2d.setColor(col);
+
+
+      if (S.getType().equals(ShapeType.ELLIPSE)) {
+        System.out.println("Drew Ellipse");
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(H);
+        System.out.println(W);
+        g2d.fillOval(x,y, W, H);
+        g2d.drawOval(x,y,W,H);
+      }
+      else if(S.getType().equals(ShapeType.RECTANGLE)) {
+        System.out.println("Drew Rectangle");
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(H);
+        System.out.println(W);
+        g2d.fillRect(x,y, W, H);
+        g2d.drawRect(x,y,W,H);
+      }
+
+    }
+
 
 
 
@@ -41,5 +88,9 @@ class AnimationPanel extends JPanel {
 
      */
 
+  }
+
+  public void setShapes(List<AnimatedShapeImpl> shapeList) {
+    this.shapeList = shapeList;
   }
 }

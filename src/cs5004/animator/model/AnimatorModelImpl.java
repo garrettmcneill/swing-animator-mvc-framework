@@ -88,6 +88,8 @@ public class AnimatorModelImpl implements AnimatorModel {
     AnimatedShapeImpl tmpShape =
         factory.createShape(name, shape, aLoc, r, g, b, length, width, appearTime, disappearTime);
 
+
+
     // add to shape map
     this.shapeMap.put(name, tmpShape);
   }
@@ -329,15 +331,19 @@ public class AnimatorModelImpl implements AnimatorModel {
     // Traverse the Hashmap
     for (Map.Entry<String, AnimatedShapeImpl> entry : this.shapeMap.entrySet()) {
 
-      if (tick < entry.getValue().getAppearTime() && tick > entry.getValue().getDisappearTime()) {
+      if (tick < entry.getValue().getAppearTime() | tick > entry.getValue().getDisappearTime()) {
+        System.out.println("Wasn't added to list");
         continue;
       }
+
+
 
       entry.getValue().validateAnimations();
       entry.getValue().updateState(tick);
 
-      shapeList.add(entry.getValue()); // todo: might need a copy of the shape, perhaps set a
-      // todo: copy constructor
+      shapeList.add(entry.getValue()); // todo: might need a copy of the shape
+      // todo: Guy : I already added copy constructors but I am not sure what the best
+      // way to invoke them in a smart way in the above code.
     }
 
     return shapeList;
@@ -352,34 +358,42 @@ public class AnimatorModelImpl implements AnimatorModel {
     return rVal;
   }
 
+  @Override
   public int getModelWidth() {
     return modelWidth;
   }
 
+  @Override
   public int getModelHeight() {
     return modelHeight;
   }
 
+  @Override
   public int getBoundingBoxWidth() {
     return boundingBoxWidth;
   }
 
+  @Override
   public void setBoundingBoxWidth(int boundingBoxWidth) {
     this.boundingBoxWidth = boundingBoxWidth;
   }
 
+  @Override
   public int getBoundingBoxHeight() {
     return boundingBoxHeight;
   }
 
+  @Override
   public void setBoundingBoxHeight(int boundingBoxHeight) {
     this.boundingBoxHeight = boundingBoxHeight;
   }
 
+  @Override
   public Point2D getBoundingBoxLoc() {
     return boundingBoxLoc;
   }
 
+  @Override
   public void setBoundingBoxLoc(double aX, double aY) {
     this.boundingBoxLoc.setX(aX);
     this.boundingBoxLoc.setY(aY);

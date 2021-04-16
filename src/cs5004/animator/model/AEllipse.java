@@ -62,6 +62,13 @@ public class AEllipse extends AnimatedShapeImpl {
     this.bAxis = bAxis;
   }
 
+  //Copy Constructor
+  public AEllipse (AEllipse toCopy) {
+    super(toCopy);
+    this.aAxis = toCopy.aAxis;
+    this.bAxis = toCopy.bAxis;
+  }
+
   /**
    * Setter for Elipse axis.
    * @param aAxis The a-axis of the elipse.
@@ -93,6 +100,11 @@ public class AEllipse extends AnimatedShapeImpl {
     return this.bAxis;
   }
 
+
+  @Override
+  public ShapeType getType() {
+    return ShapeType.ELLIPSE;
+  }
 
   @Override
   public void setShapeSize(double aWidth, double aHeight){

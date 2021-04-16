@@ -75,6 +75,20 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     this.velocity = new Velocity2D(0.0, 0.0);
   }
 
+  public AnimatedShapeImpl(AnimatedShapeImpl toCopy) {
+    this.reference = new Point2D(toCopy.reference);
+    this.name = toCopy.name;
+    this.shapeColor = new Color (toCopy.shapeColor.getRed(), toCopy.shapeColor.getGreen(),
+            toCopy.shapeColor.getBlue());
+    this.animationList = toCopy.animationList; // todo: did a quick fix here but need to make sure
+    // we do a deep copy of animationList as the copy constructor is invoked when passing
+    // Shapes to view.
+    this.appearTime = toCopy.appearTime;
+    this.disappearTime = toCopy.disappearTime;
+    this.velocity = toCopy.velocity;
+
+  }
+
   //////////////////////////////////////////////////////////
   /////////////////// SHAPE NAME METHODS ///////////////////
   //////////////////////////////////////////////////////////

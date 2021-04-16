@@ -28,10 +28,4 @@ public abstract class AbstractView implements ViewInterface {
   @Override
   public abstract void playAnimation();
 
-  @Override
-  public abstract void refresh();
-
-  @Override
-  public abstract void makeVisible();
-
 }

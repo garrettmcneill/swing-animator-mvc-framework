@@ -2,7 +2,10 @@ package cs5004.animator;
 
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.model.AnimatorModelImpl;
+import cs5004.animator.model.Point2D;
+import cs5004.animator.model.ShapeType;
 import cs5004.animator.view.ViewFactory;
+import cs5004.animator.view.ViewInterface;
 import cs5004.animator.view.ViewType;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
@@ -36,6 +39,8 @@ public class EasyAnimator {
 
   public static void main(String[] args) {
 
+
+/*
     try {
       if (!unpackArguments(args)) {
         System.out.println("Unable to unpack arguments...");
@@ -45,16 +50,38 @@ public class EasyAnimator {
       System.out.println("Unpack Arguments threw an exception: " + e.toString());
       System.exit(1);
     }
+*/
 
-    // construct jPanel
-    JPanel tmpPanel = new JPanel();
 
 
     // call animationModelBuilder
       //todo: modelbuilder saves model to attr theModel
 
+
+
+    AnimatorModelImpl testModel;
+    testModel = new AnimatorModelImpl();
+
+    testModel.setBoundingBoxLoc(0,0);
+    testModel.setBoundingBoxHeight(350);
+    testModel.setBoundingBoxWidth(350);
+
+    testModel.registerObject(
+            "First Object", ShapeType.RECTANGLE, new Point2D(50, 50), 2000, 2000,
+            0, 0, 102, 0, 10);
+
+    testModel.registerObject(
+            "Second Object", ShapeType.ELLIPSE, new Point2D(50, 50), 2000, 2000,
+            0, 0, 102, 0, 40);
+
+
+    ViewInterface test;
+    test=ViewFactory.createView( testModel, ViewType.VISUAL, "", 2);
+    test.makeVisible();
+
+
     // create view
-    ViewFactory.createView(theModel, modelViewType, outFile, fps);
+    //ViewFactory.createView(theModel, modelViewType, outFile, fps);
 
     // run animation
 

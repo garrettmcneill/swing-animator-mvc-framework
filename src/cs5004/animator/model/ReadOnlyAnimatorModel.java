@@ -8,6 +8,16 @@ public interface ReadOnlyAnimatorModel {
   ///////////////////// CURRENT STATE //////////////////////
   //////////////////////////////////////////////////////////
 
+  int getModelWidth();
+
+  int getModelHeight();
+
+  int getBoundingBoxWidth();
+
+  int getBoundingBoxHeight();
+
+  Point2D getBoundingBoxLoc();
+
   /**
    * Getter method for returning the state of the shape at a given time frame (tick.)
    *

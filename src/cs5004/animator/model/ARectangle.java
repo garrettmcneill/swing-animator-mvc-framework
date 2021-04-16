@@ -58,6 +58,15 @@ public class ARectangle extends AnimatedShapeImpl {
     super(name, ref, r, g, b, aAppearTime, aDisappearTime);
     this.width = width;
     this.length = length;
+
+
+  }
+
+  //Copy Constructor
+  public ARectangle (ARectangle toCopy) {
+    super(toCopy);
+    this.width = toCopy.width;
+    this.length = toCopy.length;
   }
 
   /**
@@ -102,6 +111,11 @@ public class ARectangle extends AnimatedShapeImpl {
     } else {
       throw new IllegalArgumentException("Width must have a value greater than zero");
     }
+  }
+
+  @Override
+  public ShapeType getType() {
+    return ShapeType.RECTANGLE;
   }
 
   @Override

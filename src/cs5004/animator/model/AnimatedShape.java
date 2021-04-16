@@ -18,6 +18,12 @@ public interface AnimatedShape {
    */
   String getName();
 
+  /**
+   * Method that returns the shape type.
+   * @return the enum of the shape type.
+   */
+  ShapeType getType();
+
 
   //////////////////////////////////////////////////////////
   /////////////////// SHAPE VISIBILITY /////////////////////

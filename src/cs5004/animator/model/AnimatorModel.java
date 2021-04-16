@@ -5,6 +5,14 @@ import java.util.List;
 /** Animator interface represents a list of AnimatedShapes that compose an animation scene. */
 public interface AnimatorModel extends ReadOnlyAnimatorModel {
 
+  void setBoundingBoxWidth(int boundingBoxWidth);
+
+  void setBoundingBoxHeight(int boundingBoxHeight);
+
+  void setBoundingBoxLoc(double aX, double aY);
+
+
+
   //////////////////////////////////////////////////////////
   /////////////////// REGISTER OBJECTS /////////////////////
   //////////////////////////////////////////////////////////

@@ -27,6 +27,14 @@ public class Point2D {
   }
 
   /**
+   * Copy Constructor.
+   */
+  public Point2D( Point2D toCopy) {
+    this.x = toCopy.x;
+    this.y = toCopy.y;
+  }
+
+  /**
    * Compute and return the Euclidean distance of this point to the origin.
    *
    * @return the euclidean distance.
