@@ -3,7 +3,7 @@ package cs5004.animator.view;
 import cs5004.animator.model.AnimatorModel;
 import java.io.IOException;
 
-public abstract class AbstractView implements StaticViewInterface {
+public abstract class AbstractView implements ViewInterface {
 
   // Attributes
   protected final AnimatorModel model;

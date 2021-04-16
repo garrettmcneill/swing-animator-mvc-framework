@@ -28,7 +28,7 @@ public abstract class AbstractAnimationImpl implements Animation {
     this.startTime = t1;
     this.endTime = t2;
 
-    if ( !(aShape instanceof AnimatedShape)) {
+    if ( !(aShape instanceof AnimatedShape) ) {
       throw new IllegalArgumentException("Shape must be of type AnimatedShape");
     }
 
