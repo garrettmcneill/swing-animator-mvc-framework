@@ -4,9 +4,9 @@ import java.io.IOException;
 
 public interface ViewInterface {
 
-  public void activateView(String outFile, int animationFrameRate) throws IOException;
+  void activateView(String outFile, int animationFrameRate) throws IOException;
 
-  public void playAnimation();
+  void playAnimation();
 
   /**
    * Signal the view to draw itself

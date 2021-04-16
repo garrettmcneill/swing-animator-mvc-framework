@@ -7,40 +7,45 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class VisualView extends JFrame implements ViewInterface {
-
-  private AnimationPanel animationPanel;
+public class VisualView extends AbstractView {
 
 
-  // might need bounds for the JFrame : int x, int y, int width, int height
+  protected VisualView(AnimatorModel aModel) {
+    super(aModel);
+  }
 
-  public VisualView(AnimatorModel aModel, Long aTickMSecs){
-    super();
+  private class Visuals extends JFrame {
 
-    this.setTitle("Animator Visual View - Bou Lahdou and Mcneill");
-    this.setSize(500,500); // todo: need to replace that with the getters from our model
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private AnimationPanel animationPanel;
 
-    this.setLayout(new BorderLayout());
+    // might need bounds for the JFrame : int x, int y, int width, int height
+
+    public Visuals(AnimatorModel aModel, Long aTickMSecs) {
+      super();
+
+      this.setTitle("Animator Visual View - Bou Lahdou and Mcneill");
+      this.setSize(500, 500); // todo: need to replace that with the getters from our model
+      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+      this.setLayout(new BorderLayout());
+
+      this.pack();
+    }
+
+    @Override
+    public void refresh() {
+      this.repaint();
+    }
 
 
-    this.pack();
-
-
-
+    @Override
+    public void makeVisible() {
+      this.setVisible(true);
+    }
 
   }
 
-  @Override
-  public void refresh() {
-    this.repaint();
-  }
 
-
-  @Override
-  public void makeVisible() {
-    this.setVisible(true);
-  }
 
 
   @Override

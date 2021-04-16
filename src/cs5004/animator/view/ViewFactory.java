@@ -18,7 +18,7 @@ public class ViewFactory {
         rVal = new SVGView(aModel, aOutFileName);
 
       case VISUAL:
-        rVal = new VisualView(aModel, aTickMsecs);
+        rVal = new VisualView(aModel);
     }
     return rVal;
   }
