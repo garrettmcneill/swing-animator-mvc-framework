@@ -108,6 +108,7 @@ public class MoveAnimation extends AbstractAnimationImpl {
 
   /**
    * Getter method for returning the starting location of the shape during the move animation.
+   *
    * @return A Point2D reference object that contains the starting location's x&y coordinates.
    */
   public Point2D getStartingLocation() {
@@ -116,6 +117,7 @@ public class MoveAnimation extends AbstractAnimationImpl {
 
   /**
    * Setter method for updating the starting location.
+   *
    * @param aLoc A Point2D reference object that represents the starting location.
    */
   public void setStartingLocation(Point2D aLoc) {
@@ -125,6 +127,7 @@ public class MoveAnimation extends AbstractAnimationImpl {
 
   /**
    * Getter method for returning the ending location of the shape in the move animation.
+   *
    * @return A Point2D reference object that contains the ending location's x&y coordinates.
    */
   public Point2D getEndingLocation() {
@@ -133,6 +136,7 @@ public class MoveAnimation extends AbstractAnimationImpl {
 
   /**
    * Setter method for changing the ending location.
+   *
    * @param aLoc A Point2D reference object that represents the ending location's x&y coordinates.
    */
   public void setEndingLocation(Point2D aLoc) {
@@ -140,9 +144,7 @@ public class MoveAnimation extends AbstractAnimationImpl {
     recalculateVelocity();
   }
 
-  /**
-   * Method for recalculating the velocity of the move animation.
-   */
+  /** Method for recalculating the velocity of the move animation. */
   private void recalculateVelocity() {
     double deltaT = this.endTime - this.startTime;
     this.deltaX = (this.endLocation.getX() - this.startingLocation.getX()) / deltaT;
@@ -151,6 +153,7 @@ public class MoveAnimation extends AbstractAnimationImpl {
 
   /**
    * Method generates an animation script for a move animation.
+   *
    * @return A formatted string that contains the printout of a move animation.
    */
   @Override
@@ -166,5 +169,29 @@ public class MoveAnimation extends AbstractAnimationImpl {
         this.endLocation.getY(),
         this.startTime,
         this.endTime);
+  }
+
+  @Override
+  public String generateXML(int msecsPtick) {
+
+    int duration = (this.endTime - this.startTime) * msecsPtick;
+
+    String xml =
+        "<animate attributeType=\"xml\" begin=\"base.begin+"
+            + Integer.toString(this.startTime * msecsPtick)
+            + " dur=\""
+            + Integer.toString(duration) + "\" attributeName=\"" ;
+
+    // TODO: FINISH THIS!!! YOU NEED TO MAKE THIS CONDITIONALLY DO THE X & Y
+
+    /*
+     <!-- fill=freeze keeps it there after the animation ends -->
+    <animate attributeType="xml" begin="base.begin+1000ms" dur="4000ms" attributeName="x" from="200" to="300" fill="freeze" />
+
+
+
+         */
+
+    return xml;
   }
 }

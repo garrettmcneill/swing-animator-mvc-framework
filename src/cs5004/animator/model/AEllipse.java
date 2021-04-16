@@ -132,5 +132,33 @@ public class AEllipse extends AnimatedShapeImpl {
     return info;
   }
 
+  //todo: add to interface, add to readme
+  public String generateXML() {
+    String rgb =
+        "rgb("
+            + Integer.toString(this.getColor().getRed())
+            + ","
+            + Integer.toString(this.getColor().getGreen())
+            + ","
+            + Integer.toString(this.getColor().getBlue())
+            + ")";
+    String xml =
+        "<ellipse id =\""
+            + this.getName()
+            + "\" cx=\""
+            + Integer.toString((int) this.getLocation().getX())
+            + "\" cy=\""
+            + Integer.toString((int) this.getLocation().getY())
+            + "\" rx=\""
+            + Integer.toString((int) this.getShapeWidth())
+            + "\" ry=\""
+            + Integer.toString((int) this.getShapeHeight())
+            + "\" fill=\""
+            + rgb
+            + "\" visibility=\"visible\" >";
+
+    return xml;
+  }
+
 
 }

@@ -133,8 +133,6 @@ public class ARectangle extends AnimatedShapeImpl {
     this.shapeWidth = aWidth;
   }
 
-
-
   /**
    * To string method for returning the state of the rectangle.
    *
@@ -154,5 +152,33 @@ public class ARectangle extends AnimatedShapeImpl {
     info += String.format("Appears at t=%d\n", this.appearTime);
     info += String.format("Disappears at t=%d\n", this.disappearTime);
     return info;
+  }
+
+  //todo: add to interface, add to readme
+  public String generateXML() {
+    String rgb =
+        "rgb("
+            + Integer.toString(this.getColor().getRed())
+            + ","
+            + Integer.toString(this.getColor().getGreen())
+            + ","
+            + Integer.toString(this.getColor().getBlue())
+            + ")";
+    String xml =
+        "<rect id =\""
+            + this.getName()
+            + "\" x=\""
+            + Integer.toString((int) this.getLocation().getX())
+            + "\" y=\""
+            + Integer.toString((int) this.getLocation().getY())
+            + "\" width=\""
+            + Integer.toString((int) this.getShapeWidth())
+            + "\" height=\""
+            + Integer.toString((int) this.getShapeHeight())
+            + "\" fill=\""
+            + rgb
+            + "\" visibility=\"visible\" >";
+
+    return xml;
   }
 }

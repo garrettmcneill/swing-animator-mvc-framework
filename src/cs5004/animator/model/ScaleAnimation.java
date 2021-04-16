@@ -244,4 +244,9 @@ public class ScaleAnimation extends AbstractAnimationImpl {
         (int) this.startTime,
         (int) this.endTime);
   }
+
+  @Override
+  public String generateXML(int msecsPtick) {
+    return null;
+  }
 }

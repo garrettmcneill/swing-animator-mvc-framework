@@ -56,5 +56,8 @@ public abstract class AbstractAnimationImpl implements Animation {
     return this.endTime;
   }
 
+  @Override
+  public abstract String generateXML(int msecsPtick);
+
 
 }

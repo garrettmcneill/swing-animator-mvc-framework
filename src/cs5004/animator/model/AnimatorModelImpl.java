@@ -307,6 +307,19 @@ public class AnimatorModelImpl implements AnimatorModel {
     return script.toString();
   }
 
+  public String generateXML(){
+    String xml = "";
+
+    /*
+    <!-- starting at time=1s relative to base.begin, move the rectangle horizontally from x=200 to x=300 in 4 seconds -->
+    <!-- fill=freeze keeps it there after the animation ends -->
+    <animate attributeType="xml" begin="base.begin+1000ms" dur="4000ms" attributeName="x" from="200" to="300" fill="freeze" />
+
+    <!-- at the end, restore all changed attributes with an instant animation of 1ms duration at the end -->
+    <animate attributeType="xml" begin="base.end" dur="1ms" attributeName="x" to="200" fill="freeze" />
+  */
+    return xml;
+  }
 
 
   @Override

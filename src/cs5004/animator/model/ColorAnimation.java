@@ -178,4 +178,9 @@ public class ColorAnimation extends AbstractAnimationImpl {
         this.startTime,
         this.endTime);
   }
+
+  @Override
+  public String generateXML(int msecsPtick) {
+    return null;
+  }
 }
