@@ -26,6 +26,20 @@ public class MoveAnimation extends AbstractAnimationImpl {
   }
 
   /**
+   * @param aShape An AnimatedShape object to be moved in this animation.
+   * @param t1 The starting time of the move animation.
+   * @param t2 The ending time of the move animation.
+   * @param startLoc THe starting location as a Point2D reference
+   * @param endLoc The ending location as a Point2D reference object (containing new x & y *
+   *     coordinates)
+   */
+  public MoveAnimation(AnimatedShape aShape, int t1, int t2, Point2D startLoc, Point2D endLoc) {
+    super(aShape, t1, t2, AnimationType.MOVE);
+    this.startingLocation = startLoc;
+    this.endLocation = endLoc;
+  }
+
+  /**
    * Method for updating a shape after an animation has been added. Will be used for running
    * animations to update the shape's properties.
    *

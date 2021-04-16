@@ -104,6 +104,14 @@ public class ARectangle extends AnimatedShapeImpl {
     }
   }
 
+  @Override
+  public void setShapeSize(double aWidth, double aHeight){
+    this.shapeWidth = aWidth;
+    this.shapeHeight = aHeight;
+    this.width = shapeWidth;
+    this.length = shapeHeight;
+  }
+
   /**
    * To string method for returning the state of the rectangle.
    *

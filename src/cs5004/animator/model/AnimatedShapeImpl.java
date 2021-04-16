@@ -8,12 +8,16 @@ import java.util.List;
 /** Abstract class represents a list of shapes that compose an animation scene. */
 public abstract class AnimatedShapeImpl implements AnimatedShape {
 
+  //todo: add to readme: appear&disappear times are no longer final
+
   // Class Attributes
   protected final String name;
-  protected final int appearTime;
-  protected final int disappearTime;
+  protected int appearTime;
+  protected int disappearTime;
   protected Point2D reference;
   protected Color shapeColor;
+  protected double shapeWidth;
+  protected double shapeHeight;
   protected List<Animation> animationList; // we should probably declare as array list
   protected Velocity2D velocity;
 
@@ -94,9 +98,21 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   }
 
   @Override
+  public void setAppearTime(int aAppearTime){
+    this.appearTime = aAppearTime;
+  }
+
+
+  @Override
   public int getDisappearTime() {
     return this.disappearTime;
   }
+
+  @Override
+  public void setDisappearTime(int aDisappearTime){
+    this.disappearTime = aDisappearTime;
+  }
+
 
   //////////////////////////////////////////////////////////
   ///////////////// SHAPE LOCATION METHODS /////////////////
@@ -127,6 +143,23 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     // todo: need to implement once we get animations/transformations implemented
     return this.velocity;
   }
+  //////////////////////////////////////////////////////////
+  ///////////////////// SHAPE SIZE /////////////////////////
+  //////////////////////////////////////////////////////////
+
+  @Override
+  public abstract void setShapeSize(double aWidth, double aHeight);
+
+  @Override
+  public double getShapeWidth(){
+    return this.shapeWidth;
+  }
+
+  @Override
+  public double getShapeHeight(){
+    return this.shapeHeight;
+  }
+
 
   //////////////////////////////////////////////////////////
   //////////////////// COLOR METHODS ///////////////////////

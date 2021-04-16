@@ -95,6 +95,15 @@ public class AEllipse extends AnimatedShapeImpl {
 
 
   @Override
+  public void setShapeSize(double aWidth, double aHeight){
+    this.shapeWidth = aWidth;
+    this.shapeHeight = aHeight;
+    this.aAxis = shapeWidth;
+    this.bAxis = shapeHeight;
+  }
+
+
+  @Override
   public String generateInfoScript() {
     String info;
     String rgb = this.getColor().toString().substring(14);
