@@ -29,6 +29,8 @@ public class ARectangle extends AnimatedShapeImpl {
    */
   public ARectangle(String name, Point2D aReference, int aAppearTime, int aDisappearTime) {
     super(aReference, name, aAppearTime, aDisappearTime);
+    this.shapeWidth = DEFAULT_WIDTH;
+    this.shapeHeight = DEFAULT_LENGTH;
     this.width = DEFAULT_WIDTH;
     this.length = DEFAULT_LENGTH;
     this.shapeColor = DEFAULT_COLOR;
@@ -57,14 +59,14 @@ public class ARectangle extends AnimatedShapeImpl {
       int aDisappearTime) {
     super(name, ref, r, g, b, aAppearTime, aDisappearTime);
 
+    this.shapeWidth = width;
+    this.shapeHeight = length;
     this.width = width;
     this.length = length;
-
-
   }
 
-  //Copy Constructor
-  public ARectangle (ARectangle toCopy) {
+  // Copy Constructor
+  public ARectangle(ARectangle toCopy) {
     super(toCopy);
     this.width = toCopy.width;
     this.length = toCopy.length;
@@ -120,7 +122,7 @@ public class ARectangle extends AnimatedShapeImpl {
   }
 
   @Override
-  public void setShapeSize(double aWidth, double aHeight){
+  public void setShapeSize(double aWidth, double aHeight) {
     this.shapeWidth = aWidth;
     this.shapeHeight = aHeight;
     this.width = shapeWidth;

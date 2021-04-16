@@ -40,7 +40,7 @@ public class EasyAnimator {
   public static void main(String[] args) {
 
 
-/*
+
     try {
       if (!unpackArguments(args)) {
         System.out.println("Unable to unpack arguments...");
@@ -50,14 +50,14 @@ public class EasyAnimator {
       System.out.println("Unpack Arguments threw an exception: " + e.toString());
       System.exit(1);
     }
-*/
+
 
 
 
     // call animationModelBuilder
       //todo: modelbuilder saves model to attr theModel
 
-
+/* ADDED BY GUY FOR TESTING
 
     AnimatorModelImpl testModel;
     testModel = new AnimatorModelImpl();
@@ -78,10 +78,10 @@ public class EasyAnimator {
     ViewInterface test;
     test=ViewFactory.createView( testModel, ViewType.VISUAL, "", 2);
     test.makeVisible();
-
+*/
 
     // create view
-    //ViewFactory.createView(theModel, modelViewType, outFile, fps);
+    ViewFactory.createView(theModel, modelViewType, outFile, fps);
 
     // run animation
 

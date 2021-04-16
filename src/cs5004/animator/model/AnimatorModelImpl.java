@@ -337,7 +337,6 @@ public class AnimatorModelImpl implements AnimatorModel {
       }
 
 
-
       entry.getValue().validateAnimations();
       entry.getValue().updateState(tick);
 
