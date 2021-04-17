@@ -337,7 +337,6 @@ public class AnimatorModelImpl implements AnimatorModel {
         continue;
       }
 
-
       entry.getValue().validateAnimations();
       entry.getValue().updateState(tick);
 
@@ -356,6 +355,16 @@ public class AnimatorModelImpl implements AnimatorModel {
     List<AnimatedShapeImpl> rVal = new ArrayList<AnimatedShapeImpl>(shapeMap.values());
 
     return rVal;
+  }
+
+  @Override
+  public int getModelStartTime() {
+    return this.modStartTime;
+  }
+
+  @Override
+  public int getModelEndTime() {
+    return this.modEndTime;
   }
 
   @Override

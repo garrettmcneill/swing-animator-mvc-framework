@@ -11,12 +11,16 @@ import cs5004.animator.view.TextView;
 import cs5004.animator.view.ViewFactory;
 import cs5004.animator.view.ViewInterface;
 import cs5004.animator.view.ViewType;
+import cs5004.animator.view.VisualView;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
 
 public class EasyAnimator {
 
@@ -97,7 +101,28 @@ public class EasyAnimator {
     */
 
     // create view
-    ViewFactory.createView(theModel, modelViewType, outFile, fps);
+    ViewInterface theView = ViewFactory.createView(theModel, modelViewType, outFile);
+
+    switch (modelViewType) {
+      case TEXT:
+      case SVG:
+
+        try{
+          theView.activateView(outFile, fps);
+        } catch (Exception e){
+          System.out.println("Unable to write file: " + e.toString());
+          System.exit(3);
+        }
+        break;
+
+      case VISUAL:
+        runTempController((VisualView) theView, fps, theModel);
+
+      default:
+        System.out.println("Unidentified View Type "+ modelViewType);
+        System.exit(4);
+
+    }
 
     // run animation
 
@@ -120,17 +145,33 @@ public class EasyAnimator {
 
     // }
 
+  }
 
-    TextView tmpView = new TextView(theModel, outFile);
 
-    try{
-      tmpView.activateView(outFile, fps);
-    } catch (Exception e){
-      System.out.println("Unable to write file: " + e.toString());
-      System.exit(3);
+    private static void runTempController(VisualView view, int  fps, AnimatorModel model ) {
+
+
+
+      int delay = (int) (1000.0/ ((double)fps));
+      int startTick = model.getModelStartTime();
+      int endTick = model.getModelEndTime();
+      int currentTick= startTick;
+
+      Timer timer = new Timer( delay, null);
+      timer.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          if (endTick <= currentTick) {
+            timer.stop();
+          }
+
+          view.setPanelShapes(model.getShapesAtTick(currentTick));
+          view.refresh();
+        }
+
+      });
     }
 
-  }
 
   private static boolean unpackArguments(String args[]) {
     int argCount = args.length;

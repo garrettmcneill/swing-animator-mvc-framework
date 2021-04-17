@@ -13,7 +13,7 @@ public enum ViewType {
       if (tmpType.name().equalsIgnoreCase(aName)) {
         return tmpType;
       }
-    }
+    }2
     return ViewType.UNKNOWN;
   }
 

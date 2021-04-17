@@ -5,7 +5,7 @@ import cs5004.animator.model.AnimatorModel;
 public class ViewFactory {
 
   public static ViewInterface createView(
-      AnimatorModel aModel, ViewType aType, String aOutFileName, long aTickMsecs) {
+      AnimatorModel aModel, ViewType aType, String aOutFileName) {
 
     ViewInterface rVal = null;
 
