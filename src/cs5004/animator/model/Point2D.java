@@ -17,9 +17,9 @@ public class Point2D {
   public Point2D(double x, double y) throws IllegalArgumentException {
 
     // todo: put modification readme to allow -1 points for shapes init by builder to be ignored.
-    if ( (x < 0 && x != -1) | (y < 0 && y != -1)) {
-      throw new IllegalArgumentException("X and Y Coordinates cannot be negative");
-    }
+//    if ( (x < 0 && x != -1) | (y < 0 && y != -1)) {
+//      throw new IllegalArgumentException("X and Y Coordinates cannot be negative");
+//    }
 
 
     this.x = x;

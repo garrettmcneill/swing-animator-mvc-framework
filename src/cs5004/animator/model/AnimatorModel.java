@@ -135,4 +135,30 @@ public interface AnimatorModel extends ReadOnlyAnimatorModel {
   List<AnimatedShapeImpl> getShapes();
 
 
+  /**
+   * Getter method for the Model's start time.
+   * @return returns the starting time of the model.
+   */
+  int getModelStartTime();
+
+
+  /**
+   * Getter method for the Model's end time.
+   * @return returns the starting end of the model.
+   */
+  int getModelEndTime();
+
+  /**
+   * Setter method for the Model's start time.
+   * @param x Starting stick.
+   */
+  void setModelStartTime(int x);
+
+  /**
+   * Setter method for the Model's end time.
+   * @param x Ending stick.
+   */
+  void setModelEndTime(int x);
+
+
 }

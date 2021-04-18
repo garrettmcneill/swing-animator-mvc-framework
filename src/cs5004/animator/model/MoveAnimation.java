@@ -53,7 +53,7 @@ public class MoveAnimation extends AbstractAnimationImpl {
       double dT = currentTime - startTime;
 
       double newX = startingLocation.getX() + (dT * deltaX);
-      double newY = startingLocation.getX() + (dT * deltaY);
+      double newY = startingLocation.getY() + (dT * deltaY);
 
       this.shape.setX(newX);
       this.shape.setY(newY);

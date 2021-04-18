@@ -36,7 +36,7 @@ public class AnimatorModelImpl implements AnimatorModel {
     this.modelHeight = DEFAULT_MODEL_HEIGHT;
     this.shapeMap = new HashMap<String, AnimatedShapeImpl>();
     this.factory = new ShapeFactory();
-    this.modStartTime = 0;
+    this.modStartTime = 2147483647;
     this.modEndTime = 0;
     this.boundingBoxWidth = modelWidth;
     this.boundingBoxHeight = modelHeight;
@@ -79,10 +79,8 @@ public class AnimatorModelImpl implements AnimatorModel {
       throw new IllegalArgumentException("Invalid shape name, must be unique and not null.");
     }
 
-    // could add more functionality so that model end time shrinks as we remove objects
-    if (disappearTime > this.modEndTime) {
-      this.modEndTime = disappearTime;
-    }
+
+
 
     // call ShapeFactory to create object
     AnimatedShapeImpl tmpShape =
@@ -345,11 +343,9 @@ public class AnimatorModelImpl implements AnimatorModel {
     // Traverse the Hashmap
     for (Map.Entry<String, AnimatedShapeImpl> entry : this.shapeMap.entrySet()) {
 
-      if (tick < entry.getValue().getAppearTime() | tick > entry.getValue().getDisappearTime()) {
-        System.out.println("Wasn't added to list");
+      if (tick <= entry.getValue().getAppearTime() | tick >= entry.getValue().getDisappearTime()) {
         continue;
       }
-
 
       entry.getValue().validateAnimations();
       entry.getValue().updateState(tick);
@@ -370,6 +366,28 @@ public class AnimatorModelImpl implements AnimatorModel {
 
     return rVal;
   }
+
+  @Override
+  public int getModelStartTime() {
+    return this.modStartTime;
+  }
+
+  @Override
+  public int getModelEndTime() {
+    return this.modEndTime;
+  }
+
+  @Override
+  public void setModelStartTime(int x) {
+    this.modStartTime = x;
+  }
+
+  @Override
+  public void setModelEndTime(int x) {
+    this.modEndTime = x;
+  }
+
+
 
   @Override
   public int getModelWidth() {

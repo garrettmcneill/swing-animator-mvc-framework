@@ -29,6 +29,12 @@ public class VisualView extends JFrame implements ViewInterface {
     this.topMostY = (int) aModel.getBoundingBoxLoc().getY();
     this.height = aModel.getModelHeight();
     this.width = aModel.getModelWidth();
+    System.out.println("Dimensions");
+    System.out.println(this.leftMostX);
+    System.out.println(this.topMostY);
+    System.out.println(this.height);
+    System.out.println(this.width);
+
     this.shapesAtTick = aModel.getShapesAtTick(0);
 
     this.setTitle("Animator Visual View - Bou Lahdou and McNeill");
@@ -44,14 +50,12 @@ public class VisualView extends JFrame implements ViewInterface {
     animationPanel.setPreferredSize(new Dimension(this.width, this.height));
     this.add(animationPanel, BorderLayout.CENTER);
 
-//    JScrollPane scroller = new JScrollPane(animationPanel);
-//    scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//    scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-//    scroller.setBounds(50, 30, 300, 50);
+    JScrollPane scroller = new JScrollPane(animationPanel);
+    scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    scroller.setBounds(20, 25, 200, 50);
 
-//    this.add(scroller, BorderLayout.CENTER);
-
-
+    this.add(scroller, BorderLayout.CENTER);
 
 
   }

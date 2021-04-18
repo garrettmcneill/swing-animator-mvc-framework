@@ -6,7 +6,7 @@ import cs5004.animator.util.AnimationBuilder;
 public final class AnimationModelBuilder implements AnimationBuilder<AnimatorModel> {
 
   // Constants
-  private static final Point2D SHAPE_DEFAULT_LOC = new Point2D(-1.0, -1.0);
+
   private static final int SHAPE_DEFAULT_LENGTH = -1;
   private static final int SHAPE_DEFAULT_WIDTH = -1;
   private static final int SHAPE_DEFAULT_RED = 0;
@@ -45,7 +45,7 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
     theModel.registerObject(
         name,
         tmpType,
-        SHAPE_DEFAULT_LOC,
+            (new Point2D(-999.0, -999.0)),
         SHAPE_DEFAULT_RED,
         SHAPE_DEFAULT_GREEN,
         SHAPE_DEFAULT_BLUE,
@@ -79,9 +79,12 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
 
     AnimatedShapeImpl tmpShape = theModel.findShape(name);
 
+    System.out.println(name);
+
     if (tmpShape == null) {
       throw new IllegalArgumentException("Shape does not exist.");
     }
+
 
     // set initial time
     int tmpAppear = tmpShape.getAppearTime();
@@ -94,7 +97,16 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
       tmpShape.setDisappearTime(t2);
     }
 
-    if ((tmpShape.getLocation().getX() < 0 || tmpShape.getLocation().getY() < 0)) {
+    if (tmpShape.getDisappearTime() > theModel.getModelEndTime()) {
+      theModel.setModelEndTime(tmpShape.getDisappearTime());
+    }
+
+    if (tmpShape.getAppearTime() < theModel.getModelEndTime()) {
+      theModel.setModelStartTime(tmpShape.getAppearTime())  ;
+    }
+
+
+    if ((tmpShape.getLocation().getX() == -999 || tmpShape.getLocation().getY() == -999)) {
 
       // set initial position
       tmpShape.setX(x1);
@@ -105,6 +117,8 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
 
       // set initial color
       tmpShape.setColor(r1, g1, b1);
+
+      System.out.println("Check if IF statement runs");
     }
 
     // (if necessary) build move animation & add it
