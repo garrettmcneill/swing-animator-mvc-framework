@@ -155,30 +155,33 @@ public class ARectangle extends AnimatedShapeImpl {
   }
 
   //todo: add to interface, add to readme
-  public String generateXML() {
-    String rgb =
-        "rgb("
-            + Integer.toString(this.getColor().getRed())
-            + ","
-            + Integer.toString(this.getColor().getGreen())
-            + ","
-            + Integer.toString(this.getColor().getBlue())
-            + ")";
-    String xml =
-        "<rect id =\""
-            + this.getName()
-            + "\" x=\""
-            + Integer.toString((int) this.getLocation().getX())
-            + "\" y=\""
-            + Integer.toString((int) this.getLocation().getY())
-            + "\" width=\""
-            + Integer.toString((int) this.getShapeWidth())
-            + "\" height=\""
-            + Integer.toString((int) this.getShapeHeight())
-            + "\" fill=\""
-            + rgb
-            + "\" visibility=\"visible\" >";
+  @Override
+  public String generateXML(Long mSecsPTick) {
 
-    return xml;
+    StringBuilder xml = new StringBuilder("<rect id=\"");
+
+    xml.append(this.getName());
+    xml.append("\" x=\"");
+    xml.append(Integer.toString((int) this.getLocation().getX()));
+    xml.append("\" y=\"");
+    xml.append(Integer.toString((int) this.getLocation().getY()));
+    xml.append("\" width=\"");
+    xml.append(Integer.toString((int) this.getShapeWidth()));
+    xml.append("\" height=\"");
+    xml.append(Integer.toString((int) this.getShapeHeight()));
+    xml.append("\" fill=\"rgb(");
+    xml.append(Integer.toString(this.getColor().getRed()));
+    xml.append(",");
+    xml.append(Integer.toString(this.getColor().getGreen()));
+    xml.append(",");
+    xml.append(Integer.toString(this.getColor().getBlue()));
+    xml.append(")\" visibility=\"visible\" >\n");
+
+    for (Animation tmpAnimation : animationList){
+      xml.append(tmpAnimation.generateXML(mSecsPTick));
+    }
+    xml.append("</rect> \n");
+
+    return xml.toString();
   }
 }

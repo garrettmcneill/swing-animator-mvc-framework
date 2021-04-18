@@ -320,4 +320,7 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   public abstract String generateInfoScript();
 
 
+  @Override
+  public abstract String generateXML(Long mSecsPTick);
+
 }

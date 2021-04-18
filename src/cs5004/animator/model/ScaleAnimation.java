@@ -246,7 +246,42 @@ public class ScaleAnimation extends AbstractAnimationImpl {
   }
 
   @Override
-  public String generateXML(int msecsPtick) {
-    return null;
+  public String generateXML(Long msecsPtick) {
+
+    //  boolean loopback = false;
+    String loopbackStr = "";
+
+    String xml = "";
+
+    Long duration = (this.endTime - this.startTime) * msecsPtick;
+
+      xml =
+          "<animate attributeType=\"xml\" begin=\""
+              + loopbackStr
+              + Long.toString(this.startTime * msecsPtick)
+              + "ms\""
+              + " dur=\""
+              + Long.toString(duration)
+              + "ms\" attributeName=\"width\" from=\""
+              + this.startingWidth
+              + "\" to =\""
+              + this.endingWidth
+              + "\" fill=\"freeze\" />\n"
+
+         + "\n<animate attributeType=\"xml\" begin=\""
+              + loopbackStr
+              + Long.toString(this.startTime * msecsPtick)
+              + "ms\""
+              + " dur=\""
+              + Long.toString(duration)
+              + "ms\" attributeName=\"height\" from=\""
+              + this.startingHeight
+              + "\" to =\""
+              + this.endingHeight
+              + "\" fill=\"freeze\" />\n";
+
+    return  xml;
+
   }
+
 }

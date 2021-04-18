@@ -131,6 +131,8 @@ public interface AnimatorModel extends ReadOnlyAnimatorModel {
    */
   String generateScript();
 
+  String generateXML(Long msecsPTick);
+
   // TODO: ADD THIS TO README CHANGED IN WK 2
   List<AnimatedShapeImpl> getShapes();
 

@@ -172,4 +172,7 @@ public interface AnimatedShape {
    */
   String generateInfoScript();
 
+
+  String generateXML(Long mSecsPTick);
+
 }

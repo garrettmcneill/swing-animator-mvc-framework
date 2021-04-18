@@ -179,25 +179,53 @@ public class MoveAnimation extends AbstractAnimationImpl {
   }
 
   @Override
-  public String generateXML(int msecsPtick) {
+  public String generateXML(Long mSecsPTick) {
 
-    int duration = (this.endTime - this.startTime) * msecsPtick;
+    //  boolean loopback = false;
+    String loopbackStr = "";
 
-    String xml =
-        "<animate attributeType=\"xml\" begin=\"base.begin+"
-            + Integer.toString(this.startTime * msecsPtick)
-            + " dur=\""
-            + Integer.toString(duration) + "\" attributeName=\"" ;
+    String xml = "";
+    Long duration = (this.endTime - this.startTime) * mSecsPTick;
 
-    // TODO: FINISH THIS!!! YOU NEED TO MAKE THIS CONDITIONALLY DO THE X & Y
+    // if loopback true
 
-    /*
-     <!-- fill=freeze keeps it there after the animation ends -->
-    <animate attributeType="xml" begin="base.begin+1000ms" dur="4000ms" attributeName="x" from="200" to="300" fill="freeze" />
+    //  if (loopback){
+    //    loopbackStr = "base.begin+";
+    //  }
 
+    // if x move animation
 
+    if (this.startingLocation.getX() != this.getEndingLocation().getX()) {
 
-         */
+      xml =
+          "<animate attributeType=\"xml\" begin=\""
+              + loopbackStr
+              + Long.toString(this.startTime * mSecsPTick)
+              + "ms\""
+              + " dur=\""
+              + Long.toString(duration)
+              + "ms\" attributeName=\"x\" from=\""
+              + this.startingLocation.getX()
+              + "\" to =\""
+              + this.getEndingLocation().getX()
+              + "\" fill=\"freeze\" />\n";
+    }
+
+    // if y move animation
+    if (this.startingLocation.getY() != this.getEndingLocation().getY()) {
+      xml =
+          "<animate attributeType=\"xml\" begin=\""
+              + loopbackStr
+              + Long.toString(this.startTime * mSecsPTick)
+              + "ms\""
+              + " dur=\""
+              + Long.toString(duration)
+              + "ms\" attributeName=\"y\" from=\""
+              + this.startingLocation.getY()
+              + "\" to =\""
+              + this.getEndingLocation().getY()
+              + "\" fill=\"freeze\" />\n";
+    }
 
     return xml;
   }

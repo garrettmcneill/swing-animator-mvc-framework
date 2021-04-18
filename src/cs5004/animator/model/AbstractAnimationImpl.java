@@ -57,7 +57,7 @@ public abstract class AbstractAnimationImpl implements Animation {
   }
 
   @Override
-  public abstract String generateXML(int msecsPtick);
+  public abstract String generateXML(Long mSecsPTick);
 
 
 }

@@ -176,6 +176,7 @@ public class AnimatorModelImplTest {
             + "First Object changes color from [r=200,g=210,b=220] to [r=220,g=230,b=240]"
             + " from t=5 to t=6\n",
         model1.generateScript());
+
   }
 
   /** Test method for rescaling a shape. */

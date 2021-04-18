@@ -133,7 +133,8 @@ public class AEllipse extends AnimatedShapeImpl {
   }
 
   //todo: add to interface, add to readme
-  public String generateXML() {
+  @Override
+  public String generateXML(Long mSecsPTick) {
     String rgb =
         "rgb("
             + Integer.toString(this.getColor().getRed())
@@ -142,22 +143,32 @@ public class AEllipse extends AnimatedShapeImpl {
             + ","
             + Integer.toString(this.getColor().getBlue())
             + ")";
-    String xml =
-        "<ellipse id =\""
-            + this.getName()
-            + "\" cx=\""
-            + Integer.toString((int) this.getLocation().getX())
-            + "\" cy=\""
-            + Integer.toString((int) this.getLocation().getY())
-            + "\" rx=\""
-            + Integer.toString((int) this.getShapeWidth())
-            + "\" ry=\""
-            + Integer.toString((int) this.getShapeHeight())
-            + "\" fill=\""
-            + rgb
-            + "\" visibility=\"visible\" >";
 
-    return xml;
+    StringBuilder xml = new StringBuilder("<ellipse id=\"");
+    xml.append(this.getName());
+    xml.append("\" cx=\"");
+    xml.append(Integer.toString((int) this.getLocation().getX()));
+    xml.append("\" cy=\"");
+    xml.append(Integer.toString((int) this.getLocation().getY()));
+    xml.append("\" rx=\"");
+    xml.append(Integer.toString((int) this.getShapeWidth()));
+    xml.append("\" ry=\"");
+    xml.append(Integer.toString((int) this.getShapeHeight()));
+    xml.append("\" fill=\"");
+    xml.append("rgb(");
+    xml.append(Integer.toString(this.getColor().getRed()));
+    xml.append(",");
+    xml.append(Integer.toString(this.getColor().getGreen()));
+    xml.append(",");
+    xml.append(Integer.toString(this.getColor().getBlue()));
+    xml.append(")\">");
+
+    for (Animation tmpAnimation : animationList){
+      xml.append(tmpAnimation.generateXML(mSecsPTick));
+    }
+    xml.append("</ellipse>\n");
+
+    return xml.toString();
   }
 
 

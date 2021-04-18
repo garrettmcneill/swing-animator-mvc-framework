@@ -1,5 +1,6 @@
 package cs5004.animator.model;
 
+import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -18,9 +19,9 @@ public class AnimatorModelImpl implements AnimatorModel {
   private static final int DEFAULT_MODEL_WIDTH = 2000;
   private static final int DEFAULT_MODEL_HEIGHT = 1000;
 
-  //todo: add note to readme that we added model heights & widths + def values.
-  private  int modelWidth;
-  private  int modelHeight;
+  // todo: add note to readme that we added model heights & widths + def values.
+  private int modelWidth;
+  private int modelHeight;
   private Map<String, AnimatedShapeImpl> shapeMap;
   private ShapeFactory factory;
   private int modStartTime;
@@ -28,7 +29,6 @@ public class AnimatorModelImpl implements AnimatorModel {
   private int boundingBoxWidth;
   private int boundingBoxHeight;
   private Point2D boundingBoxLoc;
-
 
   public AnimatorModelImpl() {
     this.modelWidth = DEFAULT_MODEL_WIDTH;
@@ -39,7 +39,7 @@ public class AnimatorModelImpl implements AnimatorModel {
     this.modEndTime = 0;
     this.boundingBoxWidth = modelWidth;
     this.boundingBoxHeight = modelHeight;
-    this.boundingBoxLoc = new Point2D(0.0,0.0);
+    this.boundingBoxLoc = new Point2D(0.0, 0.0);
   }
 
   //////////////////////////////////////////////////////////
@@ -73,21 +73,14 @@ public class AnimatorModelImpl implements AnimatorModel {
       int appearTime,
       int disappearTime) {
 
-
-
     // validate values
     if (name == null || shapeMap.get(name) != null) {
       throw new IllegalArgumentException("Invalid shape name, must be unique and not null.");
     }
 
-
-
-
     // call ShapeFactory to create object
     AnimatedShapeImpl tmpShape =
         factory.createShape(name, shape, aLoc, r, g, b, length, width, appearTime, disappearTime);
-
-
 
     // add to shape map
     this.shapeMap.put(name, tmpShape);
@@ -306,20 +299,35 @@ public class AnimatorModelImpl implements AnimatorModel {
     return script.toString();
   }
 
-  public String generateXML(){
-    String xml = "";
+  public String generateXML(Long msecsPtick) {
 
-    /*
-    <!-- starting at time=1s relative to base.begin, move the rectangle horizontally from x=200 to x=300 in 4 seconds -->
-    <!-- fill=freeze keeps it there after the animation ends -->
-    <animate attributeType="xml" begin="base.begin+1000ms" dur="4000ms" attributeName="x" from="200" to="300" fill="freeze" />
+    // Create empty List of Shapes
+    List<AnimatedShapeImpl> shapeList = new ArrayList<>();
 
-    <!-- at the end, restore all changed attributes with an instant animation of 1ms duration at the end -->
-    <animate attributeType="xml" begin="base.end" dur="1ms" attributeName="x" to="200" fill="freeze" />
-  */
-    return xml;
+    for (AnimatedShapeImpl tmpShape : shapeMap.values()) {
+      shapeList.add(tmpShape);
+    }
+
+    Comparator precedenceCompare = new AnimationComparatorShapeID();
+    shapeList.sort(precedenceCompare);
+
+    StringBuilder svgXML = new StringBuilder();
+
+    // add open tag
+    svgXML.append("<svg width=\"");
+    svgXML.append(this.getModelWidth());
+    svgXML.append("\" height=\"");
+    svgXML.append(this.getModelHeight());
+    svgXML.append("\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n");
+
+    for (AnimatedShapeImpl tmpShape : shapeList) {
+      svgXML.append(tmpShape.generateXML(msecsPtick));
+    }
+
+    svgXML.append("</svg>");
+
+    return svgXML.toString();
   }
-
 
   @Override
   public List<AnimatedShapeImpl> getShapesAtTick(int tick) {
@@ -336,19 +344,19 @@ public class AnimatorModelImpl implements AnimatorModel {
 
       entry.getValue().validateAnimations();
 
-//      System.out.println("BEFORE Update State:" + entry.getValue().getName());
-//      System.out.print("Time:");
-//      System.out.println(tick);
-//      System.out.println(entry.getValue().getLocation().getX());
-//      System.out.println(entry.getValue().getLocation().getY());
+      //      System.out.println("BEFORE Update State:" + entry.getValue().getName());
+      //      System.out.print("Time:");
+      //      System.out.println(tick);
+      //      System.out.println(entry.getValue().getLocation().getX());
+      //      System.out.println(entry.getValue().getLocation().getY());
 
       entry.getValue().updateState(tick);
 
-//      System.out.println("After Update State:" + entry.getValue().getName());
-//      System.out.print("Time:");
-//      System.out.println(tick);
-//      System.out.println(entry.getValue().getLocation().getX());
-//      System.out.println(entry.getValue().getLocation().getY());
+      //      System.out.println("After Update State:" + entry.getValue().getName());
+      //      System.out.print("Time:");
+      //      System.out.println(tick);
+      //      System.out.println(entry.getValue().getLocation().getX());
+      //      System.out.println(entry.getValue().getLocation().getY());
 
       shapeList.add(entry.getValue()); // todo: might need a copy of the shape
       // todo: Guy : I already added copy constructors but I am not sure what the best
@@ -390,8 +398,6 @@ public class AnimatorModelImpl implements AnimatorModel {
   public void setModelEndTime(int x) {
     this.modEndTime = x;
   }
-
-
 
   @Override
   public int getModelWidth() {

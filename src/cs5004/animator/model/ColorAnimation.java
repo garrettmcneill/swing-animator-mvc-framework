@@ -181,7 +181,44 @@ public class ColorAnimation extends AbstractAnimationImpl {
   }
 
   @Override
-  public String generateXML(int msecsPtick) {
-    return null;
+  public String generateXML(Long mSecsPTick) {
+
+    //  boolean loopback = false;
+    String loopbackStr = "";
+
+    String xml = "";
+    Long duration = (this.endTime - this.startTime) * mSecsPTick;
+
+    // if loopback true
+    //  if (loopback){
+    //    loopbackStr = "base.begin+";
+    //  }
+
+    if (this.startingColor != this.endColor) {
+      xml =
+          "<animate attributeType=\"xml\" begin=\""
+              + loopbackStr
+              + Long.toString(this.startTime * mSecsPTick)
+              + "ms\""
+              + " dur=\""
+              + Long.toString(duration)
+              + "ms\" attributeName=\"fill\" from=\"rgb("
+              + this.startingColor.getRed()
+              + ","
+              + this.startingColor.getGreen()
+              + ","
+              + this.startingColor.getBlue()
+              + ")\""
+              + " to =\"rgb("
+              + this.endColor.getRed()
+              + ","
+              + this.endColor.getGreen()
+              + ","
+              + this.endColor.getBlue()
+              + ")\""
+              + " fill=\"freeze\" />\n";
+    }
+
+    return xml;
   }
-}
+} // end class

@@ -19,5 +19,4 @@ public enum ShapeType {
     return ShapeType.UNKNOWN;
   }
 
-
 }
