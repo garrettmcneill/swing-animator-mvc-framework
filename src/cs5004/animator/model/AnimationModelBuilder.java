@@ -2,11 +2,13 @@ package cs5004.animator.model;
 
 import cs5004.animator.util.AnimationBuilder;
 
-// todo: add to readme
+/**
+ * Class acts as an adapter to build a model based on input from the builder file from command line
+ * argument.
+ */
 public final class AnimationModelBuilder implements AnimationBuilder<AnimatorModel> {
 
   // Constants
-
   private static final int SHAPE_DEFAULT_LENGTH = -1;
   private static final int SHAPE_DEFAULT_WIDTH = -1;
   private static final int SHAPE_DEFAULT_RED = 0;
@@ -43,39 +45,39 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
     ShapeType tmpType = ShapeType.fromString(type);
 
     theModel.registerObject(
-            name,
-            tmpType,
-            (new Point2D(-9999.0, -9999.0)),
-            SHAPE_DEFAULT_RED,
-            SHAPE_DEFAULT_GREEN,
-            SHAPE_DEFAULT_BLUE,
-            SHAPE_DEFAULT_LENGTH,
-            SHAPE_DEFAULT_WIDTH,
-            SHAPE_DEFAULT_APPEAR,
-            SHAPE_DEFAULT_DISAPPEAR);
+        name,
+        tmpType,
+        (new Point2D(-9999.0, -9999.0)),
+        SHAPE_DEFAULT_RED,
+        SHAPE_DEFAULT_GREEN,
+        SHAPE_DEFAULT_BLUE,
+        SHAPE_DEFAULT_LENGTH,
+        SHAPE_DEFAULT_WIDTH,
+        SHAPE_DEFAULT_APPEAR,
+        SHAPE_DEFAULT_DISAPPEAR);
 
     return this;
   }
 
   @Override
   public AnimationBuilder<AnimatorModel> addMotion(
-          String name,
-          int t1,
-          int x1,
-          int y1,
-          int w1,
-          int h1,
-          int r1,
-          int g1,
-          int b1,
-          int t2,
-          int x2,
-          int y2,
-          int w2,
-          int h2,
-          int r2,
-          int g2,
-          int b2) {
+      String name,
+      int t1,
+      int x1,
+      int y1,
+      int w1,
+      int h1,
+      int r1,
+      int g1,
+      int b1,
+      int t2,
+      int x2,
+      int y2,
+      int w2,
+      int h2,
+      int r2,
+      int g2,
+      int b2) {
 
     AnimatedShapeImpl tmpShape = theModel.findShape(name);
 
@@ -83,14 +85,11 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
       throw new IllegalArgumentException("Shape does not exist.");
     }
 
-
     // set initial time
     int tmpAppear = tmpShape.getAppearTime();
     if (tmpShape.emptyAnimationList() | t1 < tmpAppear) {
       tmpShape.setAppearTime(t1);
-
     }
-
 
     int tmpDisappear = tmpShape.getDisappearTime();
     if (tmpShape.emptyAnimationList() || t2 > tmpDisappear) {
@@ -105,33 +104,28 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
       theModel.setModelStartTime(tmpShape.getAppearTime());
     }
 
-
     if ((tmpShape.getLocation().getX() == -9999 || tmpShape.getLocation().getY() == -9999)) {
 
       // set initial position
       tmpShape.setX(x1);
       tmpShape.setY(y1);
 
-
       // set initial shape size
       tmpShape.setShapeSize((double) w1, (double) h1);
 
       // set initial color
       tmpShape.setColor(r1, g1, b1);
-
-
     }
 
     // (if necessary) build move animation & add it
     if ((x1 != x2 || y1 != y2)
-            | (x1 == x2 && y1 == y2 && r1 == r2 && g1 == g2 && b1 == b2 && w1 == w2 && h1 == h2)) {
+        | (x1 == x2 && y1 == y2 && r1 == r2 && g1 == g2 && b1 == b2 && w1 == w2 && h1 == h2)) {
 
       Point2D tmpStartLoc = new Point2D((double) x1, (double) y1);
       Point2D tmpEndLoc = new Point2D((double) x2, (double) y2);
       MoveAnimation tmpMove = new MoveAnimation(tmpShape, t1, t2, tmpStartLoc, tmpEndLoc);
       tmpShape.addAnimation(tmpMove);
     }
-
 
     // (if necessary) build color animation & add it
     if (r1 != r2 || g1 != g2 || b1 != b2) {
@@ -146,7 +140,6 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
       ScaleAnimation tmpScale = new ScaleAnimation(tmpShape, t1, t2, w1, h1, w2, h2);
       tmpShape.addAnimation(tmpScale);
     }
-
 
     return this;
   }

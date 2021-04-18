@@ -8,14 +8,14 @@ import java.util.List;
 /** Abstract class represents a list of shapes that compose an animation scene. */
 public abstract class AnimatedShapeImpl implements AnimatedShape {
 
-  //todo: add to readme: appear&disappear times are no longer final
+  // todo: add to readme: appear&disappear times are no longer final
 
   // Constants
   private static final Color DEFAULT_COLOR = Color.black;
-  private static int lastShapeID= 1;
+  private static int lastShapeID = 1;
 
   private static int getLastShapeID() {
-    int rVal= lastShapeID;
+    int rVal = lastShapeID;
     ++lastShapeID;
     return rVal;
   }
@@ -39,7 +39,8 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
    *     values.
    * @param name The name of the shape.
    */
-  public AnimatedShapeImpl(Point2D reference, String name, int height, int width, int aAppearTime, int aDisappearTime) {
+  public AnimatedShapeImpl(
+      Point2D reference, String name, int height, int width, int aAppearTime, int aDisappearTime) {
     this.shapeId = AnimatedShapeImpl.getLastShapeID();
     this.reference = reference;
     this.name = name;
@@ -62,7 +63,15 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
    * @param b Blue (0 -> 255) for rgb.
    */
   public AnimatedShapeImpl(
-      String name, Point2D ref, int r, int g, int b, int height, int width, int aAppearTime, int aDisappearTime) {
+      String name,
+      Point2D ref,
+      int r,
+      int g,
+      int b,
+      int height,
+      int width,
+      int aAppearTime,
+      int aDisappearTime) {
 
     if (name == null) {
       throw new IllegalArgumentException("String cannot be null and has to be a valid string");
@@ -90,15 +99,15 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     this.appearTime = aAppearTime;
     this.disappearTime = aDisappearTime;
     this.velocity = new Velocity2D(0.0, 0.0);
-
   }
 
   public AnimatedShapeImpl(AnimatedShapeImpl toCopy) {
     this.shapeId = toCopy.shapeId;
     this.reference = new Point2D(toCopy.reference);
     this.name = toCopy.name;
-    this.shapeColor = new Color (toCopy.shapeColor.getRed(), toCopy.shapeColor.getGreen(),
-            toCopy.shapeColor.getBlue());
+    this.shapeColor =
+        new Color(
+            toCopy.shapeColor.getRed(), toCopy.shapeColor.getGreen(), toCopy.shapeColor.getBlue());
     this.animationList = toCopy.animationList; // todo: did a quick fix here but need to make sure
     // we do a deep copy of animationList as the copy constructor is invoked when passing
     // Shapes to view.
@@ -115,12 +124,12 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
 
   /**
    * Getter method for the shape ID.
+   *
    * @return The ID of this shape.
    */
   public int getShapeId() {
     return this.shapeId;
   }
-
 
   /**
    * Getter method for retrieving the shape's name.
@@ -141,10 +150,9 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   }
 
   @Override
-  public void setAppearTime(int aAppearTime){
+  public void setAppearTime(int aAppearTime) {
     this.appearTime = aAppearTime;
   }
-
 
   @Override
   public int getDisappearTime() {
@@ -152,10 +160,9 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   }
 
   @Override
-  public void setDisappearTime(int aDisappearTime){
+  public void setDisappearTime(int aDisappearTime) {
     this.disappearTime = aDisappearTime;
   }
-
 
   //////////////////////////////////////////////////////////
   ///////////////// SHAPE LOCATION METHODS /////////////////
@@ -176,11 +183,6 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     reference.setY(aY);
   }
 
-  //  @Override
-  //  public double distanceFromOrigin() {
-  //    return reference.distToOrigin();
-  //  }
-
   @Override
   public Velocity2D getVelocity() {
     // todo: need to implement once we get animations/transformations implemented
@@ -194,15 +196,14 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   public abstract void setShapeSize(double aWidth, double aHeight);
 
   @Override
-  public double getShapeHeight(){
+  public double getShapeHeight() {
     return this.shapeHeight;
   }
 
   @Override
-  public double getShapeWidth(){
+  public double getShapeWidth() {
     return this.shapeWidth;
   }
-
 
   //////////////////////////////////////////////////////////
   //////////////////// COLOR METHODS ///////////////////////
@@ -223,26 +224,24 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     this.shapeColor = new Color(r, g, b);
   }
 
-
   //////////////////////////////////////////////////////////
   /////////////////// LIST UTILITIES ///////////////////////
   //////////////////////////////////////////////////////////
 
-  public boolean emptyAnimationList(){
+  public boolean emptyAnimationList() {
     return this.animationList.isEmpty();
   }
 
   /**
    * Getter method to return the list of animations.
+   *
    * @return A list of animations.
    */
   public List<Animation> getAnimationList() {
     return this.animationList;
   }
 
-  /**
-   * Method that adds an animation to the list of animations.
-   */
+  /** Method that adds an animation to the list of animations. */
   public void addAnimation(Animation aAnimation) {
 
     if (aAnimation.getStartTime() < this.appearTime
@@ -254,7 +253,6 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
 
     this.animationList.add(aAnimation);
   }
-
 
   @Override
   public boolean validateAnimations() {
@@ -273,7 +271,6 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
             aAnimation.patchBeginningState(lastAnimation);
           } else {
             rVal = false;
-
           }
           lastAnimation = aAnimation;
         }
@@ -283,7 +280,7 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     return rVal;
   }
 
-  //todo: do a quick review and test
+  // todo: do a quick review and test
   @Override
   public void updateState(int tickT) {
 
@@ -299,18 +296,10 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
             aAnimation.updateShape(tickT);
             break;
           }
-//          else if (aAnimation.getEndTime() < tickT) {
-//            //todo: might be useful to add an ID for each anim to avoid reusing 1-line code below:
-//            aAnimation.updateShape(aAnimation.getEndTime());
-//          }
         }
       }
     }
   }
-
-
-
-
 
   //////////////////////////////////////////////////////////
   ////////////////////// TO STRING /////////////////////////
@@ -319,8 +308,6 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   @Override
   public abstract String generateInfoScript();
 
-
   @Override
   public abstract String generateXML(Long mSecsPTick);
-
 }

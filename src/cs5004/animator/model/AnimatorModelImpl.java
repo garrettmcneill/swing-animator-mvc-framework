@@ -156,8 +156,6 @@ public class AnimatorModelImpl implements AnimatorModel {
   public void moveTo(String shapeName, Point2D newLoc, int t1, int t2)
       throws IllegalStateException {
 
-    // todo: CODE TO BE REFACTORED IN THE NEXT ITERATION
-
     // find the shape
     AnimatedShapeImpl tmpShape = this.shapeMap.get(shapeName);
     if (tmpShape == null) {

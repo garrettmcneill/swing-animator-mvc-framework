@@ -11,8 +11,6 @@ public interface AnimatorModel extends ReadOnlyAnimatorModel {
 
   void setBoundingBoxLoc(double aX, double aY);
 
-
-
   //////////////////////////////////////////////////////////
   /////////////////// REGISTER OBJECTS /////////////////////
   //////////////////////////////////////////////////////////
@@ -110,7 +108,6 @@ public interface AnimatorModel extends ReadOnlyAnimatorModel {
    */
   void rescaleShape(String shapeName, int newH, int newW, int t1, int t2);
 
-
   //////////////////////////////////////////////////////////
   ///////////////////// CURRENT STATE //////////////////////
   //////////////////////////////////////////////////////////
@@ -136,20 +133,17 @@ public interface AnimatorModel extends ReadOnlyAnimatorModel {
   // TODO: ADD THIS TO README CHANGED IN WK 2
   List<AnimatedShapeImpl> getShapes();
 
-
-
-
   /**
    * Setter method for the Model's start time.
+   *
    * @param x Starting stick.
    */
   void setModelStartTime(int x);
 
   /**
    * Setter method for the Model's end time.
+   *
    * @param x Ending stick.
    */
   void setModelEndTime(int x);
-
-
 }

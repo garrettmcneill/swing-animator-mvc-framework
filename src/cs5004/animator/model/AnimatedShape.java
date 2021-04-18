@@ -173,6 +173,11 @@ public interface AnimatedShape {
   String generateInfoScript();
 
 
+  /**
+   * Method for generating XML for SVG display of a shape.
+   * @param mSecsPTick Number of ticks per second.
+   * @return A string containing formatted xml for svg views.
+   */
   String generateXML(Long mSecsPTick);
 
 }

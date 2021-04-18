@@ -1,8 +1,6 @@
 package cs5004.animator.model;
 
-/**
- * Subclass for the Ellipse Shape.
- */
+/** Subclass for the Ellipse Shape. */
 public class AEllipse extends AnimatedShapeImpl {
 
   // Constants
@@ -14,7 +12,6 @@ public class AEllipse extends AnimatedShapeImpl {
   private double bHeightAxis;
 
   /**
-   *
    * Minimal Constructor for an ellipse. Requires a location to be created & instantiates with
    * default values.
    *
@@ -27,9 +24,9 @@ public class AEllipse extends AnimatedShapeImpl {
     this.bHeightAxis = DEFAULT_HEIGHT_AXIS;
   }
 
-
   /**
    * Constructor for an ellipse. Requires a location to be created & instantiates passed arguments.
+   *
    * @param name The name of the shape.
    * @param ref Point2D Object referring to the location of the sha
    * @param r Red (0 -> 255) for rgb.
@@ -58,8 +55,8 @@ public class AEllipse extends AnimatedShapeImpl {
     this.bHeightAxis = bAxis;
   }
 
-  //Copy Constructor
-  public AEllipse (AEllipse toCopy) {
+  // Copy Constructor
+  public AEllipse(AEllipse toCopy) {
     super(toCopy);
     this.aWidthAxis = toCopy.aWidthAxis;
     this.bHeightAxis = toCopy.bHeightAxis;
@@ -67,6 +64,7 @@ public class AEllipse extends AnimatedShapeImpl {
 
   /**
    * Setter for Elipse axis.
+   *
    * @param aAxis The a-axis of the elipse.
    * @param bAxis The b-axis of the elipse.
    */
@@ -79,9 +77,9 @@ public class AEllipse extends AnimatedShapeImpl {
     }
   }
 
-
   /**
    * Getter Method for a-Axis.
+   *
    * @return The double value of the a-Axis.
    */
   public double getaWidthAxis() {
@@ -90,12 +88,12 @@ public class AEllipse extends AnimatedShapeImpl {
 
   /**
    * Getter Method for b-Axis.
+   *
    * @return The double value of the b-Axis.
    */
   public double getbHeightAxis() {
     return this.bHeightAxis;
   }
-
 
   @Override
   public ShapeType getType() {
@@ -103,13 +101,12 @@ public class AEllipse extends AnimatedShapeImpl {
   }
 
   @Override
-  public void setShapeSize(double aWidth, double aHeight){
+  public void setShapeSize(double aWidth, double aHeight) {
     this.shapeWidth = aWidth;
     this.shapeHeight = aHeight;
     this.aWidthAxis = aWidth;
     this.bHeightAxis = aHeight;
   }
-
 
   @Override
   public String generateInfoScript() {
@@ -121,18 +118,13 @@ public class AEllipse extends AnimatedShapeImpl {
     info +=
         String.format(
             "Center: (%.2f,%.2f), X Radius: %.2f, Y Radius: %.2f, Color: %s\n",
-            getLocation().getX(),
-            getLocation().getY(),
-            this.aWidthAxis,
-            this.bHeightAxis,
-            rgb);
+            getLocation().getX(), getLocation().getY(), this.aWidthAxis, this.bHeightAxis, rgb);
     info += String.format("Appears at t=%d\n", this.appearTime);
     info += String.format("Disappears at t=%d\n", this.disappearTime);
 
     return info;
   }
 
-  //todo: add to interface, add to readme
   @Override
   public String generateXML(Long mSecsPTick) {
     String rgb =
@@ -163,13 +155,11 @@ public class AEllipse extends AnimatedShapeImpl {
     xml.append(Integer.toString(this.getColor().getBlue()));
     xml.append(")\">");
 
-    for (Animation tmpAnimation : animationList){
+    for (Animation tmpAnimation : animationList) {
       xml.append(tmpAnimation.generateXML(mSecsPTick));
     }
     xml.append("</ellipse>\n");
 
     return xml.toString();
   }
-
-
 }
