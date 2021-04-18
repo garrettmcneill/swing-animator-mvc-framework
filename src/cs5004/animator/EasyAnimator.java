@@ -34,6 +34,10 @@ public class EasyAnimator {
   private static final int DEFAULT_FPS = 30;
   private static final ViewType DEFAULT_VIEW_TYPE = ViewType.TEXT;
 
+  private static int currentTick;
+  private static int startTick;
+  private static int endTick;
+
   // class vars
   private static AnimatorModel theModel;
 
@@ -116,7 +120,9 @@ public class EasyAnimator {
         break;
 
       case VISUAL:
+
         runTempController((VisualView) theView, fps, theModel);
+        break;
 
       default:
         System.out.println("Unidentified View Type "+ modelViewType);
@@ -148,16 +154,22 @@ public class EasyAnimator {
   }
 
 
-    private static void runTempController(VisualView view, int  fps, AnimatorModel model ) {
+    private static void runTempController(VisualView view, int  fps, AnimatorModel model) {
 
 
+      view.makeVisible();
 
       int delay = (int) (1000.0/ ((double)fps));
-      int startTick = model.getModelStartTime();
-      int endTick = model.getModelEndTime();
-      int currentTick= startTick;
+      startTick = model.getModelStartTime();
+      endTick = model.getModelEndTime();
+      currentTick= startTick;
 
-      Timer timer = new Timer( delay, null);
+      System.out.println(startTick);
+      System.out.println(endTick);
+      System.out.println(delay);
+
+      final Timer timer = new Timer( delay, null);
+
       timer.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -167,9 +179,15 @@ public class EasyAnimator {
 
           view.setPanelShapes(model.getShapesAtTick(currentTick));
           view.refresh();
+          currentTick++;
+
         }
 
+
+
       });
+
+      timer.start();
     }
 
 

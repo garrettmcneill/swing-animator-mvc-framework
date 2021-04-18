@@ -148,5 +148,17 @@ public interface AnimatorModel extends ReadOnlyAnimatorModel {
    */
   int getModelEndTime();
 
+  /**
+   * Setter method for the Model's start time.
+   * @param x Starting stick.
+   */
+  void setModelStartTime(int x);
+
+  /**
+   * Setter method for the Model's end time.
+   * @param x Ending stick.
+   */
+  void setModelEndTime(int x);
+
 
 }
