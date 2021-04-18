@@ -73,6 +73,8 @@ public class AnimatorModelImpl implements AnimatorModel {
       int appearTime,
       int disappearTime) {
 
+
+
     // validate values
     if (name == null || shapeMap.get(name) != null) {
       throw new IllegalArgumentException("Invalid shape name, must be unique and not null.");
@@ -309,20 +311,6 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public List<AnimatedShapeImpl> getShapesAtTick(int tick) {
 
-    // 1) iterate through shapes
-    // todo: easy as we simply iterate through the hashmap
-
-    // 2)  For each : Check whether that tick is within it's appear and disappear time;
-    // getAppearTime  AND getDisappearTime Methods
-    // todo: easy to check with the getters whether the shape exists @ that tick.
-
-    // 3) If this is the case:
-    // todo: Would need to add that shape to the list. The Location, Color, Scale of that
-    //  shape would need to be at the tick
-
-    // 4) Would need that shape to have it's color, location, shape, scale updated @ tick
-    // this was taken care of by the new updateState(tick) method of AnimatedShape
-
     // Create empty List of Shapes
     List<AnimatedShapeImpl> shapeList = new ArrayList<>();
 
@@ -332,16 +320,31 @@ public class AnimatorModelImpl implements AnimatorModel {
       if (tick <= entry.getValue().getAppearTime() | tick >= entry.getValue().getDisappearTime()) {
         continue;
       }
-      System.out.println("BEFORE VALIDATE ANIMATIONS and Update State");
-      System.out.println(entry.getValue().getLocation().getX());
-      System.out.println(entry.getValue().getLocation().getY());
+
       entry.getValue().validateAnimations();
+
+//      System.out.println("BEFORE Update State:" + entry.getValue().getName());
+//      System.out.print("Time:");
+//      System.out.println(tick);
+//      System.out.println(entry.getValue().getLocation().getX());
+//      System.out.println(entry.getValue().getLocation().getY());
+
       entry.getValue().updateState(tick);
+
+//      System.out.println("After Update State:" + entry.getValue().getName());
+//      System.out.print("Time:");
+//      System.out.println(tick);
+//      System.out.println(entry.getValue().getLocation().getX());
+//      System.out.println(entry.getValue().getLocation().getY());
 
       shapeList.add(entry.getValue()); // todo: might need a copy of the shape
       // todo: Guy : I already added copy constructors but I am not sure what the best
       // way to invoke them in a smart way in the above code.
     }
+
+    // sort list by start time
+    Comparator precedenceCompare = new AnimationComparatorShapeID();
+    shapeList.sort(precedenceCompare);
 
     return shapeList;
   }
