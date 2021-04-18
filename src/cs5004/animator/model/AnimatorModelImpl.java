@@ -19,9 +19,8 @@ public class AnimatorModelImpl implements AnimatorModel {
   private static final int DEFAULT_MODEL_HEIGHT = 1000;
 
   //todo: add note to readme that we added model heights & widths + def values.
-  private final int modelWidth;
-  private final int modelHeight;
-
+  private  int modelWidth;
+  private  int modelHeight;
   private Map<String, AnimatedShapeImpl> shapeMap;
   private ShapeFactory factory;
   private int modStartTime;
@@ -346,7 +345,9 @@ public class AnimatorModelImpl implements AnimatorModel {
       if (tick <= entry.getValue().getAppearTime() | tick >= entry.getValue().getDisappearTime()) {
         continue;
       }
-
+      System.out.println("BEFORE VALIDATE ANIMATIONS and Update State");
+      System.out.println(entry.getValue().getLocation().getX());
+      System.out.println(entry.getValue().getLocation().getY());
       entry.getValue().validateAnimations();
       entry.getValue().updateState(tick);
 

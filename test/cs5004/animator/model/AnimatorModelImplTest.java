@@ -39,12 +39,12 @@ public class AnimatorModelImplTest {
             + "------------ \n"
             + "Name: First Object\n"
             + "Type: ARectangle\n"
-            + "Corner: (5.00,20.00), Length: 40.00, Width: 20.00, Color: "
+            + "Corner: (5.00,20.00), Length: 150.00, Width: 150.00, Color: "
             + "java.awt.Color[r=150,g=150,b=150]\n"
             + "\n"
             + "Name: Second Object\n"
             + "Type: AEllipse\n"
-            + "Center: (50.00,20.00), X Radius: 500.00, Y Radius: 20.00, Color:"
+            + "Center: (50.00,20.00), X Radius: 100.00, Y Radius: 100.00, Color:"
             + " [r=100,g=100,b=100]\n"
             + "Appears at t=20\n"
             + "Disappears at t=40\n"
@@ -63,8 +63,8 @@ public class AnimatorModelImplTest {
         150, 150, 150, 1, 10);
 
     model1.registerObject(
-        "Second Object", ShapeType.ELLIPSE, new Point2D(50, 20), 500, 20,
-        100, 100, 100, 20, 40);
+        "Second Object", ShapeType.ELLIPSE, new Point2D(50, 20), 100, 100,
+        100, 500, 20, 20, 40);
 
     model1.deregisterObject("First Object");
 

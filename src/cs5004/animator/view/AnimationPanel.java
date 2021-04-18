@@ -47,20 +47,21 @@ class AnimationPanel extends JPanel {
 
 
       if (S.getType().equals(ShapeType.ELLIPSE)) {
-//        System.out.println("Drew Ellipse");
-//        System.out.println(x);
-//        System.out.println(y);
-//        System.out.println(H);
-//        System.out.println(W);
+        System.out.println("Drew Ellipse"+S.getName());
+
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(H);
+        System.out.println(W);
         g2d.fillOval(x,y, W, H);
         g2d.drawOval(x,y,W,H);
       }
       else if(S.getType().equals(ShapeType.RECTANGLE)) {
-//        System.out.println("Drew Rectangle");
-//        System.out.println(x);
-//        System.out.println(y);
-//        System.out.println(H);
-//        System.out.println(W);
+        System.out.println("Drew Rectangle"+S.getName());
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(H);
+        System.out.println(W);
         g2d.fillRect(x,y, W, H);
         g2d.drawRect(x,y,W,H);
       }

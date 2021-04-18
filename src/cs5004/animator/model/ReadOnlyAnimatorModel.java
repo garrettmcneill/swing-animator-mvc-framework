@@ -37,4 +37,17 @@ public interface ReadOnlyAnimatorModel {
   // TODO: ADD THIS TO README CHANGED IN WK 2
   List<AnimatedShapeImpl> getShapes();
 
+
+  /**
+   * Getter method for the Model's start time.
+   * @return returns the starting time of the model.
+   */
+  int getModelStartTime();
+
+
+  /**
+   * Getter method for the Model's end time.
+   * @return returns the starting end of the model.
+   */
+  int getModelEndTime();
 }

@@ -27,15 +27,11 @@ public class VisualView extends JFrame implements ViewInterface {
     this.model = aModel;
     this.leftMostX = (int) aModel.getBoundingBoxLoc().getX();
     this.topMostY = (int) aModel.getBoundingBoxLoc().getY();
-    this.height = aModel.getModelHeight();
-    this.width = aModel.getModelWidth();
-    System.out.println("Dimensions");
-    System.out.println(this.leftMostX);
-    System.out.println(this.topMostY);
-    System.out.println(this.height);
-    System.out.println(this.width);
+    this.height = aModel.getBoundingBoxHeight();
+    this.width = aModel.getBoundingBoxWidth();
 
-    this.shapesAtTick = aModel.getShapesAtTick(0);
+
+    this.shapesAtTick = aModel.getShapesAtTick(this.model.getModelStartTime());
 
     this.setTitle("Animator Visual View - Bou Lahdou and McNeill");
     this.setSize(this.width, this.height);
