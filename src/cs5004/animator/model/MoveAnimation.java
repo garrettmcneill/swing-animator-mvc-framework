@@ -151,9 +151,7 @@ public class MoveAnimation extends AbstractAnimationImpl {
     recalculateVelocity();
   }
 
-  /**
-   * Method for recalculating the velocity of the move animation.
-   */
+  /** Method for recalculating the velocity of the move animation. */
   private void recalculateVelocity() {
     double deltaT = this.endTime - this.startTime;
     this.deltaX = (this.endLocation.getX() - this.startingLocation.getX()) / deltaT;
@@ -178,5 +176,29 @@ public class MoveAnimation extends AbstractAnimationImpl {
             this.endLocation.getY(),
             this.startTime,
             this.endTime);
+  }
+
+  @Override
+  public String generateXML(int msecsPtick) {
+
+    int duration = (this.endTime - this.startTime) * msecsPtick;
+
+    String xml =
+        "<animate attributeType=\"xml\" begin=\"base.begin+"
+            + Integer.toString(this.startTime * msecsPtick)
+            + " dur=\""
+            + Integer.toString(duration) + "\" attributeName=\"" ;
+
+    // TODO: FINISH THIS!!! YOU NEED TO MAKE THIS CONDITIONALLY DO THE X & Y
+
+    /*
+     <!-- fill=freeze keeps it there after the animation ends -->
+    <animate attributeType="xml" begin="base.begin+1000ms" dur="4000ms" attributeName="x" from="200" to="300" fill="freeze" />
+
+
+
+         */
+
+    return xml;
   }
 }

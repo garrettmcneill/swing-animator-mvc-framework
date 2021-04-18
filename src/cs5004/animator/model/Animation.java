@@ -62,4 +62,7 @@ public interface Animation {
 
 
 
+  //todo: add jdoc and readme
+  String generateXML(int msecsPtick);
+
 }
