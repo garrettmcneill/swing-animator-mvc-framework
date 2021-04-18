@@ -1,6 +1,8 @@
 package cs5004.animator.model;
 
-/** Scale Animation class represents a concrete implementation of a SCALE animation type. */
+/**
+ * Scale Animation class represents a concrete implementation of a SCALE animation type.
+ */
 public class MoveAnimation extends AbstractAnimationImpl {
 
   // Attributes
@@ -13,10 +15,10 @@ public class MoveAnimation extends AbstractAnimationImpl {
    * Default constructor for a move-type animation.
    *
    * @param aShape An AnimatedShape object to be moved in this animation.
-   * @param t1 The starting time of the move animation.
-   * @param t2 The ending time of the move animation.
+   * @param t1     The starting time of the move animation.
+   * @param t2     The ending time of the move animation.
    * @param endLoc The ending location as a Point2D reference object (containing new x & y
-   *     coordinates)
+   *               coordinates)
    */
   public MoveAnimation(AnimatedShape aShape, int t1, int t2, Point2D endLoc) {
     super(aShape, t1, t2, AnimationType.MOVE);
@@ -26,17 +28,18 @@ public class MoveAnimation extends AbstractAnimationImpl {
   }
 
   /**
-   * @param aShape An AnimatedShape object to be moved in this animation.
-   * @param t1 The starting time of the move animation.
-   * @param t2 The ending time of the move animation.
+   * @param aShape   An AnimatedShape object to be moved in this animation.
+   * @param t1       The starting time of the move animation.
+   * @param t2       The ending time of the move animation.
    * @param startLoc THe starting location as a Point2D reference
-   * @param endLoc The ending location as a Point2D reference object (containing new x & y *
-   *     coordinates)
+   * @param endLoc   The ending location as a Point2D reference object (containing new x & y *
+   *                 coordinates)
    */
   public MoveAnimation(AnimatedShape aShape, int t1, int t2, Point2D startLoc, Point2D endLoc) {
     super(aShape, t1, t2, AnimationType.MOVE);
     this.startingLocation = startLoc;
     this.endLocation = endLoc;
+    recalculateVelocity();
   }
 
   /**
@@ -48,17 +51,17 @@ public class MoveAnimation extends AbstractAnimationImpl {
   @Override
   public void updateShape(int currentTime) {
 
+
     if (startTime <= currentTime && currentTime <= endTime) {
+
 
       double dT = currentTime - startTime;
 
       double newX = startingLocation.getX() + (dT * deltaX);
       double newY = startingLocation.getY() + (dT * deltaY);
 
-
       this.shape.setX(newX);
       this.shape.setY(newY);
-
 
     }
   }
@@ -106,6 +109,7 @@ public class MoveAnimation extends AbstractAnimationImpl {
     if (previousAnimation instanceof MoveAnimation) {
       MoveAnimation tmpMove = (MoveAnimation) previousAnimation;
       this.setStartingLocation(tmpMove.getEndingLocation());
+
     }
   }
 
@@ -164,14 +168,14 @@ public class MoveAnimation extends AbstractAnimationImpl {
     String tmpName = this.getShape().getName();
 
     return String.format(
-        "%s moves from(%.2f,%.2f) to (%.2f,%.2f) from t=%d to t=%d\n",
-        tmpName,
-        this.startingLocation.getX(),
-        this.startingLocation.getY(),
-        this.endLocation.getX(),
-        this.endLocation.getY(),
-        this.startTime,
-        this.endTime);
+            "%s moves from(%.2f,%.2f) to (%.2f,%.2f) from t=%d to t=%d\n",
+            tmpName,
+            this.startingLocation.getX(),
+            this.startingLocation.getY(),
+            this.endLocation.getX(),
+            this.endLocation.getY(),
+            this.startTime,
+            this.endTime);
   }
 
   @Override

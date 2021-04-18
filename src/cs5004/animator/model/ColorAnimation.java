@@ -46,6 +46,7 @@ public class ColorAnimation extends AbstractAnimationImpl {
 
     this.startingColor = new Color(r1, g1, b1);
     this.endColor = new Color(r2, g2, b2);
+    recalculateVelocity();
   }
 
   /**

@@ -101,7 +101,7 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
       theModel.setModelEndTime(tmpShape.getDisappearTime());
     }
 
-    if (tmpShape.getAppearTime() < theModel.getModelEndTime()) {
+    if (tmpShape.getAppearTime() < theModel.getModelStartTime()) {
       theModel.setModelStartTime(tmpShape.getAppearTime());
     }
 

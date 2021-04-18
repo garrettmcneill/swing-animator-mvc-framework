@@ -28,24 +28,26 @@ public class AnimatorModelImplTest {
 
     model1.registerObject(
         "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20,
-        150, 150, 150, 1, 10);
+        150, 150, 100, 1, 10);
 
     model1.registerObject(
-        "Second Object", ShapeType.ELLIPSE, new Point2D(50, 20), 500, 20,
-        100, 100, 100, 20, 40);
+        "Second Object", ShapeType.ELLIPSE, new Point2D(50, 20), 40, 10,
+        100, 80, 90, 20, 40);
 
     assertEquals(
         "Shapes: \n"
             + "------------ \n"
             + "Name: First Object\n"
             + "Type: ARectangle\n"
-            + "Corner: (5.00,20.00), Length: 150.00, Width: 150.00, Color: "
-            + "java.awt.Color[r=150,g=150,b=150]\n"
+            + "Corner: (5.00,20.00), Length: 150.00, Width: 100.00, Color: "
+            + "java.awt.Color[r=40,g=20,b=150]\n"
+            + "Appears at t=1\n"
+            + "Disappears at t=10\n"
             + "\n"
             + "Name: Second Object\n"
             + "Type: AEllipse\n"
-            + "Center: (50.00,20.00), X Radius: 100.00, Y Radius: 100.00, Color:"
-            + " [r=100,g=100,b=100]\n"
+            + "Center: (50.00,20.00), X Radius: 80.00, Y Radius: 90.00, Color:"
+            + " [r=40,g=10,b=100]\n"
             + "Appears at t=20\n"
             + "Disappears at t=40\n"
             + "\n"
@@ -88,7 +90,7 @@ public class AnimatorModelImplTest {
   public void moveTo() {
     model1.registerObject(
         "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20,
-        150, 150, 150, 1, 10);
+        150, 15, 30, 1, 10);
 
     model1.moveTo("First Object", new Point2D(10, 40), 2, 4);
     model1.moveTo("First Object", new Point2D(15, 45), 5, 8);
@@ -100,8 +102,8 @@ public class AnimatorModelImplTest {
     }
 
     model1.registerObject(
-        "Second Object", ShapeType.ELLIPSE, new Point2D(50, 20), 500, 20,
-        100, 100, 100, 20, 40);
+        "Second Object", ShapeType.ELLIPSE, new Point2D(50, 20), 10, 20,
+        100, 45, 90, 20, 40);
 
     model1.moveTo("Second Object", new Point2D(50, 90), 3, 9);
 
@@ -116,13 +118,15 @@ public class AnimatorModelImplTest {
             + "------------ \n"
             + "Name: First Object\n"
             + "Type: ARectangle\n"
-            + "Corner: (5.00,20.00), Length: 40.00, Width: 20.00, Color: java.awt.Color[r=150,"
-            + "g=150,b=150]\n"
+            + "Corner: (5.00,20.00), Length: 15.00, Width: 30.00, Color: java.awt.Color[r=40,"
+            + "g=20,b=150]\n"
+            + "Appears at t=1\n"
+            + "Disappears at t=10\n"
             + "\n"
             + "Name: Second Object\n"
             + "Type: AEllipse\n"
-            + "Center: (50.00,20.00), X Radius: 500.00, Y Radius: 20.00, Color: [r=100,"
-            + "g=100,b=100]\n"
+            + "Center: (50.00,20.00), X Radius: 45.00, Y Radius: 90.00, Color: [r=10,"
+            + "g=20,b=100]\n"
             + "Appears at t=20\n"
             + "Disappears at t=40\n"
             + "\n"
@@ -150,7 +154,7 @@ public class AnimatorModelImplTest {
   public void changeColor() {
     model1.registerObject(
         "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20,
-        150, 150, 150, 1, 10);
+        150, 40, 20, 1, 10);
 
     model1.changeColor("First Object", 2, 4, 200, 210, 220);
     model1.changeColor("First Object", 5, 6, 220, 230, 240);
@@ -161,11 +165,13 @@ public class AnimatorModelImplTest {
             + "Name: First Object\n"
             + "Type: ARectangle\n"
             + "Corner: (5.00,20.00), Length: 40.00, Width: 20.00, Color: java.awt.Color"
-            + "[r=150,g=150,b=150]\n"
+            + "[r=40,g=20,b=150]\n"
+            + "Appears at t=1\n"
+            + "Disappears at t=10\n"
             + "\n"
             + "Animations: \n"
             + "------------ \n"
-            + "First Object changes color from [r=150,g=150,b=150] to [r=200,g=210,b=220]"
+            + "First Object changes color from [r=40,g=20,b=150] to [r=200,g=210,b=220]"
             + " from t=2 to t=4\n"
             + "First Object changes color from [r=200,g=210,b=220] to [r=220,g=230,b=240]"
             + " from t=5 to t=6\n",
@@ -177,7 +183,7 @@ public class AnimatorModelImplTest {
   public void rescaleShape() {
     model1.registerObject(
         "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20,
-        150, 150, 150, 1, 10);
+        150, 40, 20, 1, 10);
 
     model1.rescaleShape("First Object", 20, 10, 2, 7);
     model1.rescaleShape("First Object", 80, 100, 8, 9);
@@ -188,7 +194,9 @@ public class AnimatorModelImplTest {
             + "Name: First Object\n"
             + "Type: ARectangle\n"
             + "Corner: (5.00,20.00), Length: 40.00, Width: 20.00, Color: java.awt.Color"
-            + "[r=150,g=150,b=150]\n"
+            + "[r=40,g=20,b=150]\n"
+            + "Appears at t=1\n"
+            + "Disappears at t=10\n"
             + "\n"
             + "Animations: \n"
             + "------------ \n"

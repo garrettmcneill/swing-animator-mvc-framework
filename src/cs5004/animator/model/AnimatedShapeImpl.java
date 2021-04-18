@@ -12,9 +12,16 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
 
   // Constants
   private static final Color DEFAULT_COLOR = Color.black;
+  private static int lastShapeID= 1;
 
+  private static int getLastShapeID() {
+    int rVal= lastShapeID;
+    ++lastShapeID;
+    return rVal;
+  }
 
   // Class Attributes
+  protected final int shapeId;
   protected final String name;
   protected int appearTime;
   protected int disappearTime;
@@ -33,6 +40,7 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
    * @param name The name of the shape.
    */
   public AnimatedShapeImpl(Point2D reference, String name, int height, int width, int aAppearTime, int aDisappearTime) {
+    this.shapeId = AnimatedShapeImpl.getLastShapeID();
     this.reference = reference;
     this.name = name;
     this.animationList = new ArrayList<>();
@@ -72,7 +80,7 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     if (aAppearTime > aDisappearTime) {
       throw new IllegalArgumentException("Appear time must be less than the disappear time");
     }
-
+    this.shapeId = AnimatedShapeImpl.getLastShapeID();
     this.reference = ref;
     this.name = name;
     this.shapeColor = new Color(r, g, b);
@@ -86,6 +94,7 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   }
 
   public AnimatedShapeImpl(AnimatedShapeImpl toCopy) {
+    this.shapeId = toCopy.shapeId;
     this.reference = new Point2D(toCopy.reference);
     this.name = toCopy.name;
     this.shapeColor = new Color (toCopy.shapeColor.getRed(), toCopy.shapeColor.getGreen(),
@@ -98,13 +107,20 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     this.appearTime = toCopy.appearTime;
     this.disappearTime = toCopy.disappearTime;
     this.velocity = toCopy.velocity;
-
-
   }
 
   //////////////////////////////////////////////////////////
   /////////////////// SHAPE NAME METHODS ///////////////////
   //////////////////////////////////////////////////////////
+
+  /**
+   * Getter method for the shape ID.
+   * @return The ID of this shape.
+   */
+  public int getShapeId() {
+    return this.shapeId;
+  }
+
 
   /**
    * Getter method for retrieving the shape's name.

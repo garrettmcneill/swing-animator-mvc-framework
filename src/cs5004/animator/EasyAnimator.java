@@ -32,6 +32,7 @@ public class EasyAnimator {
   private static final String DEFAULT_IN_FILE = "default_in_file.txt";
   private static final String DEFAULT_OUT_FILE = "default_out_file.txt";
   private static final int DEFAULT_FPS = 30;
+  private static final double msInSec = 1000.0;
   private static final ViewType DEFAULT_VIEW_TYPE = ViewType.TEXT;
 
   private static int currentTick;
@@ -159,14 +160,16 @@ public class EasyAnimator {
 
       view.makeVisible();
 
-      int delay = (int) (1000.0/ ((double)fps));
+      int delay = (int) (msInSec/ ((double)fps));
       startTick = model.getModelStartTime();
+
       endTick = model.getModelEndTime();
+      System.out.println("Model start tick=" +startTick +", end tick="+ endTick);
       currentTick= startTick;
 
-      System.out.println(startTick);
-      System.out.println(endTick);
-      System.out.println(delay);
+//      System.out.println(startTick);
+//      System.out.println(endTick);
+//      System.out.println(delay);
 
       final Timer timer = new Timer( delay, null);
 
@@ -176,7 +179,7 @@ public class EasyAnimator {
           if (endTick <= currentTick) {
             timer.stop();
           }
-
+          System.out.println("Current Tick:" + currentTick);
           view.setPanelShapes(model.getShapesAtTick(currentTick));
           view.refresh();
           currentTick++;

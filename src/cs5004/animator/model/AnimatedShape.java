@@ -12,6 +12,12 @@ public interface AnimatedShape {
   //////////////////////////////////////////////////////////
 
   /**
+   * Getter method for the shape ID.
+   * @return The ID of this shape.
+   */
+  int getShapeId();
+
+  /**
    * Getter method for retrieving the shape's name. Name is a final field.
    *
    * @return A string value for the name of the shape.

@@ -61,6 +61,7 @@ public interface Animation {
   String generateAnimationScript();
 
 
+
   //todo: add jdoc and readme
   String generateXML(int msecsPtick);
 
