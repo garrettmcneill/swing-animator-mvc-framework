@@ -207,25 +207,6 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     this.shapeColor = new Color(r, g, b);
   }
 
-  //
-  //  @Override
-  //  public void rotate(double degClock) {
-  //    this.angleOfRotation = degClock % 360;
-  //  }
-
-  //  @Override
-  //  public int compare(AnimatedShape s) {
-  //    double areaThis = this.area();
-  //    double areaOther = s.area();
-  //
-  //    if (areaThis < areaOther) {
-  //      return -1;
-  //    } else if (areaOther < areaThis) {
-  //      return 1;
-  //    } else {
-  //      return 0;
-  //    }
-  //  }
 
   //////////////////////////////////////////////////////////
   /////////////////// LIST UTILITIES ///////////////////////
@@ -302,10 +283,10 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
             aAnimation.updateShape(tickT);
             break;
           }
-          else if (aAnimation.getEndTime() < tickT) {
-            //todo: might be useful to add an ID for each anim to avoid reusing 1-line code below:
-            aAnimation.updateShape(aAnimation.getEndTime());
-          }
+//          else if (aAnimation.getEndTime() < tickT) {
+//            //todo: might be useful to add an ID for each anim to avoid reusing 1-line code below:
+//            aAnimation.updateShape(aAnimation.getEndTime());
+//          }
         }
       }
     }
