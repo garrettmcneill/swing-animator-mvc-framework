@@ -1,25 +1,85 @@
 # MVC-PROJECT-PART1-v2
 
-### Week 1 Deliverable for MVC Project
+### Week 2 Deliverable for MVC Project
 
 #### By Guy Bou Lahdou & Garrett McNeill
 
-##### Version 0.5 | Date 4.5.21
+##### Version 0.7 | Date 4.18.21
 
 - - - - - - - - - - -
 
 #### Preface
 
-We can still spend a lot of time doing testing, and we still have some minor fixes that we needed to
-do, but we are really out of time. So we consider this version to be a v0.5 rather than a v1.0. With
-that said, it was a pleasure to develop the model as it made us really test what we learn in a
-battlefield like situation. This is also made us realize how easy can it be to breach SOLID
-principles when working under pressure.
+It was a pleasure to develop the model as it made us really test what we learn in a battlefield like
+situation. This is also made us realize how easy can it be to breach SOLID principles when working
+under pressure.
+
+The product in this package represents mainly the Model, and View component of an MVC project that
+is in progress.
+
+The project represents a basic animator model that can be fed various shapes along with their
+animations. Animations are created through liner-interpolation (tweening), based on two key frames
+-- the start and end of an animation.
+
+
+<br>
+
+##### This application supports three types of views:
+
+**-> Text View:** A script that describes the animation model, written to a .txt file.
+
+**-> SVG View:** An export of the animation model as an SVG file.
+
+**-> Visual View:** A view of the animation that plays in a window, powered by Java Swing.
+
+Since that project doesn't still have a concrete controller, we do have a "temporary controller" in
+the main() function located in EasyAnimator.java. EasyAnimator is the entry point to the program and
+has the capability of being invoked through a command line that takes the following arguments:
+
+1) **-in "name-of-animation-file.txt"** : the builder file to use in constructing an animation.
+   <br>
+2) **-view "type-of-view"** : must be (text, svg, or visual).
+   <br>
+3) **-out "name-of-outfile.ext"** : the name of the file to write to (.txt or .svg recommended).
+   <br>
+4) **-speed "integer-ticks-per-second"** : the desired frame-rate of the animation (30 recommended).
+
+
+#### Characteristics of a valid input are:
+
+- Each pair of arguments (-in "input-file", -out "output-file", etc.) may appear in any order
+  (e.g. the -view pair can appear first, followed by -in and so on).
+- Each pair of arguments are ordered. That is, if the user types -in then the next input must be the
+  name of an input file, and so on.
+- Providing an input file (the -in pair), and a view (the -view pair) are mandatory. If the output
+  is not specified and the view needs it, the default should be System.out. If the speed is not
+  specified and the view needs it, the default is 1 tick per second.
+
+<br /><br />
+
+
+### Changes since the last Version
+
+We had to do a number of changes to our code to be able to adapt our code to the provided interface
+and be able to build animations from the provided files.
+
+
+- AbstractAnimationImpl: Getters & Setters for appear time, generateXML
+
+- AEllipse: generateXML
+
+- AnimatedShape: setShapeSize, getShapeWidth, getShapeHeight
+
+AnimatedShapeImpl:
+Added getLastShapeID() to be able to track the order of which shape types are added. GetShapeHeight,
+GetShapeWidth
+
+
 
 
 - - - - - - - - - - -
 
-## Interfaces
+## Model Interfaces
 
 ### & their implementations
 
@@ -30,8 +90,8 @@ principles when working under pressure.
 **AnimatedShape.Java**
 = = = = = = = = =
 
-Represents a shape which is a component in a scene. Each shape contains an animationList
-which is used to store transformations (movement, color change, and rescaling).
+Represents a shape which is a component in a scene. Each shape contains an animationList which is
+used to store transformations (movement, color change, and rescaling).
 
 AnimatedShape the super-type of all shapes in our model.
 
@@ -92,7 +152,59 @@ the scene. It will become the face of our model for the controller.
     - changing a shape's color in a given duration.
     - rescaling a shape's height &/or width in a given duration.
 
-## Enums
+- - - - - - - - - - -
+
+## View Interfaces
+
+### & their implementations
+
+- - - - - - - - - - -
+
+= = = = = = = = =
+**AbstractView.Java**
+= = = = = = = = = Represents an abstract class for SVGView and TextView
+
+= = = = = = = = =
+**AnimationPanel.Java**
+= = = = = = = = = This is a private JPanel for the Visual View that is created through Swing. It
+takes a list of shapes at tick t and paints those shapes to the canvas in the order in which shape
+types are created per the input file.
+
+= = = = = = = = =
+**SVGView.Java**
+= = = = = = = = =
+
+= = = = = = = = =
+**TextView.Java**
+= = = = = = = = =
+
+= = = = = = = = =
+**ViewFactory.Java**
+= = = = = = = = = This is a factory for creating the three types of views.
+
+Views supported in this version:
+
+- **VisualView.Java** -> Represents a visual graphic view that is implemented through Java Swing.
+
+- **SVGVIEW.Java**-> XXX.
+
+- **TextView.Java**-> XXX.
+
+= = = = = = = = =
+**ViewInterface.Java**
+= = = = = = = = = As the name says, the view interface is the contract that the three types of views
+generally abide to.
+
+= = = = = = = = =
+**VisualView.Java**
+= = = = = = = = = Visual view extends Java Swing's Java frame and sets all the required parameters (
+height, width, scroll bar, leftmost and top most edge of the model, canvas layout, etc.)
+
+It has a setter method for passing the latest list of shapes at a certain tick to Jpanel so it would
+draw it to the canvas. This is used in the temporary place holder controller in the main method
+located in **EasyAnimator.java**.
+
+## Model Enums
 
 - - - - - - - - - - -
 = = = = = = = = =
@@ -106,6 +218,15 @@ the scene. It will become the face of our model for the controller.
 = = = = = = = = =
 
 -> Has the two shape types currently supported by our model: RECTANGLE, ELLIPSE, & UNKNOWN.
+
+## View Enums
+
+- - - - - - - - - - -
+= = = = = = = = =
+**ViewType.Java**
+= = = = = = = = =
+
+-> Has the three view types:   TEXT, SVG, VISUAL, & UNKNOWN.
 
 ## Utility Components
 

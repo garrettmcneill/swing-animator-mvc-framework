@@ -342,23 +342,9 @@ public class AnimatorModelImpl implements AnimatorModel {
 
       entry.getValue().validateAnimations();
 
-      //      System.out.println("BEFORE Update State:" + entry.getValue().getName());
-      //      System.out.print("Time:");
-      //      System.out.println(tick);
-      //      System.out.println(entry.getValue().getLocation().getX());
-      //      System.out.println(entry.getValue().getLocation().getY());
-
       entry.getValue().updateState(tick);
 
-      //      System.out.println("After Update State:" + entry.getValue().getName());
-      //      System.out.print("Time:");
-      //      System.out.println(tick);
-      //      System.out.println(entry.getValue().getLocation().getX());
-      //      System.out.println(entry.getValue().getLocation().getY());
-
-      shapeList.add(entry.getValue()); // todo: might need a copy of the shape
-      // todo: Guy : I already added copy constructors but I am not sure what the best
-      // way to invoke them in a smart way in the above code.
+      shapeList.add(entry.getValue());
     }
 
     // sort list by start time
