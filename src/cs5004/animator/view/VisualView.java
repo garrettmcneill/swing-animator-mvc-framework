@@ -1,11 +1,16 @@
 package cs5004.animator.view;
 
+import cs5004.animator.EasyAnimator;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.util.List;
 
+import javax.accessibility.Accessible;
+import javax.swing.Action;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import cs5004.animator.model.AnimatedShapeImpl;
@@ -17,6 +22,9 @@ import cs5004.animator.model.ReadOnlyAnimatorModel;
 public class VisualView extends JFrame implements ViewInterface {
 
   private AnimationPanel animationPanel;
+  private JPanel controlPanel;
+  private JButton pauseButton;
+  private JButton playButton;
 
   /**
    * Constructor for a Visual view type.
@@ -39,13 +47,18 @@ public class VisualView extends JFrame implements ViewInterface {
     this.setTitle("Animator Visual View - Bou Lahdou and McNeill");
     this.setSize(width, height);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     this.setLayout(new BorderLayout());
 
-    this.animationPanel = new AnimationPanel(shapesAtTick);
+    this.controlPanel = new JPanel();
+    controlPanel.setPreferredSize(new Dimension(width, (1*height)/8));
+    this.add(controlPanel, BorderLayout.SOUTH);
+    this.pauseButton = new JButton("Pause");
+    this.controlPanel.add(pauseButton);
+    //this.pauseButton.setAction(pauseButtonAction()); //todo: pick up here
 
-    animationPanel.setPreferredSize(new Dimension(width, height));
-    this.add(animationPanel, BorderLayout.CENTER);
+    this.animationPanel = new AnimationPanel(shapesAtTick);
+    animationPanel.setPreferredSize(new Dimension(width, (7*height)/8));
+    this.add(animationPanel, BorderLayout.NORTH);
 
     JScrollPane scroller = new JScrollPane(animationPanel);
     scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -53,6 +66,11 @@ public class VisualView extends JFrame implements ViewInterface {
     scroller.setBounds(20, 25, 200, 50);
 
     this.add(scroller, BorderLayout.CENTER);
+  }
+
+  private Action pauseButtonAction(){
+    EasyAnimator.togglePause();
+    return null;
   }
 
   /**

@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 
 import java.io.FileReader;
+import java.util.PrimitiveIterator;
+import javax.swing.Action;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -37,6 +39,8 @@ public class EasyAnimator {
   private static int currentTick;
   private static int startTick;
   private static int endTick;
+
+  private static boolean pauseFlag = false;
 
   // class vars
   private static AnimatorModel theModel;
@@ -144,10 +148,22 @@ public class EasyAnimator {
             }
             view.setPanelShapes(model.getShapesAtTick(currentTick));
             view.refresh();
-            currentTick++;
+
+            if (! pauseFlag ){
+              currentTick++;
+            }
           }
         });
     timer.start();
+  }
+
+
+  public static void togglePause(){
+    if (pauseFlag){
+      pauseFlag = false;
+    } else{
+      pauseFlag = true;
+    }
   }
 
   /**
