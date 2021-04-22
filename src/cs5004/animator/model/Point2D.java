@@ -20,10 +20,8 @@ public class Point2D {
     this.y = y;
   }
 
-  /**
-   * Copy Constructor.
-   */
-  public Point2D( Point2D toCopy) {
+  /** Copy Constructor. */
+  public Point2D(Point2D toCopy) {
     this.x = toCopy.x;
     this.y = toCopy.y;
   }

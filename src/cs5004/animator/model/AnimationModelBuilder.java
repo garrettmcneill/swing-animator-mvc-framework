@@ -20,6 +20,7 @@ public final class AnimationModelBuilder implements AnimationBuilder<AnimatorMod
   // Attributes
   AnimatorModelImpl theModel;
 
+  /** Constructor for Animation Model Builder. Initializes a new AnimatorModel. */
   public AnimationModelBuilder() {
     theModel = new AnimatorModelImpl();
   }

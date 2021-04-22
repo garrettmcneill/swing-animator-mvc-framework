@@ -34,6 +34,19 @@ public class ColorAnimation extends AbstractAnimationImpl {
     recalculateVelocity();
   }
 
+  /**
+   * Second constructor for a Color Animation. Used primarily by AnimationBuilder.java.
+   *
+   * @param aShape A shape object to animate.
+   * @param t1 The start time of the animation.
+   * @param r1 The starting red color value.
+   * @param g1 The starting green color value.
+   * @param b1 The starting blue color value.
+   * @param t2 The end time of the animation.
+   * @param r2 The ending red color value.
+   * @param g2 The ending green color value.
+   * @param b2 The ending blue color value.
+   */
   public ColorAnimation(
       AnimatedShape aShape, int t1, int r1, int g1, int b1, int t2, int r2, int g2, int b2) {
     super(aShape, t1, t2, AnimationType.COLOR);
@@ -78,7 +91,6 @@ public class ColorAnimation extends AbstractAnimationImpl {
    * @param previousAnimation or null.
    * @return True if the animations are consistent and do not overlap, false if they do not.
    */
-  @Override // todo: might want to move back to abstract class
   public boolean checkConsistent(Animation previousAnimation) {
 
     boolean rVal = true;
@@ -189,11 +201,6 @@ public class ColorAnimation extends AbstractAnimationImpl {
     String xml = "";
     Long duration = (this.endTime - this.startTime) * mSecsPTick;
 
-    // if loopback true
-    //  if (loopback){
-    //    loopbackStr = "base.begin+";
-    //  }
-
     if (this.startingColor != this.endColor) {
       xml =
           "<animate attributeType=\"xml\" begin=\""
@@ -221,4 +228,4 @@ public class ColorAnimation extends AbstractAnimationImpl {
 
     return xml;
   }
-} // end class
+}

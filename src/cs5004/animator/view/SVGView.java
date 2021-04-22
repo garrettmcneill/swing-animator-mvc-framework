@@ -1,26 +1,33 @@
 package cs5004.animator.view;
 
-import cs5004.animator.model.AnimatedShape;
-import cs5004.animator.model.AnimatedShapeImpl;
-import cs5004.animator.model.Animation;
-import cs5004.animator.model.AnimationComparatorStartTime;
 import cs5004.animator.model.AnimatorModel;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
-public class SVGView extends AbstractView{
 
-  public SVGView(AnimatorModel aModel, String aOutFileName, Long mSecsPTick){
+/** SVG View creates an SVG file from the model. */
+public class SVGView extends AbstractView {
+
+  /**
+   * Constructor for an SVG View, generates XML and writes it to file.
+   *
+   * @param aModel The AnimatorModel object to animate in a view.
+   * @param aOutFileName The output filename to write the view to.
+   * @param mSecsPTick The number of frames per second (or ticks per second) for the animation.
+   */
+  public SVGView(AnimatorModel aModel, String aOutFileName, Long mSecsPTick) {
 
     super(aModel, aOutFileName, mSecsPTick);
-
   }
 
-
+  /**
+   * Activate View method initializes the view.
+   *
+   * @param aOutputFilename The output file name to write to.
+   * @param animationFrameRate The number of ticks per second (or frame rate) for the animation.
+   * @throws IOException Is thrown if write fails.
+   */
   @Override
   public void activateView(String aOutputFilename, int animationFrameRate) throws IOException {
 
@@ -43,22 +50,15 @@ public class SVGView extends AbstractView{
     } catch (IOException e) {
       throw e; // throw IO exception if write error
     }
-
-  }
-
-  @Override
-  public void playAnimation() {
-
   }
 
   @Override
   public void refresh() {
-
+    // method not required for SVG view
   }
 
   @Override
   public void makeVisible() {
-
+    // method not required for SVG view
   }
-
 }

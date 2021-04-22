@@ -1,8 +1,8 @@
 package cs5004.animator.model;
 
 /**
- * Abstract class implementing the animation interface. The animation class represents
- * animations that are assigned to Shapes that hold these animations.
+ * Abstract class implementing the animation interface. The animation class represents animations
+ * that are assigned to Shapes that hold these animations.
  */
 public abstract class AbstractAnimationImpl implements Animation {
 
@@ -13,6 +13,7 @@ public abstract class AbstractAnimationImpl implements Animation {
 
   /**
    * AbstractAnimationImpl constructor.
+   *
    * @param aShape Takes an animated shape object ( Ellipse, Rectangle for this project).
    * @param t1 Appearance time of the object.
    * @param t2 Disappearance time of the object.
@@ -20,20 +21,19 @@ public abstract class AbstractAnimationImpl implements Animation {
    */
   public AbstractAnimationImpl(AnimatedShape aShape, int t1, int t2, AnimationType type) {
     if (t2 < t1) {
-      throw new IllegalArgumentException("Start of animation time has to be"
-              + "smaller than the end of the animation time.");
+      throw new IllegalArgumentException(
+          "Start of animation time has to be" + "smaller than the end of the animation time.");
     }
 
     this.type = type;
     this.startTime = t1;
     this.endTime = t2;
 
-    if ( !(aShape instanceof AnimatedShape) ) {
+    if (!(aShape instanceof AnimatedShape)) {
       throw new IllegalArgumentException("Shape must be of type AnimatedShape");
     }
 
     this.shape = aShape;
-
   }
 
   @Override
@@ -58,6 +58,4 @@ public abstract class AbstractAnimationImpl implements Animation {
 
   @Override
   public abstract String generateXML(Long mSecsPTick);
-
-
 }

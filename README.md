@@ -44,7 +44,6 @@ has the capability of being invoked through a command line that takes the follow
    <br>
 4) **-speed "integer-ticks-per-second"** : the desired frame-rate of the animation (30 recommended).
 
-
 #### Characteristics of a valid input are:
 
 - Each pair of arguments (-in "input-file", -out "output-file", etc.) may appear in any order
@@ -57,25 +56,50 @@ has the capability of being invoked through a command line that takes the follow
 
 <br /><br />
 
-
 ### Changes since the last Version
 
 We had to do a number of changes to our code to be able to adapt our code to the provided interface
 and be able to build animations from the provided files.
 
+**AnimationBuilder.java:** Is a new adapter to construct parsed files by the util package.
 
-- AbstractAnimationImpl: Getters & Setters for appear time, generateXML
+**AbstractAnimationImpl:**
+<br />
+Getters & Setters for:
+<br />
+-> start & end time, height & width of model, height & width of the bounding box.
+<br />
+-> getShapes() - returns a list of shapes
+<br />
+-> getShapesAtTick() - returns a list of shapes at a specific tick
+<br />
+-> generateXML
 
 - AEllipse: generateXML
 
-- AnimatedShape: setShapeSize, getShapeWidth, getShapeHeight
+**AnimatedShape:**
+<br />
+added: setShapeSize, getShapeWidth, getShapeHeight, get & setAppearTime, get & setDisappearTime
 
-AnimatedShapeImpl:
+**AnimatedShapeImpl:**
 Added getLastShapeID() to be able to track the order of which shape types are added. GetShapeHeight,
 GetShapeWidth
 
+**ARectangle:**
+- Added generateXML
+- Added setShapeSize
 
+**ColorAnimation.java**
+- Added second constructor to accommodate AnimationBuilder.Java
 
+**MoveAnimation.java**
+- Added second constructor to accommodate AnimationBuilder.Java
+
+**ScaleAnimation.java**
+- Added second constructor to accommodate AnimationBuilder.Java
+
+**Point2D.java**
+- Removed validation  to allow accept negative coordinates.
 
 - - - - - - - - - - -
 
@@ -162,11 +186,16 @@ the scene. It will become the face of our model for the controller.
 
 = = = = = = = = =
 **AbstractView.Java**
-= = = = = = = = = Represents an abstract class for SVGView and TextView
+= = = = = = = = =
+<br />
+Represents an abstract class for SVGView and TextView. AbstractView class is the supertype of all
+views. It holds a model which is implemented in the view.
 
 = = = = = = = = =
 **AnimationPanel.Java**
-= = = = = = = = = This is a private JPanel for the Visual View that is created through Swing. It
+= = = = = = = = = 
+<br />
+This is a private JPanel for the Visual View that is created through Swing. It
 takes a list of shapes at tick t and paints those shapes to the canvas in the order in which shape
 types are created per the input file.
 

@@ -55,7 +55,10 @@ public class AEllipse extends AnimatedShapeImpl {
     this.bHeightAxis = bAxis;
   }
 
-  // Copy Constructor
+  /**
+   * Copy constructor for an Ellipse shape type.
+   * @param toCopy An existing Ellipse object to copy from.
+   */
   public AEllipse(AEllipse toCopy) {
     super(toCopy);
     this.aWidthAxis = toCopy.aWidthAxis;

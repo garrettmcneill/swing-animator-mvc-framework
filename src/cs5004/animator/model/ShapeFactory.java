@@ -1,7 +1,7 @@
 package cs5004.animator.model;
 
 /**
- * Shapefactory class that mainly contains a method to create shapes. ShapeFactory makes use of the
+ * ShapeFactory class that mainly contains a method to create shapes. ShapeFactory makes use of the
  * factory design pattern.
  */
 public class ShapeFactory {
@@ -26,7 +26,7 @@ public class ShapeFactory {
       int aAppearTime,
       int aDisappearTime) {
 
-    AnimatedShapeImpl rVal = null; //  might want to rethink why we have null
+    AnimatedShapeImpl rVal = null;
 
     switch (aShapeType) {
       case ELLIPSE:

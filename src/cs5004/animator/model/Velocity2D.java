@@ -42,7 +42,6 @@ public class Velocity2D {
    * @param aDeltaX of this object.
    */
   public void setDeltaX(double aDeltaX) {
-    // todo: maybe validate? Can't be bigger than the screen size?
     this.deltaX = aDeltaX;
   }
 

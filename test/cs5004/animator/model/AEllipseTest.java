@@ -67,26 +67,3 @@ public class AEllipseTest {
   }
 }
 
-  // todo: need to figure a more complete testing of ellipse
-  // todo: + figure whether we need to set Getters and test them
-
-  // todo: and we need to figure a way to test these methods that we wrote ( set Axis / get Axis)...
-
-  // todo: need to also test the points of failure where we have exceptions.
-  // todo: please see the exceptions I added to AnimatedShapeImpl and AEllipse
-  // todo: add similar exceptions for rectangle
-
-  // todo: set up a similar test for RECTANGLE
-  // todo: follow the toString method of Ellipse so that we set the same for the RECTANGLE toSTRING
-  // todo: run some testing for point 2D.
-
-//    /* todo: test getters for each field set above
-//    assertEquals(
-//        "Name: Temp Circ!\n"
-//            + "Type: ACircle\n"
-//            + "Center: (10.00,20.00), Radius: 1.00, Color: java.awt.Color[r=0,g=0,b=0]\n",)
-//  }
-//     */
-//
-//  }
-// }

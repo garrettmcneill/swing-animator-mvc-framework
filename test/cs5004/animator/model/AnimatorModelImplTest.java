@@ -12,15 +12,8 @@ public class AnimatorModelImplTest {
 
   @Before
   public void setUp() {
-
     model1 = new AnimatorModelImpl();
   }
-
-  // todo: We can still spend a lot of time doing testing and we still have some minor
-  // fixes t we needed to do but we are really out of time. So we consider this version
-  // to be a v0.5 rather than a v1.0. With that said, it was a pleasure to develop the model
-  // as it made us really test what we learn in a battlefield like situation. This is also
-  // made realize how easy can it be to breach SOLID principles when working under pressure.
 
   /** Test method for registering an object. */
   @Test
@@ -61,8 +54,8 @@ public class AnimatorModelImplTest {
   public void deregisterObject() {
 
     model1.registerObject(
-        "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20,
-        150, 150, 150, 1, 10);
+        "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20, 150,
+        150, 150, 1, 10);
 
     model1.registerObject(
         "Second Object", ShapeType.ELLIPSE, new Point2D(50, 20), 100, 100,
@@ -89,8 +82,8 @@ public class AnimatorModelImplTest {
   @Test
   public void moveTo() {
     model1.registerObject(
-        "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20,
-        150, 15, 30, 1, 10);
+        "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20, 150,
+        15, 30, 1, 10);
 
     model1.moveTo("First Object", new Point2D(10, 40), 2, 4);
     model1.moveTo("First Object", new Point2D(15, 45), 5, 8);
@@ -102,8 +95,8 @@ public class AnimatorModelImplTest {
     }
 
     model1.registerObject(
-        "Second Object", ShapeType.ELLIPSE, new Point2D(50, 20), 10, 20,
-        100, 45, 90, 20, 40);
+        "Second Object", ShapeType.ELLIPSE, new Point2D(50, 20), 10, 20, 100,
+        45, 90, 20, 40);
 
     model1.moveTo("Second Object", new Point2D(50, 90), 3, 9);
 
@@ -138,23 +131,12 @@ public class AnimatorModelImplTest {
         model1.generateScript());
   }
 
-  // NEED TO FIX ALL THE FAILURE TESTING FOR MOVE TO , CHANGE COLOR, RESCALE
-  //  @Test
-  //  public void moveToFails() {
-  //
-  //    model1.registerObject("First Object", ShapeType.RECTANGLE, new Point2D(5,20),
-  //            40,20, 150,150,150,1,10);
-  //
-  //    model1.moveTo("First Object", new Point2D(10,40),2,4);
-  //    model1.moveTo("First Object", new Point2D(15,45),3,8);
-  //  }
-
   /** Test method for changing color animation. */
   @Test
   public void changeColor() {
     model1.registerObject(
-        "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20,
-        150, 40, 20, 1, 10);
+        "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20, 150,
+        40, 20, 1, 10);
 
     model1.changeColor("First Object", 2, 4, 200, 210, 220);
     model1.changeColor("First Object", 5, 6, 220, 230, 240);
@@ -176,15 +158,14 @@ public class AnimatorModelImplTest {
             + "First Object changes color from [r=200,g=210,b=220] to [r=220,g=230,b=240]"
             + " from t=5 to t=6\n",
         model1.generateScript());
-
   }
 
   /** Test method for rescaling a shape. */
   @Test
   public void rescaleShape() {
     model1.registerObject(
-        "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20,
-        150, 40, 20, 1, 10);
+        "First Object", ShapeType.RECTANGLE, new Point2D(5, 20), 40, 20, 150,
+        40, 20, 1, 10);
 
     model1.rescaleShape("First Object", 20, 10, 2, 7);
     model1.rescaleShape("First Object", 80, 100, 8, 9);

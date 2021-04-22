@@ -8,8 +8,6 @@ import java.util.List;
 /** Abstract class represents a list of shapes that compose an animation scene. */
 public abstract class AnimatedShapeImpl implements AnimatedShape {
 
-  // todo: add to readme: appear&disappear times are no longer final
-
   // Constants
   private static final Color DEFAULT_COLOR = Color.black;
   private static int lastShapeID = 1;
@@ -29,7 +27,7 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   protected Color shapeColor;
   protected double shapeHeight;
   protected double shapeWidth;
-  protected List<Animation> animationList; // we should probably declare as array list
+  protected List<Animation> animationList;
   protected Velocity2D velocity;
 
   /**
@@ -101,6 +99,11 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     this.velocity = new Velocity2D(0.0, 0.0);
   }
 
+  /**
+   * Copy constructor for Animated Shape Impl.
+   *
+   * @param toCopy An existing AnimatedShapeImpl to create a copy of.
+   */
   public AnimatedShapeImpl(AnimatedShapeImpl toCopy) {
     this.shapeId = toCopy.shapeId;
     this.reference = new Point2D(toCopy.reference);
@@ -108,9 +111,7 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
     this.shapeColor =
         new Color(
             toCopy.shapeColor.getRed(), toCopy.shapeColor.getGreen(), toCopy.shapeColor.getBlue());
-    this.animationList = toCopy.animationList; // todo: did a quick fix here but need to make sure
-    // we do a deep copy of animationList as the copy constructor is invoked when passing
-    // Shapes to view.
+    this.animationList = toCopy.animationList;
     this.shapeHeight = toCopy.shapeHeight;
     this.shapeWidth = toCopy.shapeWidth;
     this.appearTime = toCopy.appearTime;
@@ -168,8 +169,8 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   ///////////////// SHAPE LOCATION METHODS /////////////////
   //////////////////////////////////////////////////////////
 
+  @Override
   public Point2D getLocation() {
-    // todo: need to implement that after figuring the tick related stuff
     return this.reference;
   }
 
@@ -185,9 +186,9 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
 
   @Override
   public Velocity2D getVelocity() {
-    // todo: need to implement once we get animations/transformations implemented
     return this.velocity;
   }
+
   //////////////////////////////////////////////////////////
   ///////////////////// SHAPE SIZE /////////////////////////
   //////////////////////////////////////////////////////////
@@ -228,6 +229,11 @@ public abstract class AnimatedShapeImpl implements AnimatedShape {
   /////////////////// LIST UTILITIES ///////////////////////
   //////////////////////////////////////////////////////////
 
+  /**
+   * Method determines if an animation list is empty.
+   *
+   * @return A boolean true value if the list is empty, false if it is not.
+   */
   public boolean emptyAnimationList() {
     return this.animationList.isEmpty();
   }

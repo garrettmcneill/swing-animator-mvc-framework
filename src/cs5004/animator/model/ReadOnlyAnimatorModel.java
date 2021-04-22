@@ -2,6 +2,9 @@ package cs5004.animator.model;
 
 import java.util.List;
 
+/**
+ * Interface represents a read-only copy of an AnimatorModel.
+ */
 public interface ReadOnlyAnimatorModel {
 
   //////////////////////////////////////////////////////////

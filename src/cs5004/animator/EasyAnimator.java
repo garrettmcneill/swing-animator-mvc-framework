@@ -2,12 +2,8 @@ package cs5004.animator;
 
 import cs5004.animator.model.AnimationModelBuilder;
 import cs5004.animator.model.AnimatorModel;
-import cs5004.animator.model.AnimatorModelImpl;
-import cs5004.animator.model.Point2D;
-import cs5004.animator.model.ShapeType;
 import cs5004.animator.util.AnimationBuilder;
 import cs5004.animator.util.AnimationReader;
-import cs5004.animator.view.TextView;
 import cs5004.animator.view.ViewFactory;
 import cs5004.animator.view.ViewInterface;
 import cs5004.animator.view.ViewType;
@@ -16,10 +12,8 @@ import cs5004.animator.view.VisualView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -35,7 +29,7 @@ public class EasyAnimator {
   private static final String VIEW_TYPE_ARG = "-view";
   private static final String SPEED_ARG = "-speed";
   private static final String DEFAULT_IN_FILE = "default_in_file.txt";
-  private static final String DEFAULT_OUT_FILE = "default_out_file.txt";
+  public static final String DEFAULT_OUT_FILE = "default_out_file.txt";
   private static final int DEFAULT_FPS = 30;
   private static final double msInSec = 1000.0;
   private static final ViewType DEFAULT_VIEW_TYPE = ViewType.TEXT;
@@ -101,7 +95,6 @@ public class EasyAnimator {
     ViewInterface theView =
         ViewFactory.createView(theModel, modelViewType, outFile, Long.valueOf(fps));
 
-    /** Switch Statement to activate either a Text or SVG view. */
     switch (modelViewType) {
       case TEXT:
       case SVG:
@@ -123,6 +116,15 @@ public class EasyAnimator {
     }
   }
 
+  /**
+   * Method that runs the temporary controller ( placeholder for the controller of the next
+   * assignment).
+   *
+   * @param view Takes an instance of a VisualView.
+   * @param fps Desired ticks per second of the animation.
+   * @param model Model that is the single source of truth required to run the animation and show it
+   *     on the view.
+   */
   private static void runTempController(VisualView view, int fps, AnimatorModel model) {
 
     view.makeVisible();
@@ -148,7 +150,14 @@ public class EasyAnimator {
     timer.start();
   }
 
-  private static boolean unpackArguments(String args[]) {
+  /**
+   * Private method that takes care of all the command line input arguments. Method unpacks the
+   * arguments and checks whether the user wrote correct combinations of flags and inputs.
+   *
+   * @param args List of command line arguments as passed to the main method.
+   * @return Returns a boolean that is true upon a successful unpacking of arguments.
+   */
+  private static boolean unpackArguments(String[] args) {
 
     // set defaults
     inFile = DEFAULT_IN_FILE;
@@ -178,13 +187,15 @@ public class EasyAnimator {
 
     if (inFileRequired && inFile == null) {
       JOptionPane.showMessageDialog(
-          null, "Infile is required", "Invalid Command Arguments", JOptionPane.ERROR_MESSAGE);
+          null, "Infile is required", "Invalid Command Arguments",
+          JOptionPane.ERROR_MESSAGE);
       throw new IllegalArgumentException("In file is required.");
     }
 
     if (outFileRequired && outFile == null) {
       JOptionPane.showMessageDialog(
-          null, "Out file is required", "Invalid Command Arguments", JOptionPane.ERROR_MESSAGE);
+          null, "Out file is required", "Invalid Command Arguments",
+          JOptionPane.ERROR_MESSAGE);
       throw new IllegalArgumentException("Out file is required.");
     }
 

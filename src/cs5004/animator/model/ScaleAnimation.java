@@ -37,6 +37,17 @@ public class ScaleAnimation extends AbstractAnimationImpl {
     recalculateVelocity();
   }
 
+  /**
+   * 2nd Constructor for a Scale Animation. Is primarily used by AnimationBuilder.java.
+   *
+   * @param aShape A shape to add an animation to.
+   * @param t1 The starting time of an animation.
+   * @param t2 The ending time of an animation.
+   * @param startingHeight The starting height of the shape.
+   * @param endingHeight The ending height of the shape.
+   * @param startingWidth The starting width of the shape.
+   * @param endingWidth The ending width of the shape.
+   */
   public ScaleAnimation(
       AnimatedShapeImpl aShape,
       int t1,
@@ -56,7 +67,6 @@ public class ScaleAnimation extends AbstractAnimationImpl {
     this.endingHeight = endingHeight;
     this.endingWidth = endingWidth;
     this.shape = aShape;
-
   }
 
   /**
@@ -118,7 +128,6 @@ public class ScaleAnimation extends AbstractAnimationImpl {
    * @param previousAnimation or null.
    * @return True if the animations are consistent and do not overlap, false if they do not.
    */
-  @Override // todo: might want to move back to abstract class
   public boolean checkConsistent(Animation previousAnimation) {
 
     boolean rVal = true;
@@ -144,7 +153,6 @@ public class ScaleAnimation extends AbstractAnimationImpl {
    *
    * @param previousAnimation or null.
    */
-  @Override // todo: might want to move back to abstract class
   public void patchBeginningState(Animation previousAnimation) {
 
     if (previousAnimation == null) {
@@ -255,33 +263,30 @@ public class ScaleAnimation extends AbstractAnimationImpl {
 
     Long duration = (this.endTime - this.startTime) * msecsPtick;
 
-      xml =
-          "<animate attributeType=\"xml\" begin=\""
-              + loopbackStr
-              + Long.toString(this.startTime * msecsPtick)
-              + "ms\""
-              + " dur=\""
-              + Long.toString(duration)
-              + "ms\" attributeName=\"width\" from=\""
-              + this.startingWidth
-              + "\" to =\""
-              + this.endingWidth
-              + "\" fill=\"freeze\" />\n"
+    xml =
+        "<animate attributeType=\"xml\" begin=\""
+            + loopbackStr
+            + Long.toString(this.startTime * msecsPtick)
+            + "ms\""
+            + " dur=\""
+            + Long.toString(duration)
+            + "ms\" attributeName=\"width\" from=\""
+            + this.startingWidth
+            + "\" to =\""
+            + this.endingWidth
+            + "\" fill=\"freeze\" />\n"
+            + "\n<animate attributeType=\"xml\" begin=\""
+            + loopbackStr
+            + Long.toString(this.startTime * msecsPtick)
+            + "ms\""
+            + " dur=\""
+            + Long.toString(duration)
+            + "ms\" attributeName=\"height\" from=\""
+            + this.startingHeight
+            + "\" to =\""
+            + this.endingHeight
+            + "\" fill=\"freeze\" />\n";
 
-         + "\n<animate attributeType=\"xml\" begin=\""
-              + loopbackStr
-              + Long.toString(this.startTime * msecsPtick)
-              + "ms\""
-              + " dur=\""
-              + Long.toString(duration)
-              + "ms\" attributeName=\"height\" from=\""
-              + this.startingHeight
-              + "\" to =\""
-              + this.endingHeight
-              + "\" fill=\"freeze\" />\n";
-
-    return  xml;
-
+    return xml;
   }
-
 }

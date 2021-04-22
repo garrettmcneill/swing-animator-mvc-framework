@@ -39,16 +39,6 @@ public interface AnimatorModel extends ReadOnlyAnimatorModel {
       int b,
       int appearTime,
       int disappearTime);
-  /*
-  Basically we handle all exceptions for the elements we're passing as this is the way the user
-  communicated with the model.
-
-  Need make sure that the name of the object is unique so that we can use that name later
-  as a an identifier.
-
-  We then use the factory method we created to create a new object. We then append the object
-  to the shape list
-   */
 
   /**
    * Method for de-registering a shape from the model.
@@ -64,12 +54,6 @@ public interface AnimatorModel extends ReadOnlyAnimatorModel {
    * @param aAnimation An Animation object to add to the shape's animationList.
    */
   void addShapeAnimation(String shapeName, Animation aAnimation);
-  /*
-  Use this method to add an animation object to the shape starting  t1 (time it appears) and ending
-  at t2( time it disappears). This would append an animation to the animation list member
-  the shape object has. It would need to check that there is no conflict with the t1 and t2 of
-  any other animations.
-   */
 
   //////////////////////////////////////////////////////////
   /////////////////// ANIMATE OBJECTS //////////////////////
@@ -128,9 +112,17 @@ public interface AnimatorModel extends ReadOnlyAnimatorModel {
    */
   String generateScript();
 
+  /**
+   * Generates String formatted XML (SVG format) for being written to file.
+   * @param msecsPTick The number of frames per second (or ticks per second) for the animation.
+   * @return String formatted XML (SVG format).
+   */
   String generateXML(Long msecsPTick);
 
-  // TODO: ADD THIS TO README CHANGED IN WK 2
+  /**
+   * Getter method for returning the shapes that belong to the model.
+   * @return A list of shapes in the animation.
+   */
   List<AnimatedShapeImpl> getShapes();
 
   /**

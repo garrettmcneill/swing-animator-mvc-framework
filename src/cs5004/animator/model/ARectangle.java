@@ -65,7 +65,10 @@ public class ARectangle extends AnimatedShapeImpl {
     this.width = width;
   }
 
-  // Copy Constructor
+  /**
+   * Copy constructor for a rectangle shape type.
+   * @param toCopy The rectangle object to copy.
+   */
   public ARectangle(ARectangle toCopy) {
     super(toCopy);
     this.width = toCopy.width;
@@ -154,7 +157,6 @@ public class ARectangle extends AnimatedShapeImpl {
     return info;
   }
 
-  //todo: add to interface, add to readme
   @Override
   public String generateXML(Long mSecsPTick) {
 
@@ -177,7 +179,7 @@ public class ARectangle extends AnimatedShapeImpl {
     xml.append(Integer.toString(this.getColor().getBlue()));
     xml.append(")\" visibility=\"visible\" >\n");
 
-    for (Animation tmpAnimation : animationList){
+    for (Animation tmpAnimation : animationList) {
       xml.append(tmpAnimation.generateXML(mSecsPTick));
     }
     xml.append("</rect> \n");

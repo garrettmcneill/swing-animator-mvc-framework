@@ -1,10 +1,8 @@
 package cs5004.animator.model;
 
-import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +17,6 @@ public class AnimatorModelImpl implements AnimatorModel {
   private static final int DEFAULT_MODEL_WIDTH = 2000;
   private static final int DEFAULT_MODEL_HEIGHT = 1000;
 
-  // todo: add note to readme that we added model heights & widths + def values.
   private int modelWidth;
   private int modelHeight;
   private Map<String, AnimatedShapeImpl> shapeMap;
@@ -30,6 +27,9 @@ public class AnimatorModelImpl implements AnimatorModel {
   private int boundingBoxHeight;
   private Point2D boundingBoxLoc;
 
+  /**
+   * Constructor for a model. Initializes it with default width & height.
+   */
   public AnimatorModelImpl() {
     this.modelWidth = DEFAULT_MODEL_WIDTH;
     this.modelHeight = DEFAULT_MODEL_HEIGHT;
@@ -165,15 +165,11 @@ public class AnimatorModelImpl implements AnimatorModel {
     // get list of animations
     List<Animation> tmpAnimationList = tmpShape.getAnimationList();
 
-    // check whether there is a time conflict with another animation of the same type
-    // todo: this is implemented in AnimatedShapeImpl but DOUBLE CHECK
-
     Animation newAnim = new MoveAnimation(tmpShape, t1, t2, newLoc);
     tmpAnimationList.add(newAnim);
 
     if (!tmpShape.validateAnimations()) {
       throw new IllegalStateException("Animation conflicts with other animations");
-      // no method to remove animations todo: implement in next iteration
     }
   }
 
@@ -190,8 +186,6 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public void changeColor(String shapeName, int t1, int t2, int r, int g, int b) {
 
-    // todo: CODE TO BE REFACTORED IN THE NEXT ITERATION
-
     // find the shape
     AnimatedShapeImpl tmpShape = this.shapeMap.get(shapeName);
     if (tmpShape == null) {
@@ -201,15 +195,11 @@ public class AnimatorModelImpl implements AnimatorModel {
     // get list of animations
     List<Animation> tmpAnimationList = tmpShape.getAnimationList();
 
-    // check whether there is a time conflict with another animation of the same type
-    // todo: this is implemented in AnimatedShapeImpl but DOUBLE CHECK
-
     Animation newAnim = new ColorAnimation(tmpShape, t1, t2, r, g, b);
-    tmpAnimationList.add(newAnim); // FIXME: I suppose that works since the list is protected
+    tmpAnimationList.add(newAnim);
 
     if (!tmpShape.validateAnimations()) {
       throw new IllegalStateException("Animation conflicts with other animations");
-      // no method to remove animations todo: implement in next iteration
     }
   }
 
@@ -225,8 +215,6 @@ public class AnimatorModelImpl implements AnimatorModel {
   @Override
   public void rescaleShape(String shapeName, int newH, int newW, int t1, int t2) {
 
-    // todo: CODE TO BE REFACTORED IN THE NEXT ITERATION
-
     AnimatedShapeImpl tmpShape = this.shapeMap.get(shapeName);
 
     if (tmpShape == null) {
@@ -237,7 +225,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     List<Animation> tmpAnimationList = tmpShape.getAnimationList();
 
     // check whether there is a time conflict with another animation of the same type
-    // todo: this is implemented in AnimatedShapeImpl but DOUBLE CHECK
 
     if (tmpShape instanceof ARectangle) {
       Animation newAnim = new ScaleAnimation((ARectangle) tmpShape, t1, t2, newH, newW);
@@ -251,7 +238,6 @@ public class AnimatorModelImpl implements AnimatorModel {
 
     if (!tmpShape.validateAnimations()) {
       throw new IllegalStateException("Animation conflicts with other animations");
-      // no method to remove animations todo: implement in next iteration
     }
   }
 
@@ -277,12 +263,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     // add animation title:
     script.append("Animations: \n------------ \n");
 
-    // validate animation list
-    boolean allValid = true;
-    for (AnimatedShape tempS : shapeMap.values()) {
-      // todo: I LEFT OFF HERE!!!!!!!!!!  allValid = allValid && tempS.
-    }
-
     // generate animation list
     List<Animation> tmpList = new ArrayList<Animation>();
     shapeMap.forEach((k, v) -> tmpList.addAll(v.getAnimationList()));
@@ -297,6 +277,12 @@ public class AnimatorModelImpl implements AnimatorModel {
     return script.toString();
   }
 
+  /**
+   * Generates String formatted as XML for a SVG view.
+   *
+   * @param msecsPtick The number of frames per second (or ticks per second) for the animation.
+   * @return String formatted as XML to produce an SVG animation.
+   */
   public String generateXML(Long msecsPtick) {
 
     // Create empty List of Shapes
@@ -354,7 +340,6 @@ public class AnimatorModelImpl implements AnimatorModel {
     return shapeList;
   }
 
-  // TODO: ADD THIS TO README CHANGED IN WK 2
   @Override
   public List<AnimatedShapeImpl> getShapes() {
 

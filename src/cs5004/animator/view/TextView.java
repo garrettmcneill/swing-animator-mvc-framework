@@ -1,21 +1,32 @@
 package cs5004.animator.view;
 
+import cs5004.animator.EasyAnimator;
 import cs5004.animator.model.AnimatedShapeImpl;
 import cs5004.animator.model.Animation;
 import cs5004.animator.model.AnimationComparatorStartTime;
 import cs5004.animator.model.AnimatorModel;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Text View creates a TXT file from the model. Is a sub-type of AbstractView. It's supertype is
+ * ViewInterface
+ */
 public class TextView extends AbstractView {
 
-
+  /**
+   * Constructor for TextView populating values to super-type AbstractView.
+   *
+   * @param aModel An AnimatorModel object to produce a text view for.
+   * @param aOutFileName The output filename for the view to be written to.
+   */
   public TextView(AnimatorModel aModel, String aOutFileName) {
-
     super(aModel, aOutFileName, null);
   }
 
@@ -66,20 +77,32 @@ public class TextView extends AbstractView {
     } catch (IOException e) {
       throw e; // throw IO exception if write error
     }
-  }
 
-  @Override
-  public void playAnimation() {
+    if (aOutputFilename.equals(EasyAnimator.DEFAULT_OUT_FILE)) {
+      BufferedReader reader = new BufferedReader(new FileReader(EasyAnimator.DEFAULT_OUT_FILE));
+      String line = null;
+      String ls = System.getProperty("line.separator");
+      StringBuilder stringBuilder = new StringBuilder();
 
+      while ((line = reader.readLine()) != null) {
+        stringBuilder.append(line);
+        stringBuilder.append(ls);
+      }
+
+      stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+      reader.close();
+      System.out.print(stringBuilder.toString());
+    }
   }
 
   @Override
   public void refresh() {
-
+    // method not required for text view
   }
 
   @Override
   public void makeVisible() {
+    // method not required for text view
 
   }
 }
