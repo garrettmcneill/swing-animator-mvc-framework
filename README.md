@@ -1,10 +1,10 @@
-# MVC-PROJECT-PART1-v2
+# MVC-PROJECT-PART3
 
-### Week 2 Deliverable for MVC Project
+### Week 3 Deliverable for MVC Project
 
 #### By Guy Bou Lahdou & Garrett McNeill
 
-##### Version 0.7 | Date 4.18.21
+##### Version 1.0 | Date 4.24.21
 
 - - - - - - - - - - -
 
@@ -13,9 +13,6 @@
 It was a pleasure to develop the model as it made us really test what we learn in a battlefield like
 situation. This is also made us realize how easy can it be to breach SOLID principles when working
 under pressure.
-
-The product in this package represents mainly the Model, and View component of an MVC project that
-is in progress.
 
 The project represents a basic animator model that can be fed various shapes along with their
 animations. Animations are created through liner-interpolation (tweening), based on two key frames
@@ -51,12 +48,27 @@ has the capability of being invoked through a command line that takes the follow
 - Each pair of arguments are ordered. That is, if the user types -in then the next input must be the
   name of an input file, and so on.
 - Providing an input file (the -in pair), and a view (the -view pair) are mandatory. If the output
-  is not specified and the view needs it, the default should be System.out. If the speed is not
-  specified and the view needs it, the default is 1 tick per second.
+  is not specified, and the view needs it, the default should be System.out. If the speed is not
+  specified, and the view needs it, the default is 1 tick per second.
 
 <br /><br />
 
-### Changes since the last Version
+### Changes since version 0.7 (week 2)
+
+In our EasyAnimator main() method, we had a mock controller. In this iteration, we moved it to its
+own controller package.
+
+- We expanded visual view to include playback, and added various functionality support the buttons.
+
+- We added the playback functionality within the controller.
+
+- We refactored the view interface to support this new functionality.
+
+- We added UnsupportedOperationExceptions to each of the views for methods that are not supported.
+
+- We added all the necessary callback functionality between the playback view and the controller.
+
+### Changes since version 0.5 (week 1)
 
 We had to do a number of changes to our code to be able to adapt our code to the provided interface
 and be able to build animations from the provided files.
@@ -86,20 +98,25 @@ Added getLastShapeID() to be able to track the order of which shape types are ad
 GetShapeWidth
 
 **ARectangle:**
+
 - Added generateXML
 - Added setShapeSize
 
 **ColorAnimation.java**
+
 - Added second constructor to accommodate AnimationBuilder.Java
 
 **MoveAnimation.java**
+
 - Added second constructor to accommodate AnimationBuilder.Java
 
 **ScaleAnimation.java**
+
 - Added second constructor to accommodate AnimationBuilder.Java
 
 **Point2D.java**
-- Removed validation  to allow accept negative coordinates.
+
+- Removed validation to allow accept negative coordinates.
 
 - - - - - - - - - - -
 
@@ -193,11 +210,11 @@ views. It holds a model which is implemented in the view.
 
 = = = = = = = = =
 **AnimationPanel.Java**
-= = = = = = = = = 
+= = = = = = = = =
 <br />
-This is a private JPanel for the Visual View that is created through Swing. It
-takes a list of shapes at tick t and paints those shapes to the canvas in the order in which shape
-types are created per the input file.
+This is a private JPanel for the Visual View that is created through Swing. It takes a list of
+shapes at tick t and paints those shapes to the canvas in the order in which shape types are created
+per the input file.
 
 = = = = = = = = =
 **SVGView.Java**

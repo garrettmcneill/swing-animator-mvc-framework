@@ -5,20 +5,12 @@ import cs5004.animator.model.AnimationModelBuilder;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.util.AnimationBuilder;
 import cs5004.animator.util.AnimationReader;
-import cs5004.animator.view.ViewFactory;
-import cs5004.animator.view.ViewInterface;
 import cs5004.animator.view.ViewType;
-import cs5004.animator.view.VisualView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-
 import java.io.FileReader;
-import java.util.PrimitiveIterator;
-import javax.swing.Action;
+
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
 
 /**
  * Class that has the main method and methods for reading/parsing files as well as a method that
@@ -89,12 +81,8 @@ public class EasyAnimator {
       System.exit(2);
     }
 
-    new Controller( theModel, modelViewType, outFile, fps);
-
-
+    new Controller(theModel, modelViewType, outFile, fps);
   }
-
-
 
   /**
    * Private method that takes care of all the command line input arguments. Method unpacks the

@@ -3,7 +3,7 @@ package cs5004.animator.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.Timer;
 
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.view.Playback;
@@ -11,7 +11,11 @@ import cs5004.animator.view.ViewFactory;
 import cs5004.animator.view.ViewInterface;
 import cs5004.animator.view.ViewType;
 
-public class Controller implements IController, ActionListener{
+/**
+ * Controller class acts as an interface between our model and our views. Includes functionality for
+ * playback controls that are implemented in the "playback" view type.
+ */
+public class Controller implements IController, ActionListener {
 
   private static int currentTick;
   private static int startTick;
@@ -22,19 +26,23 @@ public class Controller implements IController, ActionListener{
   private static boolean restartFlag = false;
   private static boolean loopEnabled = true;
 
-  private AnimatorModel theModel;
   private ViewInterface theView;
   private Timer timer;
 
   /**
-   * Controller Constructor
+   * Controller Constructor.
+   *
    * @param theModel Instance of the model.
    * @param modelViewType View type (enum).
    * @param outFile Desired Location of the output file.
    * @param fps Initial desired ticks or frames per second.
    */
   public Controller(AnimatorModel theModel, ViewType modelViewType, String outFile, int fps) {
-    this.theModel= theModel;
+
+    // attrs
+    AnimatorModel mainModel;
+
+    mainModel = theModel;
     this.theView = ViewFactory.createView(theModel, modelViewType, outFile, (long) fps);
 
     switch (modelViewType) {
@@ -61,12 +69,11 @@ public class Controller implements IController, ActionListener{
         System.out.println("Unidentified View Type " + modelViewType);
         System.exit(4);
     }
-
   }
-
 
   /**
    * Method that runs the controller.
+   *
    * @param view Takes an instance of an Interface.
    * @param fps Desired initial ticks per second of the animation.
    * @param model Model that is the single source of truth required to run the animation and show it
@@ -82,75 +89,72 @@ public class Controller implements IController, ActionListener{
     currentTick = startTick;
     this.timer = new Timer(initDelay, null);
 
-    this.timer.addActionListener(new ActionListener(){
+    this.timer.addActionListener(
+        new ActionListener() {
 
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        if (endTick <= currentTick && loopEnabled) {
-          currentTick=startTick;
-          restart();
-        }
-        else if (endTick <= currentTick) {
-          timer.stop();
-        }
-        view.setPanelShapes(model.getShapesAtTick(currentTick));
-        theView.refresh();
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            if (endTick <= currentTick && loopEnabled) {
+              currentTick = startTick;
+              restart();
+            } else if (endTick <= currentTick) {
+              timer.stop();
+            }
+            view.setPanelShapes(model.getShapesAtTick(currentTick));
+            theView.refresh();
 
-        if (!pauseFlag) {
-          currentTick++;
-        }
+            if (!pauseFlag) {
+              currentTick++;
+            }
 
-        if (restartFlag){
-          currentTick=startTick;
-          restart();
-        }
-
-      }
-    });
+            if (restartFlag) {
+              currentTick = startTick;
+              restart();
+            }
+          }
+        });
 
     this.timer.start();
   }
 
   @Override
-  public  void togglePlay() {
+  public void togglePlay() {
     pauseFlag = false;
   }
 
   @Override
-  public  void togglePause() {
+  public void togglePause() {
     pauseFlag = true;
   }
 
   @Override
-  public  void toggleLoop() {
+  public void toggleLoop() {
     loopEnabled = true;
   }
 
   @Override
-  public  void toggleDisableLoop() {
+  public void toggleDisableLoop() {
     loopEnabled = false;
   }
 
   @Override
-  public  void restart() {
+  public void restart() {
     restartFlag = !restartFlag;
   }
 
   @Override
   public void decreaseSpeed() {
-    this.timer.setDelay(this.timer.getDelay()+speedChange);
+    this.timer.setDelay(this.timer.getDelay() + speedChange);
   }
 
   @Override
   public void increaseSpeed() {
-    if ((this.timer.getDelay()-speedChange)<0) {
+    if ((this.timer.getDelay() - speedChange) < 0) {
       this.timer.setDelay(1);
-    }
-    else {
-      this.timer.setDelay(this.timer.getDelay()-speedChange);
+    } else {
+      this.timer.setDelay(this.timer.getDelay() - speedChange);
     }
   }
-
 
   @Override
   public void actionPerformed(ActionEvent e) {
@@ -180,10 +184,5 @@ public class Controller implements IController, ActionListener{
       default:
         throw new IllegalStateException("Error: Unknown Action");
     }
-
   }
-
-
 }
-
-

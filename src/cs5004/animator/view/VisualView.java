@@ -1,6 +1,5 @@
 package cs5004.animator.view;
 
-import cs5004.animator.EasyAnimator;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -8,23 +7,16 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
-import javax.accessibility.Accessible;
-import javax.swing.Action;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import cs5004.animator.model.AnimatedShapeImpl;
 import cs5004.animator.model.ReadOnlyAnimatorModel;
 
-/**
- * Class represents a visual view which is powered by Java Swing.
- */
+/** Class represents a visual view which is powered by Java Swing. */
 public class VisualView extends JFrame implements ViewInterface, ActionListener {
 
   private AnimationPanel animationPanel;
-
 
   /**
    * Constructor for a Visual view type.
@@ -50,7 +42,7 @@ public class VisualView extends JFrame implements ViewInterface, ActionListener 
     this.setLayout(new BorderLayout());
 
     this.animationPanel = new AnimationPanel(shapesAtTick);
-    animationPanel.setPreferredSize(new Dimension(width, (7*height)/8));
+    animationPanel.setPreferredSize(new Dimension(width, (7 * height) / 8));
     this.add(animationPanel, BorderLayout.NORTH);
 
     JScrollPane scroller = new JScrollPane(animationPanel);
@@ -60,7 +52,6 @@ public class VisualView extends JFrame implements ViewInterface, ActionListener 
 
     this.add(scroller, BorderLayout.CENTER);
   }
-
 
   @Override
   public void setPanelShapes(List<AnimatedShapeImpl> shapesAtTick) {
@@ -82,10 +73,9 @@ public class VisualView extends JFrame implements ViewInterface, ActionListener 
     this.setVisible(true);
   }
 
-
   @Override
   public void actionPerformed(ActionEvent e) {
-
+    // only used by playback view, not used by visual view alone.
   }
 
   @Override

@@ -1,16 +1,20 @@
 package cs5004.animator.view;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
-import cs5004.animator.EasyAnimator;
-import cs5004.animator.controller.Controller;
 import cs5004.animator.model.ReadOnlyAnimatorModel;
 
-public class Playback extends  VisualView  {
-  private JPanel controlPanel;
+/**
+ * Class represents a playback view, which is an extension of the visual view that includes playback
+ * controls.
+ */
+public class Playback extends VisualView {
+  // private JPanel controlPanel;
   private JButton pauseButton;
   private JButton playButton;
   private JButton rePlay;
@@ -28,41 +32,40 @@ public class Playback extends  VisualView  {
   public Playback(ReadOnlyAnimatorModel aModel) {
     super(aModel);
 
-    this.controlPanel = new JPanel();
-    controlPanel.setPreferredSize(new Dimension(aModel.getBoundingBoxWidth(), (1*aModel.getBoundingBoxHeight())/8));
+    JPanel controlPanel;
+
+    controlPanel = new JPanel();
+    controlPanel.setPreferredSize(
+        new Dimension(aModel.getBoundingBoxWidth(), (1 * aModel.getBoundingBoxHeight()) / 8));
     this.add(controlPanel, BorderLayout.SOUTH);
 
     this.pauseButton = new JButton("Pause");
-    this.controlPanel.add(pauseButton);
+    controlPanel.add(pauseButton);
     this.pauseButton.setActionCommand("PAUSE");
 
     this.playButton = new JButton("Play");
-    this.controlPanel.add(playButton);
+    controlPanel.add(playButton);
     this.playButton.setActionCommand("PLAY");
 
     this.incSpeed = new JButton("Increase Speed");
-    this.controlPanel.add(incSpeed);
+    controlPanel.add(incSpeed);
     this.incSpeed.setActionCommand("INCREASE SPEED");
 
     this.decSpeed = new JButton("Decrease Speed");
-    this.controlPanel.add(decSpeed);
+    controlPanel.add(decSpeed);
     this.decSpeed.setActionCommand("DECREASE SPEED");
 
     this.enLoop = new JButton("Loop");
-    this.controlPanel.add(enLoop);
+    controlPanel.add(enLoop);
     this.enLoop.setActionCommand("ENABLE LOOP");
 
-
     this.disLoop = new JButton("Disable Loop");
-    this.controlPanel.add(disLoop);
+    controlPanel.add(disLoop);
     this.disLoop.setActionCommand("DISABLE LOOP");
 
     this.rePlay = new JButton("Replay");
-    this.controlPanel.add(rePlay);
+    controlPanel.add(rePlay);
     this.rePlay.setActionCommand("REPLAY");
-
-
-
   }
 
   @Override
@@ -75,7 +78,4 @@ public class Playback extends  VisualView  {
     enLoop.addActionListener(list);
     disLoop.addActionListener(list);
   }
-
 }
-
-
