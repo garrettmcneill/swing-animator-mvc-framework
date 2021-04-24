@@ -2,6 +2,7 @@ package cs5004.animator.view;
 
 import java.io.IOException;
 import java.util.List;
+import java.awt.event.ActionListener;
 
 import cs5004.animator.model.AnimatedShapeImpl;
 
@@ -33,4 +34,14 @@ public interface ViewInterface {
    * @param shapesAtTick The tick/frame to get shapes for.
    */
   void setPanelShapes(List<AnimatedShapeImpl> shapesAtTick);
+
+  /**
+   * Set the listener for any actions.
+   *
+   * @param listener the listener to use
+   */
+  void setListener(ActionListener listener);
+
 }
+
+

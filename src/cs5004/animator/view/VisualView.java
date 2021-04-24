@@ -62,8 +62,6 @@ public class VisualView extends JFrame implements ViewInterface, ActionListener 
   }
 
 
-
-
   @Override
   public void setPanelShapes(List<AnimatedShapeImpl> shapesAtTick) {
     this.animationPanel.setShapes(shapesAtTick);
@@ -88,5 +86,10 @@ public class VisualView extends JFrame implements ViewInterface, ActionListener 
   @Override
   public void actionPerformed(ActionEvent e) {
 
+  }
+
+  @Override
+  public void setListener(ActionListener listener) {
+    throw new UnsupportedOperationException("Unsupported Method For SVG View");
   }
 }

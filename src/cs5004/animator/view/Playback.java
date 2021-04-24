@@ -61,13 +61,11 @@ public class Playback extends  VisualView  {
     this.controlPanel.add(rePlay);
     this.rePlay.setActionCommand("REPLAY");
 
-    this.eXit = new JButton("Exit");
-    this.controlPanel.add(eXit);
-    this.eXit.setActionCommand("EXIT");
 
 
   }
 
+  @Override
   public void setListener(ActionListener list) {
     pauseButton.addActionListener(list);
     playButton.addActionListener(list);
@@ -76,7 +74,6 @@ public class Playback extends  VisualView  {
     decSpeed.addActionListener(list);
     enLoop.addActionListener(list);
     disLoop.addActionListener(list);
-    //Controller.togglePause();
   }
 
 }

@@ -5,6 +5,8 @@ import cs5004.animator.model.AnimatedShapeImpl;
 import cs5004.animator.model.Animation;
 import cs5004.animator.model.AnimationComparatorStartTime;
 import cs5004.animator.model.AnimatorModel;
+
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -109,5 +111,10 @@ public class TextView extends AbstractView {
   @Override
   public void setPanelShapes(List<AnimatedShapeImpl> shapesAtTick) {
     throw new UnsupportedOperationException("Unsupported Method For TextView");
+  }
+
+  @Override
+  public void setListener(ActionListener listener) {
+    throw new UnsupportedOperationException("Unsupported Method For SVG View");
   }
 }

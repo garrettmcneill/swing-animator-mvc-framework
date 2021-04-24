@@ -11,7 +11,7 @@ import cs5004.animator.view.ViewFactory;
 import cs5004.animator.view.ViewInterface;
 import cs5004.animator.view.ViewType;
 
-public class Controller implements ActionListener{
+public class Controller implements IController, ActionListener{
 
   private static int currentTick;
   private static int startTick;
@@ -26,7 +26,13 @@ public class Controller implements ActionListener{
   private ViewInterface theView;
   private Timer timer;
 
-
+  /**
+   * Controller Constructor
+   * @param theModel Instance of the model.
+   * @param modelViewType View type (enum).
+   * @param outFile Desired Location of the output file.
+   * @param fps Initial desired ticks or frames per second.
+   */
   public Controller(AnimatorModel theModel, ViewType modelViewType, String outFile, int fps) {
     this.theModel= theModel;
     this.theView = ViewFactory.createView(theModel, modelViewType, outFile, (long) fps);
@@ -56,24 +62,13 @@ public class Controller implements ActionListener{
         System.exit(4);
     }
 
-
   }
 
-  public void setPause() {
-
-  }
-
-
-  public void resetPause() {
-
-  }
 
   /**
-   * Method that runs the temporary controller ( placeholder for the controller of the next
-   * assignment).
-   *
-   * @param view Takes an instance of a VisualView.
-   * @param fps Desired ticks per second of the animation.
+   * Method that runs the controller.
+   * @param view Takes an instance of an Interface.
+   * @param fps Desired initial ticks per second of the animation.
    * @param model Model that is the single source of truth required to run the animation and show it
    *     on the view.
    */
@@ -110,39 +105,43 @@ public class Controller implements ActionListener{
           restart();
         }
 
-
-
-
       }
     });
 
     this.timer.start();
   }
 
-  public static void togglePlay() {
+  @Override
+  public  void togglePlay() {
     pauseFlag = false;
   }
 
-  public static void togglePause() {
+  @Override
+  public  void togglePause() {
     pauseFlag = true;
   }
 
-  public static void toggleLoop() {
+  @Override
+  public  void toggleLoop() {
     loopEnabled = true;
   }
 
-  public static void toggleDisableLoop() {
+  @Override
+  public  void toggleDisableLoop() {
     loopEnabled = false;
   }
 
-  public static void restart() {
+  @Override
+  public  void restart() {
     restartFlag = !restartFlag;
   }
 
+  @Override
   public void decreaseSpeed() {
     this.timer.setDelay(this.timer.getDelay()+speedChange);
   }
 
+  @Override
   public void increaseSpeed() {
     if ((this.timer.getDelay()-speedChange)<0) {
       this.timer.setDelay(1);
@@ -177,9 +176,6 @@ public class Controller implements ActionListener{
         break;
       case "PAUSE":
         togglePause();
-        break;
-      case "EXIT":
-        System.exit(0);
         break;
       default:
         throw new IllegalStateException("Error: Unknown Action");

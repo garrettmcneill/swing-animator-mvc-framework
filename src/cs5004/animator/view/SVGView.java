@@ -2,6 +2,8 @@ package cs5004.animator.view;
 
 import cs5004.animator.model.AnimatedShapeImpl;
 import cs5004.animator.model.AnimatorModel;
+
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -66,6 +68,11 @@ public class SVGView extends AbstractView {
 
   @Override
   public void setPanelShapes(List<AnimatedShapeImpl> shapesAtTick) {
+    throw new UnsupportedOperationException("Unsupported Method For SVG View");
+  }
+
+  @Override
+  public void setListener(ActionListener listener) {
     throw new UnsupportedOperationException("Unsupported Method For SVG View");
   }
 }
