@@ -7,6 +7,7 @@ public enum ViewType {
   TEXT,
   SVG,
   VISUAL,
+  PLAYBACK,
   UNKNOWN;
 
   /**

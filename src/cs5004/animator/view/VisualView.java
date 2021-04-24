@@ -24,9 +24,7 @@ import cs5004.animator.model.ReadOnlyAnimatorModel;
 public class VisualView extends JFrame implements ViewInterface, ActionListener {
 
   private AnimationPanel animationPanel;
-  private JPanel controlPanel;
-  private JButton pauseButton;
-  private JButton playButton;
+
 
   /**
    * Constructor for a Visual view type.
@@ -51,15 +49,6 @@ public class VisualView extends JFrame implements ViewInterface, ActionListener 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLayout(new BorderLayout());
 
-    this.controlPanel = new JPanel();
-    controlPanel.setPreferredSize(new Dimension(width, (1*height)/8));
-    this.add(controlPanel, BorderLayout.SOUTH);
-    this.pauseButton = new JButton("Pause");
-    this.controlPanel.add(pauseButton);
-
-    this.pauseButton.addActionListener(this); //todo: pick up here
-    this.pauseButton.setActionCommand("PAUSE"); //todo: pick up here
-
     this.animationPanel = new AnimationPanel(shapesAtTick);
     animationPanel.setPreferredSize(new Dimension(width, (7*height)/8));
     this.add(animationPanel, BorderLayout.NORTH);
@@ -74,11 +63,8 @@ public class VisualView extends JFrame implements ViewInterface, ActionListener 
 
 
 
-  /**
-   * Setter method for getting shapes at tick for updating the view.
-   *
-   * @param shapesAtTick The tick/frame to get shapes for.
-   */
+
+  @Override
   public void setPanelShapes(List<AnimatedShapeImpl> shapesAtTick) {
     this.animationPanel.setShapes(shapesAtTick);
   }
@@ -98,8 +84,9 @@ public class VisualView extends JFrame implements ViewInterface, ActionListener 
     this.setVisible(true);
   }
 
+
   @Override
   public void actionPerformed(ActionEvent e) {
-    EasyAnimator.togglePause();
+
   }
 }

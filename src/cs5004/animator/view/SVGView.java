@@ -1,9 +1,11 @@
 package cs5004.animator.view;
 
+import cs5004.animator.model.AnimatedShapeImpl;
 import cs5004.animator.model.AnimatorModel;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 
 /** SVG View creates an SVG file from the model. */
@@ -60,5 +62,10 @@ public class SVGView extends AbstractView {
   @Override
   public void makeVisible() {
     // method not required for SVG view
+  }
+
+  @Override
+  public void setPanelShapes(List<AnimatedShapeImpl> shapesAtTick) {
+    throw new UnsupportedOperationException("Unsupported Method For SVG View");
   }
 }

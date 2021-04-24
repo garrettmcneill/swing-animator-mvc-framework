@@ -1,5 +1,6 @@
 package cs5004.animator;
 
+import cs5004.animator.controller.Controller;
 import cs5004.animator.model.AnimationModelBuilder;
 import cs5004.animator.model.AnimatorModel;
 import cs5004.animator.util.AnimationBuilder;
@@ -32,15 +33,8 @@ public class EasyAnimator {
   private static final String SPEED_ARG = "-speed";
   private static final String DEFAULT_IN_FILE = "default_in_file.txt";
   public static final String DEFAULT_OUT_FILE = "default_out_file.txt";
-  private static final int DEFAULT_FPS = 30;
-  private static final double msInSec = 1000.0;
+  private static final int DEFAULT_FPS = 1;
   private static final ViewType DEFAULT_VIEW_TYPE = ViewType.TEXT;
-
-  private static int currentTick;
-  private static int startTick;
-  private static int endTick;
-
-  private static boolean pauseFlag = false;
 
   // class vars
   private static AnimatorModel theModel;
@@ -95,75 +89,12 @@ public class EasyAnimator {
       System.exit(2);
     }
 
-    // create view
-    ViewInterface theView =
-        ViewFactory.createView(theModel, modelViewType, outFile, Long.valueOf(fps));
+    new Controller( theModel, modelViewType, outFile, fps);
 
-    switch (modelViewType) {
-      case TEXT:
-      case SVG:
-        try {
-          theView.activateView(outFile, fps);
-        } catch (Exception e) {
-          System.out.println("Unable to write file: " + e.toString());
-          System.exit(3);
-        }
-        break;
 
-      case VISUAL:
-        runTempController((VisualView) theView, fps, theModel);
-        break;
-
-      default:
-        System.out.println("Unidentified View Type " + modelViewType);
-        System.exit(4);
-    }
   }
 
-  /**
-   * Method that runs the temporary controller ( placeholder for the controller of the next
-   * assignment).
-   *
-   * @param view Takes an instance of a VisualView.
-   * @param fps Desired ticks per second of the animation.
-   * @param model Model that is the single source of truth required to run the animation and show it
-   *     on the view.
-   */
-  private static void runTempController(VisualView view, int fps, AnimatorModel model) {
 
-    view.makeVisible();
-
-    startTick = model.getModelStartTime();
-    endTick = model.getModelEndTime();
-    int delay = (int) (msInSec / ((double) fps));
-    currentTick = startTick;
-    final Timer timer = new Timer(delay, null);
-
-    timer.addActionListener(
-        new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            if (endTick <= currentTick) {
-              timer.stop();
-            }
-            view.setPanelShapes(model.getShapesAtTick(currentTick));
-            view.refresh();
-
-            if (!pauseFlag) {
-              currentTick++;
-            }
-          }
-        });
-    timer.start();
-  }
-
-  public static void togglePause() {
-    if (pauseFlag) {
-      pauseFlag = false;
-    } else {
-      pauseFlag = true;
-    }
-  }
 
   /**
    * Private method that takes care of all the command line input arguments. Method unpacks the

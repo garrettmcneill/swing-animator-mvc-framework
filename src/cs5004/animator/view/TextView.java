@@ -105,4 +105,9 @@ public class TextView extends AbstractView {
     // method not required for text view
 
   }
+
+  @Override
+  public void setPanelShapes(List<AnimatedShapeImpl> shapesAtTick) {
+    throw new UnsupportedOperationException("Unsupported Method For TextView");
+  }
 }

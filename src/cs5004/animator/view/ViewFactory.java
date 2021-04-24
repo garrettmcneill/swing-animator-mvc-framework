@@ -33,6 +33,10 @@ public class ViewFactory {
         rVal = new VisualView(aModel);
         break;
 
+      case PLAYBACK:
+        rVal = new Playback(aModel);
+        break;
+
       case UNKNOWN:
 
       default:
