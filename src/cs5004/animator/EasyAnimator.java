@@ -149,7 +149,7 @@ public class EasyAnimator {
             view.setPanelShapes(model.getShapesAtTick(currentTick));
             view.refresh();
 
-            if (! pauseFlag ){
+            if (!pauseFlag) {
               currentTick++;
             }
           }
@@ -157,11 +157,10 @@ public class EasyAnimator {
     timer.start();
   }
 
-
-  public static void togglePause(){
-    if (pauseFlag){
+  public static void togglePause() {
+    if (pauseFlag) {
       pauseFlag = false;
-    } else{
+    } else {
       pauseFlag = true;
     }
   }
@@ -203,15 +202,13 @@ public class EasyAnimator {
 
     if (inFileRequired && inFile == null) {
       JOptionPane.showMessageDialog(
-          null, "Infile is required", "Invalid Command Arguments",
-          JOptionPane.ERROR_MESSAGE);
+          null, "Infile is required", "Invalid Command Arguments", JOptionPane.ERROR_MESSAGE);
       throw new IllegalArgumentException("In file is required.");
     }
 
     if (outFileRequired && outFile == null) {
       JOptionPane.showMessageDialog(
-          null, "Out file is required", "Invalid Command Arguments",
-          JOptionPane.ERROR_MESSAGE);
+          null, "Out file is required", "Invalid Command Arguments", JOptionPane.ERROR_MESSAGE);
       throw new IllegalArgumentException("Out file is required.");
     }
 

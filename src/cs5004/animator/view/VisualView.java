@@ -3,6 +3,8 @@ package cs5004.animator.view;
 import cs5004.animator.EasyAnimator;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,7 +21,7 @@ import cs5004.animator.model.ReadOnlyAnimatorModel;
 /**
  * Class represents a visual view which is powered by Java Swing.
  */
-public class VisualView extends JFrame implements ViewInterface {
+public class VisualView extends JFrame implements ViewInterface, ActionListener {
 
   private AnimationPanel animationPanel;
   private JPanel controlPanel;
@@ -54,7 +56,9 @@ public class VisualView extends JFrame implements ViewInterface {
     this.add(controlPanel, BorderLayout.SOUTH);
     this.pauseButton = new JButton("Pause");
     this.controlPanel.add(pauseButton);
-    //this.pauseButton.setAction(pauseButtonAction()); //todo: pick up here
+
+    this.pauseButton.addActionListener(this); //todo: pick up here
+    this.pauseButton.setActionCommand("PAUSE"); //todo: pick up here
 
     this.animationPanel = new AnimationPanel(shapesAtTick);
     animationPanel.setPreferredSize(new Dimension(width, (7*height)/8));
@@ -68,10 +72,7 @@ public class VisualView extends JFrame implements ViewInterface {
     this.add(scroller, BorderLayout.CENTER);
   }
 
-  private Action pauseButtonAction(){
-    EasyAnimator.togglePause();
-    return null;
-  }
+
 
   /**
    * Setter method for getting shapes at tick for updating the view.
@@ -95,5 +96,10 @@ public class VisualView extends JFrame implements ViewInterface {
   @Override
   public void makeVisible() {
     this.setVisible(true);
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    EasyAnimator.togglePause();
   }
 }
