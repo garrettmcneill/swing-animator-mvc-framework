@@ -1,12 +1,12 @@
 # MVC-PROJECT-PART3
 
-### Week 3 Deliverable for MVC Project
-
 #### By Guy Bou Lahdou & Garrett McNeill
 
 ##### Version 1.0 | Date 4.24.21
 
 - - - - - - - - - - -
+*NOTE: THIS ASSIGNMENT IS POSTED AS A REFERENCE FOR MY EXPERIENCE IN THE COURSE. IT IS NOT INTENDED FOR OTHER STUDENTS TO PLAGIARIZE.
+
 
 #### Preface
 
