@@ -1,6 +1,6 @@
 # MVC-PROJECT-PART3
 
-#### By Garrett McNeill
+#### By Guy Bou Ladou & Garrett McNeill
 
 ##### Version 1.0 | Date 4.24.21
 
